@@ -8,7 +8,7 @@ import Settings from './pages/Settings';
 function App() {
   return (
     <div className='h-[100%] w-screen flex flex-col overflow-hidden'>
-      <div className='flex-1'>
+      <div className='flex-1 flex overflow-auto'>
         <Routes>
           <Route path='/' element={<Map />} />
           <Route path='/book' element={<Book />} />
