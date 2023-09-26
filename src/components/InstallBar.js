@@ -16,7 +16,7 @@ function InstallBar() {
 
     return (
         <div className='w-full flex flex-row bg-indigo-100 p-3 gap-2 items-center'>
-            <img src="./logo512.png"  className='bg-white w-12 h-12 rounded-xl'/>
+            <img alt='app logo' src="./logo512.png"  className='bg-white w-12 h-12 rounded-xl'/>
             <span className='text-lg font-semibold'>Install city game app</span>
 
             <div className='ml-auto flex flex-row gap-2'>
@@ -25,6 +25,7 @@ function InstallBar() {
                         Install
                 </button>
                 <button className='w-6 flex justify-center items-center'
+                    aria-label="close install prompt"
                     onClick={() => {
                         setHidePrompt(true);
                         localStorage.setItem('hideInstallPrompt', 'true');
