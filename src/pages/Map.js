@@ -1,5 +1,6 @@
 import React, {useRef, useEffect} from 'react';
 import mapboxgl from 'mapbox-gl';
+import 'mapbox-gl/dist/mapbox-gl.css';
 
 mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_KEY;
 
@@ -27,11 +28,23 @@ function Map() {
         window.addEventListener("resize", () => {
             map.current.resize();
         });
+
+        map.current.addControl(
+            new mapboxgl.GeolocateControl({
+                positionOptions: {
+                    enableHighAccuracy: true
+                },
+                trackUserLocation: true,
+                showUserHeading: true,
+                showAccuracyCircle: false
+            })
+        );
+
     });
 
   return (
-    <div className='h-full w-full overflow-hidden' >
-        <div ref={mapContainer} className="h-full w-full" />
+    <div className='h-full w-full' > 
+        <div ref={mapContainer} className='h-full w-full' />
     </div>
   )
 }
