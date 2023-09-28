@@ -25,9 +25,6 @@ function App() {
   }
 
   useEffect(() => {
-    //ask for permission
-    navigator.geolocation.getCurrentPosition(() => {});
-
     //check permission status
     navigator.permissions.query({ name: "geolocation" })
       .then((result) => {
