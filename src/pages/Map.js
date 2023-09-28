@@ -1,10 +1,14 @@
-import React, {useRef, useEffect} from 'react';
+import React, {useRef, useEffect, useState} from 'react';
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
+import Markers from '../markers/Markers';
+import PositionMarker from '../markers/PositionMarker';
 
 mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_KEY;
 
 function Map() {
+    const [mapActive, setMapActive] = useState(false); 
+    const [userPosition, setUserPosition] = useState({lat: 0, lng: 0}); 
     const mapContainer = useRef(null);
     const map = useRef(null);
 
@@ -24,27 +28,21 @@ function Map() {
             pitch: 20, 
             maxBounds: bounds
         });
+        setMapActive(true);
 
         window.addEventListener("resize", () => {
             map.current.resize();
         });
-
-        map.current.addControl(
-            new mapboxgl.GeolocateControl({
-                positionOptions: {
-                    enableHighAccuracy: true
-                },
-                trackUserLocation: true,
-                showUserHeading: true,
-                showAccuracyCircle: false
-            })
-        );
-
-    });
+    }, []);
 
   return (
     <div className='h-full w-full' > 
         <div ref={mapContainer} className='h-full w-full' />
+        {mapActive && (
+            <Markers map={map.current}>
+                <PositionMarker {...userPosition} setUserPosition={setUserPosition} />
+            </Markers>
+        )}
     </div>
   )
 }
