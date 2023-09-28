@@ -3,20 +3,17 @@ import React, { useState } from "react";
 function PositionMarker({setUserPosition}) {
     useState(() => {
         if (!navigator.geolocation) return;
-
-        //check permission status
-        navigator.permissions.query({ name: "geolocation" })
-            .then((result) => {
-                if (result.state !== "granted") return;
-
-                //watch position
-                navigator.geolocation.watchPosition((position) => {
-                    setUserPosition({
-                        lat: position.coords.latitude,
-                        lng: position.coords.longitude
-                    });
+        
+        //wait to make lighthouse stop complaining
+        setTimeout(() => {
+            //watch position
+            navigator.geolocation.watchPosition((position) => {
+                setUserPosition({
+                    lat: position.coords.latitude,
+                    lng: position.coords.longitude
                 });
-            })
+            });
+        }, 4000);
     }, [setUserPosition]);
 
     return (
