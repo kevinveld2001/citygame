@@ -29,6 +29,9 @@ function Markers({ children, map }) {
 
             setMarkers((markers) => [...markers, marker]);
         });
+        document.querySelectorAll('[aria-label="Map marker"]').forEach((marker) => {
+            marker.removeAttribute("aria-label");
+        });
     }, [children, map]);
 
     React.Children.toArray(children).forEach((child) => {
