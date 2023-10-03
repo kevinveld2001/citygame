@@ -4,16 +4,15 @@ function PositionMarker({setUserPosition}) {
     useState(() => {
         if (!navigator.geolocation) return;
         
-        //wait to make lighthouse stop complaining
-        setTimeout(() => {
+        
             //watch position
-            navigator.geolocation.watchPosition((position) => {
-                setUserPosition({
-                    lat: position.coords.latitude,
-                    lng: position.coords.longitude
-                });
+        navigator.geolocation.watchPosition((position) => {
+            setUserPosition({
+                lat: position.coords.latitude,
+                lng: position.coords.longitude
             });
-        }, 4000);
+        });
+        
     }, [setUserPosition]);
 
     return (
