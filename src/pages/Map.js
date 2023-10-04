@@ -1,9 +1,9 @@
 import React, {useRef, useEffect, useState} from 'react';
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
-import Markers from '../markers/Markers';
-import PositionMarker from '../markers/PositionMarker';
-import GameMarker from '../markers/GameMarker';
+import Markers from '../components/markers/Markers';
+import PositionMarker from '../components/markers/PositionMarker';
+import GameMarker from '../components/markers/GameMarker';
 import Sheet from 'react-modal-sheet'
 
 mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_KEY;
