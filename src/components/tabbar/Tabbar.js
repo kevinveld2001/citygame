@@ -8,9 +8,9 @@ function Tabbar() {
 
     return (
     <div className="h-20  border border-t-slate-200 flex flex-row">
-        <TabItem toLink="/" icon={<FaMap />} text="Map" />
-        <TabItem toLink="/book" icon={<FaBook />} text="Book" />
-        <TabItem toLink="/settings" icon={<FaSlidersH />} text="Settings" />
+        <TabItem active={location.pathname === "/"} toLink="/" icon={<FaMap />} text="Map" />
+        <TabItem active={location.pathname === "/book"} toLink="/book" icon={<FaBook />} text="Book" />
+        <TabItem active={location.pathname === "/settings"} toLink="/settings" icon={<FaSlidersH />} text="Settings" />
     </div>
     );
 }
