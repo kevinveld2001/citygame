@@ -3,12 +3,15 @@ import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import Markers from '../markers/Markers';
 import PositionMarker from '../markers/PositionMarker';
+import GameMarker from '../markers/GameMarker';
+import Sheet from 'react-modal-sheet'
 
 mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_KEY;
 
 function Map() {
     const [mapActive, setMapActive] = useState(false); 
     const [userPosition, setUserPosition] = useState({lat: 0, lng: 0}); 
+    const [isSheetOpen, setIsSheetOpen] = useState(true); 
     const mapContainer = useRef(null);
     const map = useRef(null);
 
@@ -38,8 +41,20 @@ function Map() {
   return (
     <div className='h-full w-full' > 
         <div ref={mapContainer} className='h-full w-full' />
+        <Sheet isOpen={isSheetOpen} onClose={() => setIsSheetOpen(false)} detent='content-height'>
+            <Sheet.Container>
+                <Sheet.Header />
+                <Sheet.Content>
+                    <div className='h-[50vh]'>
+
+                    </div>
+                </Sheet.Content>
+            </Sheet.Container>
+            <Sheet.Backdrop />
+        </Sheet>
         {mapActive && (
             <Markers map={map.current}>
+                <GameMarker onClick={() => {setIsSheetOpen(true)}} lat={45.9299} lng={13.6187} />
                 <PositionMarker {...userPosition} setUserPosition={setUserPosition} />
             </Markers>
         )}
