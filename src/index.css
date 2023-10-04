@@ -14,6 +14,7 @@ html, body, #root {
     height: 100%;
 }
 
-.mapboxgl-ctrl-bottom-right {
+/* hide for lighthouse optimalisation */
+.mapboxgl-control-container {
     display: none;
 }
