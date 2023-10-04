@@ -11,7 +11,7 @@ mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_KEY;
 function Map() {
     const [mapActive, setMapActive] = useState(false); 
     const [userPosition, setUserPosition] = useState({lat: 0, lng: 0}); 
-    const [isSheetOpen, setIsSheetOpen] = useState(true); 
+    const [sheetInfo, setSheetInfo] = useState({ open: false, isOpen: false , lat: null, lng: null }); 
     const mapContainer = useRef(null);
     const map = useRef(null);
 
@@ -38,10 +38,27 @@ function Map() {
         });
     }, []);
 
+    useEffect(() => {
+        map.current.resize();
+        if (!sheetInfo.isOpen) return;
+
+        map.current.flyTo({
+            center: [sheetInfo.lng, sheetInfo.lat],
+            zoom: 18,
+            essential: true
+        });
+
+    }, [sheetInfo]);
+
   return (
-    <div className='h-full w-full' > 
-        <div ref={mapContainer} className='h-full w-full' />
-        <Sheet isOpen={isSheetOpen} onClose={() => setIsSheetOpen(false)} detent='content-height'>
+    <div className='h-full w-full flex flex-col' > 
+        <div ref={mapContainer} className='flex-1' />
+        <div className={`flex-1 hidden bg-red-white ${sheetInfo.isOpen && '!block'}`} />
+        <Sheet isOpen={sheetInfo.open} 
+            onClose={() => setSheetInfo( info => ({...info, open: false, isOpen: false}) )} 
+            onOpenEnd={() => setSheetInfo( info => ({...info, isOpen: true}) )}
+            onCloseStart={() => setSheetInfo( info => ({...info, isOpen: false}) )}
+            detent='content-height'>
             <Sheet.Container>
                 <Sheet.Header />
                 <Sheet.Content>
@@ -54,7 +71,7 @@ function Map() {
         </Sheet>
         {mapActive && (
             <Markers map={map.current}>
-                <GameMarker onClick={() => {setIsSheetOpen(true)}} lat={45.9299} lng={13.6187} />
+                <GameMarker onClick={() => {setSheetInfo( info => ({...info, open: true, lat:45.9299, lng:13.6187}) )}} lat={45.9299} lng={13.6187} />
                 <PositionMarker {...userPosition} setUserPosition={setUserPosition} />
             </Markers>
         )}
