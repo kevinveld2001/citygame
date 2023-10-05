@@ -5,6 +5,7 @@ import Markers from '../components/markers/Markers';
 import PositionMarker from '../components/markers/PositionMarker';
 import GameMarker from '../components/markers/GameMarker';
 import Sheet from 'react-modal-sheet'
+import GameSheet from '../components/game/GameSheet';
 
 mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_KEY;
 
@@ -62,9 +63,7 @@ function Map() {
             <Sheet.Container>
                 <Sheet.Header />
                 <Sheet.Content>
-                    <div className='h-[50vh]'>
-
-                    </div>
+                    <GameSheet />
                 </Sheet.Content>
             </Sheet.Container>
             <Sheet.Backdrop />
