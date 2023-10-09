@@ -2,7 +2,7 @@
   "name": "citygame",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://<github_username>.github.io/<app_repo>",
+  "homepage": "https://kevinveld2001.github.io/citygame",
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
