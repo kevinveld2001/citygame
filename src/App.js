@@ -1,5 +1,5 @@
 import './App.css';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import Tabbar from './components/tabbar/Tabbar';
 import Map from './pages/Map';
@@ -7,8 +7,12 @@ import Book from './pages/Book';
 import Settings from './pages/Settings';
 import InstallBar from './components/InstallBar';
 import EnableLocation from './pages/EnableLocation';
+import LoginScreen from './pages/Login';
 
 function App() {
+  const location = useLocation(); 
+  const pathWithTabbar = ['/book', '/settings', '/'];
+
   useEffect(() => {
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register("/serviceworker.js");
@@ -40,18 +44,21 @@ function App() {
         };
       });
   }, []);
+  console.log(pathWithTabbar.includes(location.pathname));
 
   return (
     <div className='h-[100%] w-screen flex flex-col overflow-hidden'>
       <InstallBar />
       <div className='flex-1 flex overflow-auto'>
+        	{window.localStorage.getItem('auth') === null ? (<Navigate to="/login" />) : <></>}
         <Routes>
           <Route path='/' element={homeScreen} />
           <Route path='/book' element={<Book />} />
           <Route path='/settings' element={<Settings />} />
+          <Route path='/login' element={<LoginScreen />} />
         </Routes>
       </div>
-      <Tabbar />
+      {pathWithTabbar.includes(location.pathname) ? <Tabbar /> : <></>}
     </div>
   );
 }
