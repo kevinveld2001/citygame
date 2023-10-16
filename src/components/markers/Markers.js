@@ -18,7 +18,7 @@ function Markers({ children, map }) {
             customMarker.innerHTML = renderToString(child);
 
             const marker = new Marker({
-                anchor: "bottom",
+                anchor: "center",
                 element: customMarker,
             })
             .setLngLat({
@@ -26,17 +26,19 @@ function Markers({ children, map }) {
                 lat: child.props.lat
             });
             marker.addTo(map);
+            if (child?.props?.onClick !== null) {
+                marker.getElement().addEventListener('click', child.props.onClick);
+            }
 
             setMarkers((markers) => [...markers, marker]);
         });
         document.querySelectorAll('[aria-label="Map marker"]').forEach((marker) => {
             marker.removeAttribute("aria-label");
         });
+        
+        //comment to stop it complaining about markers not being in there
+        // eslint-disable-next-line
     }, [children, map]);
-
-    React.Children.toArray(children).forEach((child) => {
-
-    });
 
     return (
         <></>
