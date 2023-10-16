@@ -1,4 +1,4 @@
-import React, {useRef, useEffect, useState} from 'react';
+import React, {useRef, useEffect, useState, useContext} from 'react';
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import Markers from '../components/markers/Markers';
@@ -6,10 +6,12 @@ import PositionMarker from '../components/markers/PositionMarker';
 import GameMarker from '../components/markers/GameMarker';
 import Sheet from 'react-modal-sheet'
 import GameSheet from '../components/game/GameSheet';
+import SettingsContext from '../services/SettingsContext';
 
 mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_KEY;
 
 function Map() {
+    const [settings] = useContext(SettingsContext);
     const [mapActive, setMapActive] = useState(false); 
     const [userPosition, setUserPosition] = useState({lat: 0, lng: 0}); 
     const [sheetInfo, setSheetInfo] = useState({ open: false, isOpen: false , lat: null, lng: null }); 
@@ -50,6 +52,10 @@ function Map() {
         });
 
     }, [sheetInfo]);
+
+    useEffect(() => {
+        map.current.resize();
+    }, [settings.showInstallPrompt]);
 
   return (
     <div className='h-full w-full flex flex-col' > 
