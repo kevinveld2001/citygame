@@ -5,6 +5,8 @@ import { FaMap, FaBook, FaSlidersH } from "react-icons/fa";
 import { useLocation } from "react-router-dom";
 
 function Tabbar() {
+    const location = useLocation();
+
     const [settings, setSettings] = useContext(SettingsContext);
     const translations = settings?.translations[settings?.language];
 
