@@ -2,14 +2,14 @@ export default {
     // tabs
     TAB_MAP: 'Zemljevid',
     TAB_BOOK: 'Knjiga',
-    TAB_SETTINGS: 'nastavitve',
+    TAB_SETTINGS: 'Nastavitve',
 
     // settings screen
-    SETTINGS_SCREEN_TITLE: 'nastavitve',
+    SETTINGS_SCREEN_TITLE: 'Nastavitve',
     SETTINGS_LANGUAGE: 'Jezik',
     SETTINGS_LANGUAGE_EXPLENATION: 'Spremenite jezik aplikacije.',
-    SETTINGS_LANGUAGE_EN: 'angleščina',
-    SETTINGS_LANGUAGE_IT: 'italijanščina',
+    SETTINGS_LANGUAGE_EN: 'Angleščina',
+    SETTINGS_LANGUAGE_IT: 'Italijanščina',
     SETTINGS_LANGUAGE_SL: 'Slovenščina',
 
     // Instalation banner
