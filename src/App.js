@@ -61,7 +61,7 @@ function App() {
             <Route path='/login' element={<LoginScreen />} />
           </Routes>
         </div>
-        <Tabbar />
+        {pathWithTabbar.includes(location.pathname) ? <Tabbar /> : <></>}
       </SettingsContext.Provider>
     </div>
   );

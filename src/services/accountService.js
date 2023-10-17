@@ -4,7 +4,7 @@ export async function anonymousLogin() {
     const myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
 
-    const anonymousUserCridentionals = await fetch("https://api.toto.io/v2/auth/try", {
+    const anonymousUserCridentionals = await fetch("/totoapi/v2/auth/try", {
         method: 'POST',
         headers: myHeaders,
         body: JSON.stringify({
