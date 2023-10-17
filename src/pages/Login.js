@@ -9,12 +9,12 @@ function LoginScreen() {
 
     return (<div className="p-7 flex flex-col items-center w-full">
         {window.localStorage.getItem('auth') === null ? <></> : <Navigate to="/" />}
-        <h1 className="text-2xl font-bold">City Game</h1>
-        <span className="text-sm text-center mt-5">To play the sity game you need a acount. You can make a acount. If you have one you can login with that one. But you can also try the app with a anoneymous account. </span>
+        <h1 className="text-2xl font-bold">{translations.LOGIN_SCREEN_TITLE}</h1>
+        <span className="text-sm text-center mt-5">{translations.LOGIN_SCREEN_EXPLANATION}</span>
 
         <div className="flex flex-row mt-5 w-full gap-3">
-            <button className="bg-blue-500 text-white rounded-md p-2 flex-1">Login</button>
-            <button className="bg-blue-500 text-white rounded-md p-2 flex-1">Create account</button>
+            <button className="bg-blue-500 text-white rounded-md p-2 flex-1">{translations.LOGIN_SCREEN_BUTTON_LOGIN}</button>
+            <button className="bg-blue-500 text-white rounded-md p-2 flex-1">{translations.LOGIN_SCREEN_BUTTON_REGISTER}</button>
         </div>
         <button className="bg-blue-500 text-white rounded-md p-2 w-full mt-3"
             onClick={async () => {
@@ -22,7 +22,7 @@ function LoginScreen() {
                 window.localStorage.setItem('auth', JSON.stringify(credentials));
                 setSettings({...settings, auth: credentials});
             }}> 
-            Try without account 
+            {translations.LOGIN_SCREEN_BUTTON_TRY}
         </button>
     </div>)
 }
