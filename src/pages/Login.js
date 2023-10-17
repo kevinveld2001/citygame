@@ -1,8 +1,11 @@
-import React from "react";
+import React, {useContext} from "react";
 import { Navigate } from 'react-router-dom';
 import { anonymousLogin } from "../services/accountService"
+import SettingsContext from "../services/SettingsContext";
 
 function LoginScreen() {
+    const [settings, setSettings] = useContext(SettingsContext);
+    const translations = settings?.translations[settings?.language];
 
     return (<div className="p-7 flex flex-col items-center w-full">
         {window.localStorage.getItem('auth') === null ? <></> : <Navigate to="/" />}
@@ -14,7 +17,11 @@ function LoginScreen() {
             <button className="bg-blue-500 text-white rounded-md p-2 flex-1">Create account</button>
         </div>
         <button className="bg-blue-500 text-white rounded-md p-2 w-full mt-3"
-            onClick={anonymousLogin}> 
+            onClick={async () => {
+                const credentials = await anonymousLogin();
+                window.localStorage.setItem('auth', JSON.stringify(credentials));
+                setSettings({...settings, auth: credentials});
+            }}> 
             Try without account 
         </button>
     </div>)

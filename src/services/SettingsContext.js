@@ -4,6 +4,7 @@ import itLanguage from './translations/it.js';
 import slLanguage from './translations/sl.js';
 
 const rawSettings = {
+    auth: window.localStorage.getItem('auth'),
     language: 'en',
     translations: {
         en: enLanguage,

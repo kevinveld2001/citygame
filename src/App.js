@@ -46,14 +46,13 @@ function App() {
         };
       });
   }, []);
-  console.log(pathWithTabbar.includes(location.pathname));
 
   return (
     <div className='h-[100%] w-screen flex flex-col overflow-hidden'>
       <SettingsContext.Provider value={[settings, setSettings]}>
         <InstallBar />
         <div className='flex-1 flex overflow-auto'>
-          {window.localStorage.getItem('auth') === null ? (<Navigate to="/login" />) : <></>}
+          {settings.auth === null ? (<Navigate to="/login" />) : <></>}
           <Routes>
             <Route path='/' element={homeScreen} />
             <Route path='/book' element={<Book />} />
