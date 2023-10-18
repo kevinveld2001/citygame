@@ -24,7 +24,7 @@ export default {
 
     // Login screen
     LOGIN_SCREEN_TITLE: 'Gioco di città',
-    LOGIN_SCREEN_EXPLANATION: 'Per giocare al gioco Sity hai bisogno di un contratto. Puoi fare un conteggio. Se ne hai uno puoi accedere con quello. Ma puoi anche provare l\'app con un account Anoneyous.',
+    LOGIN_SCREEN_EXPLANATION: 'Per giocare al gioco della città hai bisogno di un contratto. Puoi fare un conteggio. Se ne hai uno puoi accedere con quello. Ma puoi anche provare l\'app con un account Anoneyous.',
     LOGIN_SCREEN_BUTTON_LOGIN: 'Login',
     LOGIN_SCREEN_BUTTON_REGISTER: 'Creare un account',
     LOGIN_SCREEN_BUTTON_TRY: 'Prova senza account',
