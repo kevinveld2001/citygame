@@ -1,19 +1,19 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 
 function PositionMarker({setUserPosition}) {
-    useState(() => {
+  
+    (() => {
         if (!navigator.geolocation) return;
         
-        
-            //watch position
+        //watch position
         navigator.geolocation.watchPosition((position) => {
             setUserPosition({
                 lat: position.coords.latitude,
                 lng: position.coords.longitude
             });
         });
-        
-    }, [setUserPosition]);
+    }) ();
+  
 
     return (
         <div className="w-4 h-4 flex items-center justify-center">
