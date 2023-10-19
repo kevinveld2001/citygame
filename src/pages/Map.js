@@ -2,7 +2,6 @@ import React, {useRef, useEffect, useState} from 'react';
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import Markers from '../components/markers/Markers';
-import PositionMarker from '../components/markers/PositionMarker';
 import GameMarker from '../components/markers/GameMarker';
 import Sheet from 'react-modal-sheet'
 import GameSheet from '../components/game/GameSheet';
@@ -11,7 +10,6 @@ mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_KEY;
 
 function Map() {
     const [mapActive, setMapActive] = useState(false); 
-    const [userPosition, setUserPosition] = useState({lat: 0, lng: 0}); 
     const [sheetInfo, setSheetInfo] = useState({ open: false, isOpen: false , lat: null, lng: null }); 
     const mapContainer = useRef(null);
     const map = useRef(null);
@@ -71,7 +69,6 @@ function Map() {
         {mapActive && (
             <Markers map={map.current}>
                 <GameMarker onClick={() => {setSheetInfo( info => ({...info, open: true, lat:45.9299, lng:13.6187}) )}} lat={45.9299} lng={13.6187} />
-                <PositionMarker {...userPosition} setUserPosition={setUserPosition} />
             </Markers>
         )}
     </div>
