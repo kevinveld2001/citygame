@@ -30,6 +30,16 @@ function Map() {
             pitch: 20, 
             maxBounds: bounds
         });
+        map.current.addControl(
+            new mapboxgl.GeolocateControl({
+                positionOptions: {
+                    enableHighAccuracy: true,
+                },
+                trackUserLocation: true,
+                showUserHeading: false,
+                showAccuracyCircle: false,
+            })
+        );
         setMapActive(true);
 
         window.addEventListener("resize", () => {
