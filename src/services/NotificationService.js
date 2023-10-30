@@ -11,7 +11,7 @@ export async function showNotification(title, options) {
 }
 
 
-export async function scheduleNotification(title, options, time) {
+export function scheduleNotification(title, options, time) {
     const timeDate = new Date(time);
     if (timeDate === "Invalid Date" ) {
         throw new Error("Invalid date");

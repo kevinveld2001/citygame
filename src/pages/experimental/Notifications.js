@@ -3,12 +3,17 @@ import { askPermision, scheduleNotification, showNotification } from "../../serv
 
 export default function Notifications() {
     const [permission, setPermission] = useState(Notification.permission);
+    const [error, setError] = useState(false);
     const [title, setTitle] = useState("");
     const [options, setOptions] = useState({});
     const [datetime, setDateTime] = useState(0);
 
     return (<div className="flex flex-col gap-1 p-5">
         <h1 className="text-5xl font-semibold">Notifications</h1>
+
+        {error && <div className="bg-red-300 border border-red-600 text-red-600 rounded p-3">
+            <span>An error occurred</span>
+        </div>}
 
         <div className="mt-3">
             <button className="text-blue-500 underline" onClick={() => {
@@ -37,6 +42,7 @@ export default function Notifications() {
 
             <button className="text-blue-500 underline" onClick={() => {
                 showNotification(title, options);
+                setError(false);
             }}>Show notification</button>
         </div>
 
@@ -46,7 +52,13 @@ export default function Notifications() {
                 className="border rounded-lg p-2" 
                 onChange={(event) => {setDateTime(Date.parse(event.target.value))}}/>
             <button className="text-blue-500 underline" onClick={() => {
-                scheduleNotification(title, options, datetime);
+                try {
+                    scheduleNotification(title, options, datetime);
+                    setError(false);
+                } catch (error) { 
+                    console.error(error);
+                    setError(true);
+                }
             }}>Show delayed notification</button>
         </div>
     </div>)
