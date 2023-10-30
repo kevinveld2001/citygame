@@ -11,11 +11,17 @@ export async function showNotification(title, options) {
 }
 
 
-// TODO fix this And save it for later site visit and serviceworker
 export async function scheduleNotification(title, options, time) {
-    if (Date.now() - time <= 0) return;
+    const timeDate = new Date(time);
+    if (timeDate === "Invalid Date" ) {
+        throw new Error("Invalid date");
+    } 
+    const timeTime = timeDate.getTime() - Date.now();
+    if (timeTime <= 0 || timeTime > 2147483647) {
+        throw new Error("Invalid time");
+    }
 
     setTimeout(() => {
         showNotification(title, options);
-    }, time - Date.now() );
+    }, timeTime);
 }
