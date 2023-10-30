@@ -1,5 +1,6 @@
 import React, {useContext} from "react";
 import SettingsContext from "../services/SettingsContext";
+import { Link } from "react-router-dom";
 
 function Settings() {
   const [settings, setSettings] = useContext(SettingsContext);
@@ -44,6 +45,10 @@ function Settings() {
           </li>
 
         </ul>
+
+        {process.env.REACT_APP_EXPERIMENTAL_FEATURES === 'true' && <>
+          <Link to='/experimental' className='text-blue-500 underline'>experimental features</Link>
+        </> }
     </div>
   )
 }

@@ -9,6 +9,9 @@ import Settings from './pages/Settings';
 import InstallBar from './components/InstallBar';
 import EnableLocation from './pages/EnableLocation';
 
+import Experimental from './pages/experimental/Experimental';
+import Notifications from './pages/experimental/Notifications';
+
 function App() {
   const [settings, setSettings] = useState(rawSettings);
   
@@ -53,6 +56,10 @@ function App() {
             <Route path='/' element={homeScreen} />
             <Route path='/book' element={<Book />} />
             <Route path='/settings' element={<Settings />} />
+            {process.env.REACT_APP_EXPERIMENTAL_FEATURES === 'true' && <>
+              <Route path='/experimental' element={<Experimental />} />
+              <Route path='/experimental/notifications' element={<Notifications />} />
+            </> }
           </Routes>
         </div>
         <Tabbar />
