@@ -11,6 +11,8 @@ import EnableLocation from './pages/EnableLocation';
 
 import Experimental from './pages/experimental/Experimental';
 import Notifications from './pages/experimental/Notifications';
+import { scheduleNotificationFromStoreage } from './services/NotificationService';
+scheduleNotificationFromStoreage();
 
 function App() {
   const [settings, setSettings] = useState(rawSettings);
