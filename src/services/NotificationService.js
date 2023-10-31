@@ -20,9 +20,15 @@ export function scheduleNotification(title, options, time, saveNotification = tr
         throw new Error("Invalid date");
     } 
     const timeTime = timeDate.getTime() - Date.now();
-    if (timeTime <= 0 || timeTime > 2147483647) {
+    if (timeTime > 2147483647) {
         throw new Error("Invalid time");
     }
+
+    if (timeTime <= 0) {
+        showNotification(title, options);
+        return;
+    }
+
     if (saveNotification) {
         storeSchedule(title, options, timeDate.getTime());
     }
@@ -45,11 +51,11 @@ function storeSchedule(title, options, time) {
 }
 
 export function scheduleNotificationFromStoreage() {
-    removeNotificationFromStoreage();
     const notifications = JSON.parse(localStorage.getItem("notifications") || "[]");
     notifications.forEach(notification => {
         scheduleNotification(notification.title, notification.options, notification.time, false);
     });
+    removeNotificationFromStoreage();
 }
 
 function removeNotificationFromStoreage() {
