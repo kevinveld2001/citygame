@@ -16,4 +16,11 @@ export default {
     INSTALL_BANNER_TITLE: 'Install city game app',
     INSTALL_BANNER_INSTALL_BUTTON: 'Install',
 
+
+    // Login screen
+    LOGIN_SCREEN_TITLE: 'City Game',
+    LOGIN_SCREEN_EXPLANATION: 'To play the city game you need a acount. You can make a acount. If you have one you can login with that one. But you can also try the app with a anoneymous account. ',
+    LOGIN_SCREEN_BUTTON_LOGIN: 'Login',
+    LOGIN_SCREEN_BUTTON_REGISTER: 'Create account',
+    LOGIN_SCREEN_BUTTON_TRY: 'Try without account',
 };

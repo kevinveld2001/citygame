@@ -15,5 +15,12 @@ export default {
     // Instalation banner
     INSTALL_BANNER_TITLE: 'Namestite aplikacijo City Game',
     INSTALL_BANNER_INSTALL_BUTTON: 'Namestite',
+  
 
+    // Login screen
+    LOGIN_SCREEN_TITLE: 'Mestna igra',
+    LOGIN_SCREEN_EXPLANATION: 'Če želite igrati mestno igro, potrebujete acount. Lahko naredite acount. Če imate enega, se lahko prijavite s tem. Lahko pa poskusite tudi z aplikacijo z računom AnoneyMous.',
+    LOGIN_SCREEN_BUTTON_LOGIN: 'Vpiši se',
+    LOGIN_SCREEN_BUTTON_REGISTER: 'Ustvari račun',
+    LOGIN_SCREEN_BUTTON_TRY: 'Poskusite brez računa',
 };
