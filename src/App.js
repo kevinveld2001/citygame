@@ -1,5 +1,5 @@
 import './App.css';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import SettingsContext, {rawSettings} from './services/SettingsContext';
 import Tabbar from './components/tabbar/Tabbar';
@@ -8,10 +8,13 @@ import Book from './pages/Book';
 import Settings from './pages/Settings';
 import InstallBar from './components/InstallBar';
 import EnableLocation from './pages/EnableLocation';
+import LoginScreen from './pages/Login';
 
 function App() {
+  const location = useLocation(); 
+  const pathWithTabbar = ['/book', '/settings', '/'];
   const [settings, setSettings] = useState(rawSettings);
-  
+
   useEffect(() => {
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register("/serviceworker.js");
@@ -49,13 +52,15 @@ function App() {
       <SettingsContext.Provider value={[settings, setSettings]}>
         <InstallBar />
         <div className='flex-1 flex overflow-auto'>
+          {settings.auth === null ? (<Navigate to="/login" />) : <></>}
           <Routes>
             <Route path='/' element={homeScreen} />
             <Route path='/book' element={<Book />} />
             <Route path='/settings' element={<Settings />} />
+            <Route path='/login' element={<LoginScreen />} />
           </Routes>
         </div>
-        <Tabbar />
+        {pathWithTabbar.includes(location.pathname) ? <Tabbar /> : <></>}
       </SettingsContext.Provider>
     </div>
   );
