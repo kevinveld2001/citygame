@@ -9,7 +9,8 @@ const rawSettings = {
         en: enLanguage,
         it: itLanguage,
         sl: slLanguage
-    }
+    },
+    showInstallPrompt: false
 };
 const SettingsContext = createContext(rawSettings);
 
