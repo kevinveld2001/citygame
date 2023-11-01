@@ -16,11 +16,6 @@ export default {
     INSTALL_BANNER_TITLE: 'Installa l\'app di gioco della città',
     INSTALL_BANNER_INSTALL_BUTTON: 'Installare',
     
-    // EnableLocation screen
-    ENABLE_LOCATION_SCREEN_TITLE: 'Abilita posizione',
-    ENABLE_LOCATION_SCREEN_EXPLANATION: 'Per giocare, è necessario abilitare la posizione GPS sul dispositivo. Questo ci permetterà di mostrarti la mappa e la tua posizione su di essa. La tua posizione verrà utilizzata solo durante l\'utilizzo del gioco.',
-    ENABLE_LOCATION_SCREEN_BUTTON: 'Abilita posizione GPS',
-    ENABLE_LOCATION_SCREEN_NO_BUTTON: 'Vai alle impostazioni del sito nel browser per abilitare la posizione GPS.',
 
     // Login screen
     LOGIN_SCREEN_TITLE: 'Gioco di città',

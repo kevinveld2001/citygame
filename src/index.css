@@ -15,6 +15,6 @@ html, body, #root {
 }
 
 /* hide for lighthouse optimalisation */
-.mapboxgl-control-container {
+.mapboxgl-ctrl-bottom-right, .mapboxgl-ctrl-bottom-left {
     display: none;
 }

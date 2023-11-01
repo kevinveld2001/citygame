@@ -7,7 +7,7 @@ import Map from './pages/Map';
 import Book from './pages/Book';
 import Settings from './pages/Settings';
 import InstallBar from './components/InstallBar';
-import EnableLocation from './pages/EnableLocation';
+
 import LoginScreen from './pages/Login';
 
 function App() {
@@ -20,32 +20,7 @@ function App() {
       navigator.serviceWorker.register("/serviceworker.js");
     }
   }, [])
-  const [homeScreen, setHomeScreen] = useState(<EnableLocation/>);
 
-  function handlePermissionStatusChange(permissionStatus) {
-    switch (permissionStatus.state) {
-      case "granted":
-        setHomeScreen(<Map />);
-        break;
-      case "denied":
-        setHomeScreen(<EnableLocation showEnableLocationButton={false} />);
-        break;
-      default:
-        setHomeScreen(<EnableLocation showEnableLocationButton={true} />);
-        break;
-    }
-  }
-
-  useEffect(() => {
-    //check permission status
-    navigator.permissions.query({ name: "geolocation" })
-      .then((result) => {
-        handlePermissionStatusChange(result);
-        result.onchange = () => {
-            handlePermissionStatusChange(result);
-        };
-      });
-  }, []);
 
   return (
     <div className='h-[100%] w-screen flex flex-col overflow-hidden'>
@@ -54,7 +29,7 @@ function App() {
         <div className='flex-1 flex overflow-auto'>
           {settings.auth === null ? (<Navigate to="/login" />) : <></>}
           <Routes>
-            <Route path='/' element={homeScreen} />
+            <Route path='/' element={<Map />} />
             <Route path='/book' element={<Book />} />
             <Route path='/settings' element={<Settings />} />
             <Route path='/login' element={<LoginScreen />} />
