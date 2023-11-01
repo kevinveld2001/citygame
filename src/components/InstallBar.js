@@ -12,6 +12,7 @@ function InstallBar() {
         window.addEventListener('beforeinstallprompt', (e) => {
             e.preventDefault();
             setInstallPrompt(e);
+            setSettings({...settings, showInstallPrompt: true});
         });
     }, []);
 
@@ -32,6 +33,7 @@ function InstallBar() {
                     onClick={() => {
                         setHidePrompt(true);
                         localStorage.setItem('hideInstallPrompt', 'true');
+                        setSettings({...settings, showInstallPrompt: false});
                     }}>
                     <IoCloseSharp />
                 </button>

@@ -1,18 +1,19 @@
-import React, {useRef, useEffect, useState} from 'react';
+import React, {useRef, useEffect, useState, useContext} from 'react';
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import Markers from '../components/markers/Markers';
-import PositionMarker from '../components/markers/PositionMarker';
 import GameMarker from '../components/markers/GameMarker';
 import Sheet from 'react-modal-sheet'
 import GameSheet from '../components/game/GameSheet';
 import spawnObject from '../services/3dmap/3dObject';
+import SettingsContext from '../services/SettingsContext';
+
 
 mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_KEY;
 
 function Map() {
+    const [settings] = useContext(SettingsContext);
     const [mapActive, setMapActive] = useState(false); 
-    const [userPosition, setUserPosition] = useState({lat: 0, lng: 0}); 
     const [sheetInfo, setSheetInfo] = useState({ open: false, isOpen: false , lat: null, lng: null }); 
     const mapContainer = useRef(null);
     const map = useRef(null);
@@ -33,6 +34,16 @@ function Map() {
             pitch: 20, 
             maxBounds: bounds
         });
+        map.current.addControl(
+            new mapboxgl.GeolocateControl({
+                positionOptions: {
+                    enableHighAccuracy: true,
+                },
+                trackUserLocation: true,
+                showUserHeading: false,
+                showAccuracyCircle: false,
+            })
+        );
         setMapActive(true);
 
         window.addEventListener("resize", () => {
@@ -57,6 +68,10 @@ function Map() {
 
     }, [sheetInfo]);
 
+    useEffect(() => {
+        map.current.resize();
+    }, [settings.showInstallPrompt]);
+
   return (
     <div className='h-full w-full flex flex-col' > 
         <div ref={mapContainer} className='flex-1' />
@@ -77,7 +92,6 @@ function Map() {
         {mapActive && (
             <Markers map={map.current}>
                 <GameMarker onClick={() => {setSheetInfo( info => ({...info, open: true, lat:45.9299, lng:13.6187}) )}} lat={45.9299} lng={13.6187} />
-                <PositionMarker {...userPosition} setUserPosition={setUserPosition} />
             </Markers>
         )}
     </div>
