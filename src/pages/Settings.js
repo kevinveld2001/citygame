@@ -1,5 +1,6 @@
 import React, {useContext} from "react";
 import SettingsContext from "../services/SettingsContext";
+import { Link } from "react-router-dom";
 import LanguagePicker from "../components/settings/LanguagePicker";
 
 function Settings() {
@@ -11,6 +12,10 @@ function Settings() {
         <h1 className='font-semibold text-5xl mb-6'>{translations.SETTINGS_SCREEN_TITLE}</h1>
 
         <LanguagePicker />
+        {process.env.REACT_APP_EXPERIMENTAL_FEATURES === 'true' && <>
+          <Link to='/experimental' className='text-blue-500 underline'>experimental features</Link>
+        </> }
+        
     </div>
   )
 }

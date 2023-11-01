@@ -10,6 +10,11 @@ import InstallBar from './components/InstallBar';
 
 import LoginScreen from './pages/Login';
 
+import Experimental from './pages/experimental/Experimental';
+import Notifications from './pages/experimental/Notifications';
+import { scheduleNotificationFromStoreage } from './services/NotificationService';
+scheduleNotificationFromStoreage();
+
 function App() {
   const location = useLocation(); 
   const pathWithTabbar = ['/book', '/settings', '/'];
@@ -32,6 +37,10 @@ function App() {
             <Route path='/' element={<Map />} />
             <Route path='/book' element={<Book />} />
             <Route path='/settings' element={<Settings />} />
+            {process.env.REACT_APP_EXPERIMENTAL_FEATURES === 'true' && <>
+              <Route path='/experimental' element={<Experimental />} />
+              <Route path='/experimental/notifications' element={<Notifications />} />
+            </> }
             <Route path='/login' element={<LoginScreen />} />
           </Routes>
         </div>
