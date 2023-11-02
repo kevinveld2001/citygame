@@ -8,7 +8,8 @@ import Book from './pages/Book';
 import Settings from './pages/Settings';
 import InstallBar from './components/InstallBar';
 
-import LoginScreen from './pages/Login';
+import AuthScreen from './pages/Auth';
+import LoginScreen from './pages/auth/Login';
 
 import Experimental from './pages/experimental/Experimental';
 import Notifications from './pages/experimental/Notifications';
@@ -32,7 +33,7 @@ function App() {
       <SettingsContext.Provider value={[settings, setSettings]}>
         <InstallBar />
         <div className='flex-1 flex overflow-auto'>
-          {settings.auth === null ? (<Navigate to="/login" />) : <></>}
+          {settings.auth === null && !location.pathname.includes("/auth") ? (<Navigate to="/auth" />) : <></>}
           <Routes>
             <Route path='/' element={<Map />} />
             <Route path='/book' element={<Book />} />
@@ -41,7 +42,8 @@ function App() {
               <Route path='/experimental' element={<Experimental />} />
               <Route path='/experimental/notifications' element={<Notifications />} />
             </> }
-            <Route path='/login' element={<LoginScreen />} />
+            <Route path='/auth' element={<AuthScreen />} />
+            <Route path='/auth/login' element={<LoginScreen />} />
           </Routes>
         </div>
         {pathWithTabbar.includes(location.pathname) ? <Tabbar /> : <></>}
