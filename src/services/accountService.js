@@ -1,4 +1,4 @@
-
+import { getCookie } from "./cookieService";
 
 export async function anonymousLogin() {
     const myHeaders = new Headers();
@@ -21,6 +21,11 @@ export async function anonymousLogin() {
 export async function login(username, password) {
     const myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
+
+    const csrfToken = getCookie('csrfToken');
+    if (csrfToken) {
+        myHeaders.append("csrf-token", csrfToken);
+    }
     
     const cridentionals = await fetch("/totoapi/v2/auth/login", {
         method: 'POST',
@@ -38,4 +43,23 @@ export async function login(username, password) {
     if (!res.ok || res.status !== 200) return null;
 
     return await cridentionals;
+}
+
+export async function logout() {
+    const myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+
+    const csrfToken = getCookie('csrfToken');
+    if (csrfToken) {
+        myHeaders.append("csrf-token", csrfToken);
+    }
+
+    const res = await fetch("/totoapi/v2/auth/logout", {
+        method: 'POST',
+        headers: myHeaders,
+    })
+    .then(response => response.json())
+    .catch(error => console.log('error', error));
+
+    return res;
 }
