@@ -18,7 +18,7 @@ function AuthScreen() {
 
         <div className="flex flex-row mt-5 w-full gap-3">
             <Link to="/auth/login" className="bg-blue-500 text-white rounded-md p-2 flex-1 text-center">{translations.AUTH_SCREEN_BUTTON_LOGIN}</Link>
-            <Link to="/auth/login" className="bg-blue-500 text-white rounded-md p-2 flex-1 text-center">{translations.AUTH_SCREEN_BUTTON_REGISTER}</Link>
+            <Link to="/auth/register" className="bg-blue-500 text-white rounded-md p-2 flex-1 text-center">{translations.AUTH_SCREEN_BUTTON_REGISTER}</Link>
         </div>
         <button className="bg-blue-500 text-white rounded-md p-2 w-full mt-3"
             onClick={async () => {

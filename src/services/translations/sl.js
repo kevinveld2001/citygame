@@ -31,4 +31,13 @@ export default {
     LOGIN_SCREEN_USERNAME_LABLE: 'Uporabniško ime',
     LOGIN_SCREEN_PASSWORD_LABLE: 'Geslo',
     LOGIN_SCREEN_LOGIN_BUTTON_LABLE: 'Vpiši se',
+    LOGIN_SCREEN_FAILED: 'Prijava ni uspela',
+
+    //register screen    
+    REGISTER_SCREEN_TITLE: 'Register',
+    REGISTER_SCREEN_INFO: 'Vnesite svoje poverilnice, da ustvarite nov račun.',
+    REGISTER_SCREEN_EMAIL: 'E-naslov',
+    REGISTER_SCREEN_BUTTON: 'Pošlji sporočilo',
+    REGISTER_SCREEN_FAILED: 'Ni uspelo ustvariti računa',
+    REGISTER_SEREEN_EMAIL_SENT: 'Email poslan',
 };

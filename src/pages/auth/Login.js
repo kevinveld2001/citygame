@@ -17,6 +17,11 @@ function LoginScreen() {
 
         <span className="text-sm text-center my-5">{translations.LOGIN_SCREEN_INFO}</span>
 
+        {error !== "" && <div className="bg-red-500 text-white rounded-md p-2 w-full mt-3 border border-red-700 mb-4">
+            {error}
+        </div>}
+
+
         <label htmlFor="usernameField" className="text-left w-full px-2">{translations.LOGIN_SCREEN_USERNAME_LABLE}</label>
         <input id="usernameField" 
             className="border w-full rounded-md h-9 p-3 py-4" 
@@ -34,7 +39,7 @@ function LoginScreen() {
                 setError("");
                 const credentials = await login(username, password);
                 if (credentials == null) {
-                    setError("Login failed");
+                    setError(translations.LOGIN_SCREEN_FAILED);
                     return;
                 }
 

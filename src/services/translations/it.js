@@ -31,4 +31,13 @@ export default {
     LOGIN_SCREEN_USERNAME_LABLE: 'Nome utente',
     LOGIN_SCREEN_PASSWORD_LABLE: 'Parola d\'ordine',
     LOGIN_SCREEN_LOGIN_BUTTON_LABLE: 'login',
+    LOGIN_SCREEN_FAILED: 'Accesso non riuscito',
+
+    //register screen
+    REGISTER_SCREEN_TITLE: 'Registrati',
+    REGISTER_SCREEN_INFO: 'Inserisci le tue credenziali per creare un nuovo account.',
+    REGISTER_SCREEN_EMAIL: 'E-mail',
+    REGISTER_SCREEN_BUTTON: 'Invia una email',
+    REGISTER_SCREEN_FAILED: 'Impossibile creare un account',
+    REGISTER_SEREEN_EMAIL_SENT: 'Email inviata',
 };

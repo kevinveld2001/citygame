@@ -31,4 +31,13 @@ export default {
     LOGIN_SCREEN_USERNAME_LABLE: 'Username',
     LOGIN_SCREEN_PASSWORD_LABLE: 'Password',
     LOGIN_SCREEN_LOGIN_BUTTON_LABLE: 'login',
+    LOGIN_SCREEN_FAILED: 'Login failed',
+
+    //register screen
+    REGISTER_SCREEN_TITLE: 'Register',
+    REGISTER_SCREEN_INFO: 'Please enter your credentials to create a new account.',
+    REGISTER_SCREEN_EMAIL: 'Email',
+    REGISTER_SCREEN_BUTTON: 'Send email',
+    REGISTER_SCREEN_FAILED: 'Failed to create account',
+    REGISTER_SEREEN_EMAIL_SENT: 'Email sent',
 };

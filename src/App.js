@@ -10,6 +10,7 @@ import InstallBar from './components/InstallBar';
 
 import AuthScreen from './pages/Auth';
 import LoginScreen from './pages/auth/Login';
+import RegisterScreen from './pages/auth/Register';
 
 import Experimental from './pages/experimental/Experimental';
 import Notifications from './pages/experimental/Notifications';
@@ -44,6 +45,7 @@ function App() {
             </> }
             <Route path='/auth' element={<AuthScreen />} />
             <Route path='/auth/login' element={<LoginScreen />} />
+            <Route path='/auth/register' element={<RegisterScreen />} />
           </Routes>
         </div>
         {pathWithTabbar.includes(location.pathname) ? <Tabbar /> : <></>}
