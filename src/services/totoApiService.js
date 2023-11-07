@@ -1,6 +1,6 @@
 import { getCookie } from "./cookieService";
 
-function totoFetch(url, options) {
+export default function totoFetch(url, options) {
     options = {...{
         headers: {
             'Content-Type': 'application/json'
@@ -24,7 +24,3 @@ function totoFetch(url, options) {
         });
 }
 
-
-export async function getSessionConfig() {
-    return await totoFetch('/v2/session/config');
-}
