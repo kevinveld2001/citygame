@@ -4,6 +4,11 @@ export async function anonymousLogin() {
     const myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
 
+    const csrfToken = getCookie('csrfToken');
+    if (csrfToken) {
+        myHeaders.append("csrf-token", csrfToken);
+    }
+
     const anonymousUserCridentionals = await fetch("/totoapi/v2/auth/try", {
         method: 'POST',
         headers: myHeaders,
