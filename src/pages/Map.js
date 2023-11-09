@@ -6,6 +6,7 @@ import GameMarker from '../components/markers/GameMarker';
 import Sheet from 'react-modal-sheet'
 import GameSheet from '../components/game/GameSheet';
 import SettingsContext from '../services/SettingsContext';
+import { getSessionInfo } from '../services/totoSessionService';
 
 mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_KEY;
 
@@ -13,6 +14,7 @@ function Map() {
     const [settings] = useContext(SettingsContext);
     const [mapActive, setMapActive] = useState(false); 
     const [sheetInfo, setSheetInfo] = useState({ open: false, isOpen: false , lat: null, lng: null }); 
+    const [gameMarkers, setGameMarkers] = useState([]); 
     const mapContainer = useRef(null);
     const map = useRef(null);
 
@@ -30,7 +32,7 @@ function Map() {
             center: startPosition,
             zoom: 11,
             pitch: 20, 
-            maxBounds: bounds
+            // maxBounds: bounds
         });
         map.current.addControl(
             new mapboxgl.GeolocateControl({
@@ -47,6 +49,19 @@ function Map() {
         window.addEventListener("resize", () => {
             map.current.resize();
         });
+
+        let sessionids = JSON.parse(localStorage.getItem("sessionids", "{}"));
+        for (const [key, value] of Object.entries(sessionids)) {
+            (async() => {
+                const session = await getSessionInfo(value);
+                if (!session?.story?.graph?.nodes) return;
+
+                for (const node of session.story.graph.nodes) {
+                    setGameMarkers(markers => [...markers, {lng: node.posX, lat: node.posY, id: node.id, refId: node.refId}])
+                }
+            })();
+        }
+
     }, []);
 
     useEffect(() => {
@@ -85,6 +100,9 @@ function Map() {
         {mapActive && (
             <Markers map={map.current}>
                 <GameMarker onClick={() => {setSheetInfo( info => ({...info, open: true, lat:45.9299, lng:13.6187}) )}} lat={45.9299} lng={13.6187} />
+                {gameMarkers.map((marker, index) => 
+                    <GameMarker key={index} onClick={() => {setSheetInfo( info => ({...info, open: true, lat:marker.lat, lng:marker.lng}) )}} lat={marker.lat} lng={marker.lng} />
+                )}
             </Markers>
         )}
     </div>

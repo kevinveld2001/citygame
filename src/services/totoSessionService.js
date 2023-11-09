@@ -35,3 +35,7 @@ export async function initAllDefaultSessions() {
     }
 
 }
+
+export async function getSessionInfo(sessionId) {
+    return await totoFetch(`/v2/session/${sessionId}`);
+}
