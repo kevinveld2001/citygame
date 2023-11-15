@@ -6,6 +6,7 @@ import GameMarker from '../components/markers/GameMarker';
 import Sheet from 'react-modal-sheet'
 import GameSheet from '../components/game/GameSheet';
 import SettingsContext from '../services/SettingsContext';
+import { getSessionInfo } from '../services/totoSessionService';
 
 mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_KEY;
 
@@ -13,6 +14,7 @@ function Map() {
     const [settings] = useContext(SettingsContext);
     const [mapActive, setMapActive] = useState(false); 
     const [sheetInfo, setSheetInfo] = useState({ open: false, isOpen: false , lat: null, lng: null }); 
+    const [gameMarkers, setGameMarkers] = useState([]); 
     const mapContainer = useRef(null);
     const map = useRef(null);
 
@@ -47,6 +49,24 @@ function Map() {
         window.addEventListener("resize", () => {
             map.current.resize();
         });
+
+        let sessionids = JSON.parse(localStorage.getItem("sessionids") ?? "{}");
+        for (const [key, value] of Object.entries(sessionids)) {
+            (async() => {
+                const session = await getSessionInfo(value);
+                if (!session?.elements?.length === 0) return;
+
+                for (const element of session?.elements) {
+                    if (!element?.location?.gps) continue;
+                    setGameMarkers(markers => [...markers, {
+                        lng: element?.location?.gps.lon, 
+                        lat: element?.location?.gps.lat, 
+                        id: element?.id
+                    }])
+                }
+            })();
+        }
+
     }, []);
 
     useEffect(() => {
@@ -84,7 +104,9 @@ function Map() {
         </Sheet>
         {mapActive && (
             <Markers map={map.current}>
-                <GameMarker onClick={() => {setSheetInfo( info => ({...info, open: true, lat:45.9299, lng:13.6187}) )}} lat={45.9299} lng={13.6187} />
+                {gameMarkers.map((marker, index) => 
+                    <GameMarker key={index} onClick={() => {setSheetInfo( info => ({...info, open: true, lat:marker.lat, lng:marker.lng}) )}} lat={marker.lat} lng={marker.lng} />
+                )}
             </Markers>
         )}
     </div>
