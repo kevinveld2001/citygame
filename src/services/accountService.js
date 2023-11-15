@@ -1,4 +1,5 @@
 import { getCookie } from "./cookieService";
+import {initAllDefaultSessions} from './totoSessionService.js';
 
 export async function anonymousLogin() {
     const myHeaders = new Headers();
@@ -46,6 +47,8 @@ export async function login(username, password) {
 
     const res = await fetch("/totoapi/v2/auth/identity", {headers: myHeaders});
     if (res.status !== 200) return null;
+  
+    await initAllDefaultSessions();
 
     return await cridentionals;
 }
@@ -90,3 +93,4 @@ export async function register(email, lang = "eng") {
 
     return res.status == 200;
 } 
+
