@@ -32,7 +32,7 @@ function Map() {
             center: startPosition,
             zoom: 11,
             pitch: 20, 
-            // maxBounds: bounds
+            maxBounds: bounds
         });
         map.current.addControl(
             new mapboxgl.GeolocateControl({
