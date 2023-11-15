@@ -17,10 +17,27 @@ export default {
     INSTALL_BANNER_INSTALL_BUTTON: 'Install',
 
 
-    // Login screen
-    LOGIN_SCREEN_TITLE: 'City Game',
-    LOGIN_SCREEN_EXPLANATION: 'To play the city game you need a acount. You can make a acount. If you have one you can login with that one. But you can also try the app with a anoneymous account. ',
-    LOGIN_SCREEN_BUTTON_LOGIN: 'Login',
-    LOGIN_SCREEN_BUTTON_REGISTER: 'Create account',
-    LOGIN_SCREEN_BUTTON_TRY: 'Try without account',
+    // auth screen
+    AUTH_SCREEN_TITLE: 'City Game',
+    AUTH_SCREEN_EXPLANATION: 'To play the city game you need a acount. You can make a acount. If you have one you can login with that one. But you can also try the app with a anoneymous account. ',
+    AUTH_SCREEN_BUTTON_LOGIN: 'Login',
+    AUTH_SCREEN_BUTTON_REGISTER: 'Create account',
+    AUTH_SCREEN_BUTTON_TRY: 'Try without account',
+
+    // login screen
+    LOGIN_SCREEN_TITLE: 'Login',
+    LOGIN_SCREEN_BACK_LABLE: 'go back to main page',
+    LOGIN_SCREEN_INFO: 'Please enter your credentials to login.',
+    LOGIN_SCREEN_USERNAME_LABLE: 'Username',
+    LOGIN_SCREEN_PASSWORD_LABLE: 'Password',
+    LOGIN_SCREEN_LOGIN_BUTTON_LABLE: 'login',
+    LOGIN_SCREEN_FAILED: 'Login failed',
+
+    //register screen
+    REGISTER_SCREEN_TITLE: 'Register',
+    REGISTER_SCREEN_INFO: 'Please enter your credentials to create a new account.',
+    REGISTER_SCREEN_EMAIL: 'Email',
+    REGISTER_SCREEN_BUTTON: 'Send email',
+    REGISTER_SCREEN_FAILED: 'Failed to create account',
+    REGISTER_SEREEN_EMAIL_SENT: 'Email sent',
 };
