@@ -54,10 +54,15 @@ function Map() {
         for (const [key, value] of Object.entries(sessionids)) {
             (async() => {
                 const session = await getSessionInfo(value);
-                if (!session?.story?.graph?.nodes) return;
+                if (!session?.elements?.length === 0) return;
 
-                for (const node of session.story.graph.nodes) {
-                    setGameMarkers(markers => [...markers, {lng: node.posX, lat: node.posY, id: node.id, refId: node.refId}])
+                for (const element of session?.elements) {
+                    if (!element?.location?.gps) continue;
+                    setGameMarkers(markers => [...markers, {
+                        lng: element?.location?.gps.lon, 
+                        lat: element?.location?.gps.lat, 
+                        id: element?.id
+                    }])
                 }
             })();
         }
@@ -99,7 +104,6 @@ function Map() {
         </Sheet>
         {mapActive && (
             <Markers map={map.current}>
-                <GameMarker onClick={() => {setSheetInfo( info => ({...info, open: true, lat:45.9299, lng:13.6187}) )}} lat={45.9299} lng={13.6187} />
                 {gameMarkers.map((marker, index) => 
                     <GameMarker key={index} onClick={() => {setSheetInfo( info => ({...info, open: true, lat:marker.lat, lng:marker.lng}) )}} lat={marker.lat} lng={marker.lng} />
                 )}
