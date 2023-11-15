@@ -50,7 +50,7 @@ function Map() {
             map.current.resize();
         });
 
-        let sessionids = JSON.parse(localStorage.getItem("sessionids", "{}"));
+        let sessionids = JSON.parse(localStorage.getItem("sessionids") ?? "{}");
         for (const [key, value] of Object.entries(sessionids)) {
             (async() => {
                 const session = await getSessionInfo(value);
