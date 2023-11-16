@@ -6,6 +6,7 @@ import Tabbar from './components/tabbar/Tabbar';
 import Map from './pages/Map';
 import Book from './pages/Book';
 import Settings from './pages/Settings';
+import GameScreen from './pages/Game';
 import InstallBar from './components/InstallBar';
 
 import AuthScreen from './pages/Auth';
@@ -39,6 +40,7 @@ function App() {
             <Route path='/' element={<Map />} />
             <Route path='/book' element={<Book />} />
             <Route path='/settings' element={<Settings />} />
+            <Route path='/game/:sessionId/:elementId' element={<GameScreen />} />
             {process.env.REACT_APP_EXPERIMENTAL_FEATURES === 'true' && <>
               <Route path='/experimental' element={<Experimental />} />
               <Route path='/experimental/notifications' element={<Notifications />} />
