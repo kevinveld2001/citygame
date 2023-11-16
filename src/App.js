@@ -16,6 +16,7 @@ import RegisterScreen from './pages/auth/Register';
 import Experimental from './pages/experimental/Experimental';
 import Notifications from './pages/experimental/Notifications';
 import { scheduleNotificationFromStoreage } from './services/NotificationService';
+import QuestScreen from './pages/Quest';
 scheduleNotificationFromStoreage();
 
 function App() {
@@ -39,6 +40,7 @@ function App() {
           <Routes>
             <Route path='/' element={<Map />} />
             <Route path='/quest/list' element={<QuestList />} />
+            <Route path='/quest/:id' element={<QuestScreen />} />
             <Route path='/settings' element={<Settings />} />
             <Route path='/game/:sessionId/:elementId' element={<GameScreen />} />
             {process.env.REACT_APP_EXPERIMENTAL_FEATURES === 'true' && <>
