@@ -5,8 +5,10 @@ import Markers from '../components/markers/Markers';
 import GameMarker from '../components/markers/GameMarker';
 import Sheet from 'react-modal-sheet'
 import GameSheet from '../components/game/GameSheet';
+import spawnObject from '../services/3dmap/3dObject';
 import SettingsContext from '../services/SettingsContext';
 import { getSessionInfo } from '../services/totoSessionService';
+
 
 mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_KEY;
 
@@ -48,6 +50,11 @@ function Map() {
 
         window.addEventListener("resize", () => {
             map.current.resize();
+        });
+
+        map.current.on('style.load', () => { 
+            map.current.addLayer(spawnObject('necklace', './models/necklace_test.glb', [13.6197, 45.9399], 0, [Math.PI / 2, Math.PI / 1.2, 0], 10000));
+            map.current.addLayer(spawnObject('test', './models/test2.glb', [13.6187, 45.9399], 0, [Math.PI / 2, Math.PI / 1.8, 0], 1));
         });
 
         let sessionids = JSON.parse(localStorage.getItem("sessionids") ?? "{}");
