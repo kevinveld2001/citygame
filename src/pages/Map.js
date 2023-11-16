@@ -7,6 +7,7 @@ import Sheet from 'react-modal-sheet'
 import GameSheet from '../components/game/GameSheet';
 import spawnObject from '../services/3dmap/3dObject';
 import SettingsContext from '../services/SettingsContext';
+import { getSessionInfo } from '../services/totoSessionService';
 
 
 mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_KEY;
@@ -15,6 +16,7 @@ function Map() {
     const [settings] = useContext(SettingsContext);
     const [mapActive, setMapActive] = useState(false); 
     const [sheetInfo, setSheetInfo] = useState({ open: false, isOpen: false , lat: null, lng: null }); 
+    const [gameMarkers, setGameMarkers] = useState([]); 
     const mapContainer = useRef(null);
     const map = useRef(null);
 
@@ -54,6 +56,24 @@ function Map() {
             map.current.addLayer(spawnObject('necklace', './models/necklace_test.glb', [13.6197, 45.9399], 0, [Math.PI / 2, Math.PI / 1.2, 0], 10000));
             map.current.addLayer(spawnObject('test', './models/test2.glb', [13.6187, 45.9399], 0, [Math.PI / 2, Math.PI / 1.8, 0], 1));
         });
+
+        let sessionids = JSON.parse(localStorage.getItem("sessionids") ?? "{}");
+        for (const [key, value] of Object.entries(sessionids)) {
+            (async() => {
+                const session = await getSessionInfo(value);
+                if (!session?.elements?.length === 0) return;
+
+                for (const element of session?.elements) {
+                    if (!element?.location?.gps) continue;
+                    setGameMarkers(markers => [...markers, {
+                        lng: element?.location?.gps.lon, 
+                        lat: element?.location?.gps.lat, 
+                        id: element?.id
+                    }])
+                }
+            })();
+        }
+
     }, []);
 
     useEffect(() => {
@@ -91,7 +111,9 @@ function Map() {
         </Sheet>
         {mapActive && (
             <Markers map={map.current}>
-                <GameMarker onClick={() => {setSheetInfo( info => ({...info, open: true, lat:45.9299, lng:13.6187}) )}} lat={45.9299} lng={13.6187} />
+                {gameMarkers.map((marker, index) => 
+                    <GameMarker key={index} onClick={() => {setSheetInfo( info => ({...info, open: true, lat:marker.lat, lng:marker.lng}) )}} lat={marker.lat} lng={marker.lng} />
+                )}
             </Markers>
         )}
     </div>

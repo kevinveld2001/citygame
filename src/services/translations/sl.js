@@ -17,10 +17,27 @@ export default {
     INSTALL_BANNER_INSTALL_BUTTON: 'Namestite',
   
 
-    // Login screen
-    LOGIN_SCREEN_TITLE: 'Mestna igra',
-    LOGIN_SCREEN_EXPLANATION: 'Če želite igrati mestno igro, potrebujete acount. Lahko naredite acount. Če imate enega, se lahko prijavite s tem. Lahko pa poskusite tudi z aplikacijo z računom AnoneyMous.',
-    LOGIN_SCREEN_BUTTON_LOGIN: 'Vpiši se',
-    LOGIN_SCREEN_BUTTON_REGISTER: 'Ustvari račun',
-    LOGIN_SCREEN_BUTTON_TRY: 'Poskusite brez računa',
+    // auth screen
+    AUTH_SCREEN_TITLE: 'Mestna igra',
+    AUTH_SCREEN_EXPLANATION: 'Če želite igrati mestno igro, potrebujete acount. Lahko naredite acount. Če imate enega, se lahko prijavite s tem. Lahko pa poskusite tudi z aplikacijo z računom AnoneyMous.',
+    AUTH_SCREEN_BUTTON_LOGIN: 'Vpiši se',
+    AUTH_SCREEN_BUTTON_REGISTER: 'Ustvari račun',
+    AUTH_SCREEN_BUTTON_TRY: 'Poskusite brez računa',
+
+    // login screen
+    LOGIN_SCREEN_TITLE: 'Vpiši se',
+    LOGIN_SCREEN_BACK_LABLE: 'Vrnite se na glavno stran',
+    LOGIN_SCREEN_INFO: 'Prosimo, vnesite svoje poverilnice za prijavo.',
+    LOGIN_SCREEN_USERNAME_LABLE: 'Uporabniško ime',
+    LOGIN_SCREEN_PASSWORD_LABLE: 'Geslo',
+    LOGIN_SCREEN_LOGIN_BUTTON_LABLE: 'Vpiši se',
+    LOGIN_SCREEN_FAILED: 'Prijava ni uspela',
+
+    //register screen    
+    REGISTER_SCREEN_TITLE: 'Register',
+    REGISTER_SCREEN_INFO: 'Vnesite svoje poverilnice, da ustvarite nov račun.',
+    REGISTER_SCREEN_EMAIL: 'E-naslov',
+    REGISTER_SCREEN_BUTTON: 'Pošlji sporočilo',
+    REGISTER_SCREEN_FAILED: 'Ni uspelo ustvariti računa',
+    REGISTER_SEREEN_EMAIL_SENT: 'Email poslan',
 };
