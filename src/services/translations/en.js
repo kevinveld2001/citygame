@@ -1,7 +1,7 @@
 export default {
     // tabs
     TAB_MAP: 'Map',
-    TAB_BOOK: 'Book',
+    TAB_QUEST: 'Quests',
     TAB_SETTINGS: 'Settings',
 
     // settings screen

@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import SettingsContext, {rawSettings} from './services/SettingsContext';
 import Tabbar from './components/tabbar/Tabbar';
 import Map from './pages/Map';
-import Book from './pages/Book';
+import QuestList from './pages/QuestList';
 import Settings from './pages/Settings';
 import GameScreen from './pages/Game';
 import InstallBar from './components/InstallBar';
@@ -20,7 +20,7 @@ scheduleNotificationFromStoreage();
 
 function App() {
   const location = useLocation(); 
-  const pathWithTabbar = ['/book', '/settings', '/'];
+  const pathsWithTabbar = ['/quest', '/settings'];
   const [settings, setSettings] = useState(rawSettings);
 
   useEffect(() => {
@@ -38,7 +38,7 @@ function App() {
           {settings.auth === null && !location.pathname.includes("/auth") ? (<Navigate to="/auth" />) : <></>}
           <Routes>
             <Route path='/' element={<Map />} />
-            <Route path='/book' element={<Book />} />
+            <Route path='/quest/list' element={<QuestList />} />
             <Route path='/settings' element={<Settings />} />
             <Route path='/game/:sessionId/:elementId' element={<GameScreen />} />
             {process.env.REACT_APP_EXPERIMENTAL_FEATURES === 'true' && <>
@@ -50,7 +50,7 @@ function App() {
             <Route path='/auth/register' element={<RegisterScreen />} />
           </Routes>
         </div>
-        {pathWithTabbar.includes(location.pathname) ? <Tabbar /> : <></>}
+        {pathsWithTabbar.some((pathWithTabbar) => location.pathname.includes(pathWithTabbar) || location.pathname === "/") ? <Tabbar /> : <></>}
       </SettingsContext.Provider>
     </div>
   );

@@ -1,7 +1,7 @@
 export default {
     // tabs
     TAB_MAP: 'Carta geografica',
-    TAB_BOOK: 'Libro',
+    TAB_QUEST: 'Missioni',
     TAB_SETTINGS: 'Impostazioni',
 
     // settings screen
