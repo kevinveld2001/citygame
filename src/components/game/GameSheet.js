@@ -1,31 +1,28 @@
 import React, {useState, useEffect} from "react";
 import SkeletonLoader from "./SkeletonLoader";
 import ReactMarkdown from "react-markdown";
+import { getSessionInfo } from "../../services/totoSessionService";
+import remarkGfm from 'remark-gfm'
 
 
-function GameSheet({}) {
+function GameSheet({ elementId, sessionId }) {
     const [showSkeletonLoader, setShowSkeletonLoader] = useState(true);
+    const [markdown, setMarkdown] = useState("");
 
     useEffect(() => {
-        setTimeout(() => {
+        (async () => {
+            const sessionInfo = await getSessionInfo(sessionId);
+            const element = sessionInfo.elements.find(element => element.id === elementId);
+            setMarkdown(element?.content?.description);
             setShowSkeletonLoader(false);
-        }, 2000);
+        }) ();
     }, []);
-    const gameSheetMarkdown = `
-    *React-Markdown* is **Awesome**
-    # header 1
-    ## header 2
-    ### header 3
-    #### header 4
-    `;
 
-    return <div className='h-[50vh]'>
+    return <div className='h-[50vh] overflow-y-scroll'>
         {showSkeletonLoader && <SkeletonLoader />}
         {!showSkeletonLoader && <div className="flex flex-col justify-between p-10 h-full">
             <div className="prose lg:prose-xl">
-                { gameSheetMarkdown.split('\n').map((line, index) => {
-                    return <ReactMarkdown children={line.trim()} key={index}/> 
-                }) }
+                <ReactMarkdown remarkPlugins={[remarkGfm]} children={markdown}/>
             </div>
         </div>}
     </div>
