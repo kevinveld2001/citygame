@@ -1,7 +1,7 @@
 export default {
     // tabs
     TAB_MAP: 'Zemljevid',
-    TAB_BOOK: 'Knjiga',
+    TAB_QUEST: 'Naloge',
     TAB_SETTINGS: 'Nastavitve',
 
     // settings screen
