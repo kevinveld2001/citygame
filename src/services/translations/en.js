@@ -11,6 +11,8 @@ export default {
     SETTINGS_LANGUAGE_EN: 'English',
     SETTINGS_LANGUAGE_IT: 'Italian',
     SETTINGS_LANGUAGE_SL: 'Slovenian',
+    SETTINGS_ACOUNTSETTING_TITLE: 'Account settings',
+    SETTINGS_ACOUNTSETTING_LOG_OUT_BUTTON: 'Log out',
 
     // Instalation banner
     INSTALL_BANNER_TITLE: 'Install city game app',

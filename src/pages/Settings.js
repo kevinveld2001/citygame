@@ -1,5 +1,5 @@
 import React, {useContext} from "react";
-import SettingsContext from "../services/SettingsContext";
+import SettingsContext, {rawSettings} from "../services/SettingsContext";
 import { Link } from "react-router-dom";
 import LanguagePicker from "../components/settings/LanguagePicker";
 import { logout } from "../services/accountService";
@@ -15,16 +15,16 @@ function Settings() {
         <LanguagePicker />
         
         <h2 className="font-semibold text-xl">
-          Account settings
+          {translations.SETTINGS_ACOUNTSETTING_TITLE}
         </h2>
         <a className="text-red-500 underline cursor-pointer"
           onClick={async () => {
             await logout();
-            localStorage.removeItem('auth');
-            setSettings({...settings, auth: null});
+            localStorage.clear();
+            setSettings(rawSettings)
           }}>
           <div className="border my-4 rounded-lg flex flex-col p-3">
-              Log out
+              {translations.SETTINGS_ACOUNTSETTING_LOG_OUT_BUTTON}
           </div>
         </a>
 

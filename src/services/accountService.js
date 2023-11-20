@@ -65,9 +65,7 @@ export async function logout() {
     const res = await fetch("/totoapi/v2/auth/logout", {
         method: 'POST',
         headers: myHeaders,
-    })
-    .then(response => response.json())
-    .catch(error => console.log('error', error));
+    });
 
     return res;
 }
