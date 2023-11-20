@@ -1,12 +1,14 @@
-import React, {useContext} from "react";
+import React, {useContext, useState} from "react";
 import SettingsContext, {rawSettings} from "../services/SettingsContext";
 import { Link } from "react-router-dom";
 import LanguagePicker from "../components/settings/LanguagePicker";
 import { logout } from "../services/accountService";
+import { AiOutlineLoading } from "react-icons/ai";
 
 function Settings() {
   const [settings, setSettings] = useContext(SettingsContext);
   const translations = settings?.translations[settings?.language];
+  const [loading, setLoading] = useState(false);
 
   return (
     <div className='p-6 overflow-y-scroll w-full'>
@@ -19,12 +21,14 @@ function Settings() {
         </h2>
         <a className="text-red-500 underline cursor-pointer"
           onClick={async () => {
+            if (loading === true) return;
+            setLoading(true);
             await logout();
             localStorage.clear();
             setSettings({...settings, auth: null});
           }}>
           <div className="border my-4 rounded-lg flex flex-col p-3">
-              {translations.SETTINGS_ACOUNTSETTING_LOG_OUT_BUTTON}
+              {loading? <AiOutlineLoading className="animate-spin w-6 h-6" /> :translations.SETTINGS_ACOUNTSETTING_LOG_OUT_BUTTON}
           </div>
         </a>
 

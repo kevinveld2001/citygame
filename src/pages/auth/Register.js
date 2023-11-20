@@ -2,7 +2,7 @@ import React, {useContext, useState} from "react";
 import {Link} from "react-router-dom";
 import SettingsContext from "../../services/SettingsContext";
 import { register } from "../../services/accountService";
-
+import { AiOutlineLoading } from "react-icons/ai";
 
 function RegisterScreen() {
     const [settings, setSettings] = useContext(SettingsContext);
@@ -10,6 +10,7 @@ function RegisterScreen() {
     const [email, setemail] = useState("");
     const [error, setError] = useState("");
     const [emailSend, setEmailSend] = useState(false);
+    const [loading, setLoading] = useState(false);
 
     return (<div className="p-7 flex flex-col items-center w-full">
         <h1 className="text-2xl font-bold mb-6">{translations.REGISTER_SCREEN_TITLE}</h1>
@@ -31,19 +32,23 @@ function RegisterScreen() {
             type="email" placeholder={translations.REGISTER_SCREEN_EMAIL} 
             onChange={(e) => {setemail(e.target.value)}} />
 
-        <button className="bg-blue-500 text-white rounded-md p-2 w-full mt-3"
+        <button className="bg-blue-500 text-white rounded-md p-2 w-full mt-3 flex items-center justify-center"
             onClick={async () => {
+                if (loading === true) return;
+                setLoading(true);
                 setError("");
                 setEmailSend(false);
                 const emailSend = await register(email);
                 if (!emailSend) {
                     setError(translations.REGISTER_SCREEN_FAILED);
+                    setLoading(false);
                     return;
                 }
 
                 setEmailSend(true);
+                setLoading(false);
             }}>
-            {translations.REGISTER_SCREEN_BUTTON}
+            {loading? <AiOutlineLoading className="animate-spin w-6 h-6" />: translations.REGISTER_SCREEN_BUTTON}
         </button>
 
     </div>)

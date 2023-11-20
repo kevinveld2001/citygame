@@ -2,6 +2,7 @@ import React, {useContext, useState} from "react";
 import {Link} from "react-router-dom";
 import SettingsContext from "../../services/SettingsContext";
 import { login } from "../../services/accountService";
+import { AiOutlineLoading } from "react-icons/ai";
 
 
 function LoginScreen() {
@@ -10,6 +11,7 @@ function LoginScreen() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
+    const [loading, setLoading] = useState(false);
 
     return (<div className="p-7 flex flex-col items-center w-full">
         <h1 className="text-2xl font-bold mb-6">{translations.LOGIN_SCREEN_TITLE}</h1>
@@ -34,12 +36,15 @@ function LoginScreen() {
             type="password" placeholder={translations.LOGIN_SCREEN_PASSWORD_LABLE} 
             onChange={(e) => {setPassword(e.target.value)}} />
 
-        <button className="bg-blue-500 text-white rounded-md p-2 w-full mt-3"
+        <button className="bg-blue-500 text-white rounded-md p-2 w-full mt-3 flex items-center justify-center"
             onClick={async () => {
+                if (loading === true) return;
+                setLoading(true);
                 setError("");
                 const credentials = await login(username, password);
                 if (credentials == null) {
                     setError(translations.LOGIN_SCREEN_FAILED);
+                    setLoading(false);
                     return;
                 }
 
@@ -47,7 +52,7 @@ function LoginScreen() {
                 setSettings({...settings, auth: credentials});
                 window.location.href = "/";
             }}>
-            {translations.LOGIN_SCREEN_LOGIN_BUTTON_LABLE}
+            {loading? <AiOutlineLoading className="animate-spin w-6 h-6" />: translations.LOGIN_SCREEN_LOGIN_BUTTON_LABLE}
         </button>
 
     </div>)
