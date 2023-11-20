@@ -11,6 +11,8 @@ export default {
     SETTINGS_LANGUAGE_EN: 'Angleščina',
     SETTINGS_LANGUAGE_IT: 'Italijanščina',
     SETTINGS_LANGUAGE_SL: 'Slovenščina',
+    SETTINGS_ACOUNTSETTING_TITLE: 'Nastavitve računa',
+    SETTINGS_ACOUNTSETTING_LOG_OUT_BUTTON: 'Odjava',
 
     // Instalation banner
     INSTALL_BANNER_TITLE: 'Namestite aplikacijo City Game',

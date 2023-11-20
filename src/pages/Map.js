@@ -61,7 +61,7 @@ function Map() {
         for (const [key, sessionId] of Object.entries(sessionids)) {
             (async() => {
                 const session = await getSessionInfo(sessionId);
-                if (!session?.elements?.length === 0) return;
+                if (!session?.session || session?.elements?.length === 0) return;
 
                 for (const element of session?.elements) {
                     if (!element?.location?.gps) continue;

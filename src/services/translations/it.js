@@ -11,6 +11,8 @@ export default {
     SETTINGS_LANGUAGE_EN: 'Inglese',
     SETTINGS_LANGUAGE_IT: 'Italiana',
     SETTINGS_LANGUAGE_SL: 'Slovena',
+    SETTINGS_ACOUNTSETTING_TITLE: 'Impostazioni dell\'account',
+    SETTINGS_ACOUNTSETTING_LOG_OUT_BUTTON: 'Disconnettersi',
 
     // Instalation banner
     INSTALL_BANNER_TITLE: 'Installa l\'app di gioco della città',
