@@ -21,7 +21,7 @@ function Settings() {
           onClick={async () => {
             await logout();
             localStorage.clear();
-            setSettings(rawSettings)
+            setSettings({...settings, auth: null})
           }}>
           <div className="border my-4 rounded-lg flex flex-col p-3">
               {translations.SETTINGS_ACOUNTSETTING_LOG_OUT_BUTTON}
