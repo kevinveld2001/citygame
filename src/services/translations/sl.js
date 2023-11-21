@@ -44,6 +44,6 @@ export default {
     REGISTER_SEREEN_EMAIL_SENT: 'Email poslan',
     
     // game links component
-    GAME_LINKS_TITLE: 'Igralne povezave',
+    GAME_LINKS_TITLE: 'Naslednja stopnja',
     GAME_LINK_NO_LINKS: 'Naslednjih ravni ni',
 };

@@ -44,6 +44,6 @@ export default {
     REGISTER_SEREEN_EMAIL_SENT: 'Email sent',
 
     // game links component
-    GAME_LINKS_TITLE: 'Game links',
+    GAME_LINKS_TITLE: 'Next level(s)',
     GAME_LINK_NO_LINKS: 'There are no next levels',
 };
