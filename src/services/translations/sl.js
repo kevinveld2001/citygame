@@ -42,4 +42,8 @@ export default {
     REGISTER_SCREEN_BUTTON: 'Pošlji sporočilo',
     REGISTER_SCREEN_FAILED: 'Ni uspelo ustvariti računa',
     REGISTER_SEREEN_EMAIL_SENT: 'Email poslan',
+    
+    // game links component
+    GAME_LINKS_TITLE: 'Igralne povezave',
+    GAME_LINK_NO_LINKS: 'Naslednjih ravni ni',
 };

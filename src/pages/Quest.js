@@ -18,7 +18,7 @@ function QuestScreen() {
         <h1 className="text-center text-2xl font-bold">QuestScreen</h1>
 
         {session && session?.elements.map((element, index) => 
-        <Link to={`/game/${id}/${element?.id}`} className='text-blue-500'>
+        <Link key={index} to={`/game/${id}/${element?.id}`} className='text-blue-500'>
             {element?.id}
         </Link>
         )}

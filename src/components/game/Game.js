@@ -11,6 +11,8 @@ function Game({ elementId, sessionId }) {
     const [markdown, setMarkdown] = useState("");
 
     useEffect(() => {
+        setError(false);
+        setShowSkeletonLoader(true);
         async function getMarkdown ()  {
             const sessionInfo = await getSessionInfo(sessionId);
             if (sessionInfo === undefined) {
@@ -30,7 +32,7 @@ function Game({ elementId, sessionId }) {
         };
 
         getMarkdown();
-    }, []);
+    }, [elementId, sessionId]);
 
 
     return (<div>

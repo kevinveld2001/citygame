@@ -1,10 +1,14 @@
 
-import React, {useState, useEffect} from "react";
+import React, {useState, useEffect, useContext} from "react";
 import { AiOutlineLoading } from "react-icons/ai";
 import { getSessionInfo } from "../../services/totoSessionService";
 import { ImCross } from "react-icons/im";
+import SettingsContext from "../../services/SettingsContext";
+import { Link } from "react-router-dom";
 
 function GameLink({ elId, sessionId }) {
+    const [settings] = useContext(SettingsContext);
+    const translations = settings?.translations[settings?.language];
     const [isLoading, setIsLoading] = useState(true);
     const [links, setLinks] = useState([]);
 
@@ -32,7 +36,7 @@ function GameLink({ elId, sessionId }) {
 
     return <div className="border rounded-lg flex flex-col">
         <div className="bg-blue-100 rounded-t-lg p-4">
-            <h2 className="font-bold">Next levels</h2>
+            <h2 className="font-bold">{translations.GAME_LINKS_TITLE}</h2>
         </div>
         {isLoading && <div className="p-4 border-t flex justify-center">
             <AiOutlineLoading className="animate-spin w-6 h-6" />
@@ -40,12 +44,12 @@ function GameLink({ elId, sessionId }) {
         {!isLoading && links.length === 0 && <div className="p-4 border-t">
             <span className="flex flex-row items-center gap-4">
                 <ImCross  className="h-8 w-8"/> 
-                There are no next levels
+                {translations.GAME_LINK_NO_LINKS}
             </span>    
         </div>}
-        {links.map(element => <a key={element.id} href={element.link} className="p-4 border-t">
+        {links.map(element => <Link key={element.id} to={element.link} className="p-4 border-t" >
             {element.title}
-        </a>)}
+        </Link>)}
     </div>
 }
 

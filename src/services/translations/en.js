@@ -42,4 +42,8 @@ export default {
     REGISTER_SCREEN_BUTTON: 'Send email',
     REGISTER_SCREEN_FAILED: 'Failed to create account',
     REGISTER_SEREEN_EMAIL_SENT: 'Email sent',
+
+    // game links component
+    GAME_LINKS_TITLE: 'Game links',
+    GAME_LINK_NO_LINKS: 'There are no next levels',
 };
