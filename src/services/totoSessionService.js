@@ -45,3 +45,12 @@ export async function initAllDefaultSessions() {
 export async function getSessionInfo(sessionId) {
     return await totoFetch(`/v2/session/${sessionId}`);
 }
+
+export async function acknowledge(sessionId, elementUuid) {
+    return await totoFetch(`/v2/session/${sessionId}/info/acknowledge`, {
+        method: "POST",
+        body: JSON.stringify({
+            id: elementUuid
+        })
+    });
+}
