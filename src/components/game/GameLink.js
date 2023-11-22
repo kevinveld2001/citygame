@@ -24,6 +24,8 @@ function GameLink({ elId, sessionId }) {
                     const targetElementId = challenge.graph.nodes.find(node => node.id === link.target).refId;
                     const element = session.elements.find(element => element.elementId === targetElementId);
                     
+                    if (!element) continue;
+
                     setLinks(links => {
                         if (links.find(link => link.id === element.id)) return links;
                         return [...links, {id: element.id, link:`/game/${sessionId}/${element.id}`, title: element.content.title}]
