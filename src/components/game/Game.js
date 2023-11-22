@@ -3,12 +3,14 @@ import SkeletonLoader from "./SkeletonLoader";
 import ReactMarkdown from "react-markdown";
 import { getSessionInfo } from "../../services/totoSessionService";
 import remarkGfm from 'remark-gfm'
+import Solutions from './Solutions';
 
 
 function Game({ elementId, sessionId }) {
     const [showSkeletonLoader, setShowSkeletonLoader] = useState(true);
     const [error, setError] = useState(false);
     const [markdown, setMarkdown] = useState("");
+    const [element, setElement] = useState(null);
 
     useEffect(() => {
         (async () => {
@@ -19,6 +21,7 @@ function Game({ elementId, sessionId }) {
             } else {
                 const element = sessionInfo.elements.find(element => element.id === elementId);
                 setMarkdown(element?.content?.description);
+                setElement(element);
                 setShowSkeletonLoader(false);
             }
         }) ();
@@ -36,6 +39,7 @@ function Game({ elementId, sessionId }) {
             <div className="prose lg:prose-xl">
                 <ReactMarkdown remarkPlugins={[remarkGfm]} children={markdown}/>
             </div>
+            <Solutions element={element} data={element.solutions} elementId={elementId} sessionId={sessionId} />
         </div>}
     </div>)
 }

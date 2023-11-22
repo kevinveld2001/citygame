@@ -45,3 +45,13 @@ export async function initAllDefaultSessions() {
 export async function getSessionInfo(sessionId) {
     return await totoFetch(`/v2/session/${sessionId}`);
 }
+
+export async function taskSolveMC(sessionId, elementId, text) {
+    return await totoFetch(`/v2/session/${sessionId}/task/solve/mc`, {
+        method: "POST",
+        body: JSON.stringify({
+            "id": elementId,
+            "text": text
+        })
+    });
+}

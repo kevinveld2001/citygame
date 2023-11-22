@@ -42,4 +42,12 @@ export default {
     REGISTER_SCREEN_BUTTON: 'Pošlji sporočilo',
     REGISTER_SCREEN_FAILED: 'Ni uspelo ustvariti računa',
     REGISTER_SEREEN_EMAIL_SENT: 'Email poslan',
+
+    //solutions component
+    SOLUTIONS_SCREEN_SUBMIT_BUTTON: 'Oddaj',
+    SOLUTIONS_SCREEN_SUBMIT_SELECT_ERROR: 'Izberite odgovor za oddajo',
+    SOLUTIONS_SCREEN_SUBMIT_GENERAL_ERROR: 'Nekaj ​​je šlo narobe',
+    SOLUTIONS_SCREEN_SUBMIT_WRONG_ANSWER: 'Napačen odgovor',
+    SOLUTIONS_SCREEN_SUBMIT_SUCCESS: 'Pravilen odgovor',
+    SOLUTIONS_SCREEN_SUBMIT_SCORE_TEXT: 'Rešili ste nalogo ":task_name" in pridobili :score ocene.',
 };

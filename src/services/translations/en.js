@@ -42,4 +42,12 @@ export default {
     REGISTER_SCREEN_BUTTON: 'Send email',
     REGISTER_SCREEN_FAILED: 'Failed to create account',
     REGISTER_SEREEN_EMAIL_SENT: 'Email sent',
+
+    //solutions component
+    SOLUTIONS_SCREEN_SUBMIT_BUTTON: 'Submit',
+    SOLUTIONS_SCREEN_SUBMIT_SELECT_ERROR: 'Select a answer to submit',
+    SOLUTIONS_SCREEN_SUBMIT_GENERAL_ERROR: 'Something went wrong',
+    SOLUTIONS_SCREEN_SUBMIT_WRONG_ANSWER: 'Wrong answer',
+    SOLUTIONS_SCREEN_SUBMIT_SUCCESS: 'Correct answer',
+    SOLUTIONS_SCREEN_SUBMIT_SCORE_TEXT: 'You solved the task ":task_name" and gained :score points.',
 };
