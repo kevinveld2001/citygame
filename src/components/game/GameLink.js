@@ -36,7 +36,7 @@ function GameLink({ elId, sessionId }) {
         }) ();
     }, []);
 
-    return <div className="border rounded-lg flex flex-col">
+    return <div className="border rounded-lg flex flex-col mt-5">
         <div className="bg-blue-100 rounded-t-lg p-4">
             <h2 className="font-bold">{translations.GAME_LINKS_TITLE}</h2>
         </div>
