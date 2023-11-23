@@ -4,7 +4,7 @@ import { AiOutlineLoading } from "react-icons/ai";
 import { taskSolveMC } from "../../../services/totoSessionService";
 import Score from "./Score";
 
-function MC({element, data, elementId, sessionId }) {
+function MC({element, data, elementId, sessionId, updateLinks }) {
     const [settings] = useContext(SettingsContext);
     const translations = settings.translations[settings.language];
     const [selected, setSelected] = useState("");
@@ -32,6 +32,7 @@ function MC({element, data, elementId, sessionId }) {
         }
         setSuccess(element?.content?.successMessage ?? translations.SOLUTIONS_SCREEN_SUBMIT_SUCCESS);
         setLoading(false);
+        updateLinks();
     }
 
     return <div className="flex flex-col">

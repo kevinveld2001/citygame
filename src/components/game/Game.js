@@ -12,6 +12,7 @@ function Game({ elementId, sessionId }) {
     const [error, setError] = useState(false);
     const [markdown, setMarkdown] = useState("");
     const [element, setElement] = useState(null);
+    const [updateKey, setUpdateKey] = useState(Math.random());
 
     useEffect(() => {
         setError(false);
@@ -38,6 +39,9 @@ function Game({ elementId, sessionId }) {
         getMarkdown();
     }, [elementId, sessionId]);
 
+    function updateLinks() {
+        setUpdateKey(Math.random());
+    }
 
     return (<div>
         {showSkeletonLoader && <SkeletonLoader />}
@@ -51,8 +55,8 @@ function Game({ elementId, sessionId }) {
                 <ReactMarkdown remarkPlugins={[remarkGfm]} children={markdown}/>
             </div>
 
-            <Solutions element={element} data={element.solutions} elementId={elementId} sessionId={sessionId} />
-            <GameLink sessionId={sessionId} elId={elementId}/>
+            <Solutions element={element} data={element.solutions} elementId={elementId} sessionId={sessionId} updateLinks={updateLinks} />
+            <GameLink key={updateKey} sessionId={sessionId} elId={elementId}/>
         </div>}
     </div>)
 }
