@@ -24,5 +24,8 @@ export default function totoFetch(url, options) {
             }
           return response.json();
         })
+        .catch(error => {
+            console.error(error);
+        });
 }
 
