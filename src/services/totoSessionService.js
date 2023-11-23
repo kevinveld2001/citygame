@@ -56,6 +56,16 @@ export async function taskSolveMC(sessionId, elementId, text) {
     });
 }
 
+export async function taskSolveFreeText(sessionId, elementId, text) {
+    return await totoFetch(`/v2/session/${sessionId}/task/solve/text`, {
+        method: "POST",
+        body: JSON.stringify({
+            "id": elementId,
+            "text": text
+        })
+    });
+}
+
 export async function acknowledge(sessionId, elementUuid) {
     return await totoFetch(`/v2/session/${sessionId}/info/acknowledge`, {
         method: "POST",
