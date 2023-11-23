@@ -43,7 +43,10 @@ function MC({element, data, elementId, sessionId }) {
         </div>}
         <div className="flex flex-col border rounded-lg mt-3"> 
             {data.mc.map((title) => <button key={title} className={`p-4 text-left first:rounded-t-lg last:rounded-b-lg [&:not(:first-child)]:border-t ${title === selected ? "bg-blue-100" : ""}`} 
-                onClick={() => {setSelected(title)}} >
+                onClick={() => {
+                    if (success !== "") return;
+                    setSelected(title)
+                }} >
                 <span>{title}</span>
             </button>)}
         </div>
@@ -54,7 +57,7 @@ function MC({element, data, elementId, sessionId }) {
                 {loading ? <AiOutlineLoading className="animate-spin w-6 h-6"/> : translations.SOLUTIONS_SCREEN_SUBMIT_BUTTON}
             </button>
         }
-        {success && <Score element={element} />}
+        {success && <Score elementid={element.id} sessionId={sessionId} />}
     </div>
 }
 
