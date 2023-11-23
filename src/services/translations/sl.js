@@ -50,4 +50,8 @@ export default {
     SOLUTIONS_SCREEN_SUBMIT_WRONG_ANSWER: 'Napačen odgovor',
     SOLUTIONS_SCREEN_SUBMIT_SUCCESS: 'Pravilen odgovor',
     SOLUTIONS_SCREEN_SUBMIT_SCORE_TEXT: 'Rešili ste nalogo ":task_name" in pridobili :score ocene.',
+    
+    // game links component
+    GAME_LINKS_TITLE: 'Naslednja stopnja',
+    GAME_LINK_NO_LINKS: 'Naslednjih ravni ni',
 };

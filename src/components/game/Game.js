@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import SkeletonLoader from "./SkeletonLoader";
 import ReactMarkdown from "react-markdown";
-import { getSessionInfo } from "../../services/totoSessionService";
+import { acknowledge, getSessionInfo } from "../../services/totoSessionService";
 import remarkGfm from 'remark-gfm'
 import Solutions from './Solutions';
+import GameLink from "./GameLink";
 
 
 function Game({ elementId, sessionId }) {
@@ -13,19 +14,29 @@ function Game({ elementId, sessionId }) {
     const [element, setElement] = useState(null);
 
     useEffect(() => {
-        (async () => {
+        setError(false);
+        setShowSkeletonLoader(true);
+        async function getMarkdown ()  {
             const sessionInfo = await getSessionInfo(sessionId);
             if (sessionInfo === undefined) {
                 setError(true);
                 setShowSkeletonLoader(false);
             } else {
-                const element = sessionInfo.elements.find(element => element.id === elementId);
+                let element = sessionInfo.elements.find(element => element.id === elementId);
+                if (element.t === "Info" && !element?.processed) {
+                    const acknowledgement = await acknowledge(sessionId, element.id);
+                    if (acknowledgement) {
+                        element = acknowledgement.updatedElement;
+                    }
+                }
                 setMarkdown(element?.content?.description);
                 setElement(element);
                 setShowSkeletonLoader(false);
             }
-        }) ();
-    }, []);
+        };
+
+        getMarkdown();
+    }, [elementId, sessionId]);
 
 
     return (<div>
@@ -36,10 +47,12 @@ function Game({ elementId, sessionId }) {
         </div>}
 
         {!showSkeletonLoader && !error && <div className="flex flex-col justify-between p-10 h-full">
-            <div className="prose lg:prose-xl">
+            <div className="prose lg:prose-xl mb-5">
                 <ReactMarkdown remarkPlugins={[remarkGfm]} children={markdown}/>
             </div>
+
             <Solutions element={element} data={element.solutions} elementId={elementId} sessionId={sessionId} />
+            <GameLink sessionId={sessionId} elId={elementId}/>
         </div>}
     </div>)
 }

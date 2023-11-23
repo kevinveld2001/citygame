@@ -55,3 +55,12 @@ export async function taskSolveMC(sessionId, elementId, text) {
         })
     });
 }
+
+export async function acknowledge(sessionId, elementUuid) {
+    return await totoFetch(`/v2/session/${sessionId}/info/acknowledge`, {
+        method: "POST",
+        body: JSON.stringify({
+            id: elementUuid
+        })
+    });
+}

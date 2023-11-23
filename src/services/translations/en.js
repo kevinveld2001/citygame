@@ -50,4 +50,8 @@ export default {
     SOLUTIONS_SCREEN_SUBMIT_WRONG_ANSWER: 'Wrong answer',
     SOLUTIONS_SCREEN_SUBMIT_SUCCESS: 'Correct answer',
     SOLUTIONS_SCREEN_SUBMIT_SCORE_TEXT: 'You solved the task ":task_name" and gained :score points.',
+
+    // game links component
+    GAME_LINKS_TITLE: 'Next level(s)',
+    GAME_LINK_NO_LINKS: 'There are no next levels',
 };
