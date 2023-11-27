@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { getSessionInfo } from "../../services/totoSessionService";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from 'remark-gfm'
+import { FaCheck } from "react-icons/fa6";
 
 function QuestListItem({sessionId}) {
     const [isLoading, setIsLoading] = useState(true);
@@ -21,6 +22,11 @@ function QuestListItem({sessionId}) {
         <div className="relative w-24 h-24 ">
             <div className="bg-gray-300 animate-pulse w-full h-full absolute"/>
             <div className={`absolute z-10 bg-[url('https://api.toto.io/v2/pub/file/${quest?.story?.content?.logo}?v=s')] w-full h-full bg-cover`} />
+            {quest?.session?.finishedAt && 
+                <div className="absolute z-20 w-full h-full bg-black opacity-40 flex justify-center items-center">
+                    <FaCheck className="text-white w-12 h-12"/>
+                </div>
+            }
         </div>
         <div className="flex-1">
             <h1 className="text-xl font-bold text-black">
