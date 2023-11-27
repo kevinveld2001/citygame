@@ -42,6 +42,14 @@ export default {
     REGISTER_SCREEN_BUTTON: 'Invia una email',
     REGISTER_SCREEN_FAILED: 'Impossibile creare un account',
     REGISTER_SEREEN_EMAIL_SENT: 'Email inviata',
+
+    //solutions component
+    SOLUTIONS_SCREEN_SUBMIT_BUTTON: 'Invia',
+    SOLUTIONS_SCREEN_SUBMIT_SELECT_ERROR: 'Seleziona una risposta da inviare',
+    SOLUTIONS_SCREEN_SUBMIT_GENERAL_ERROR: 'Qualcosa è andato storto',
+    SOLUTIONS_SCREEN_SUBMIT_WRONG_ANSWER: 'Risposta sbagliata',
+    SOLUTIONS_SCREEN_SUBMIT_SUCCESS: 'Risposta corretta',
+    SOLUTIONS_SCREEN_SUBMIT_SCORE_TEXT: 'Hai risolto l\'attività ":task_name" e guadagnato :score di punteggio.',
     
     // game links component
     GAME_LINKS_TITLE: 'Livello successivo',

@@ -3,12 +3,16 @@ import SkeletonLoader from "./SkeletonLoader";
 import ReactMarkdown from "react-markdown";
 import { acknowledge, getSessionInfo } from "../../services/totoSessionService";
 import remarkGfm from 'remark-gfm'
+import Solutions from './Solutions';
 import GameLink from "./GameLink";
+
 
 function Game({ elementId, sessionId }) {
     const [showSkeletonLoader, setShowSkeletonLoader] = useState(true);
     const [error, setError] = useState(false);
     const [markdown, setMarkdown] = useState("");
+    const [element, setElement] = useState(null);
+    const [updateKey, setUpdateKey] = useState(Math.random());
 
     useEffect(() => {
         setError(false);
@@ -27,6 +31,7 @@ function Game({ elementId, sessionId }) {
                     }
                 }
                 setMarkdown(element?.content?.description);
+                setElement(element);
                 setShowSkeletonLoader(false);
             }
         };
@@ -34,6 +39,9 @@ function Game({ elementId, sessionId }) {
         getMarkdown();
     }, [elementId, sessionId]);
 
+    function updateLinks() {
+        setUpdateKey(Math.random());
+    }
 
     return (<div>
         {showSkeletonLoader && <SkeletonLoader />}
@@ -46,7 +54,9 @@ function Game({ elementId, sessionId }) {
             <div className="prose lg:prose-xl mb-5">
                 <ReactMarkdown remarkPlugins={[remarkGfm]} children={markdown}/>
             </div>
-            <GameLink sessionId={sessionId} elId={elementId}/>
+
+            <Solutions element={element} data={element.solutions} elementId={elementId} sessionId={sessionId} updateLinks={updateLinks} />
+            <GameLink key={updateKey} sessionId={sessionId} elId={elementId}/>
         </div>}
     </div>)
 }
