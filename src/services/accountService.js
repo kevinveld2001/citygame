@@ -1,5 +1,6 @@
 import { getCookie } from "./cookieService";
 import {initAllDefaultSessions} from './totoSessionService.js';
+import totoApiService from "./totoApiService.js";
 
 export async function anonymousLogin() {
     const myHeaders = new Headers();
@@ -92,3 +93,8 @@ export async function register(email, lang = "eng") {
     return res.status == 200;
 } 
 
+export async function getIdentity() {
+    return await totoApiService('/v2/auth/identity', {
+        method: 'GET'
+    });
+}

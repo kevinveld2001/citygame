@@ -17,6 +17,7 @@ import Experimental from './pages/experimental/Experimental';
 import Notifications from './pages/experimental/Notifications';
 import { scheduleNotificationFromStoreage } from './services/NotificationService';
 import QuestScreen from './pages/Quest';
+import { getIdentity } from './services/accountService'; 
 scheduleNotificationFromStoreage();
 
 function App() {
@@ -28,6 +29,18 @@ function App() {
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register("/serviceworker.js");
     }
+
+    async function checkIdentity() {
+      const identity = await getIdentity();
+      if (identity?.id && !location.pathname.includes("/auth")) {
+        // go to login screen
+        localStorage.clear();
+        window.location.href = "/auth";
+      }
+    }
+
+    checkIdentity();
+    setTimeout(checkIdentity, 60000);
   }, [])
 
 
