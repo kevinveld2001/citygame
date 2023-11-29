@@ -26,7 +26,9 @@ function QuestListItem({sessionId, filter}) {
         <Link to={`/quest/${sessionId}`} className={`text-blue-500 flex flex-row bg-gray-50 p-5 gap-5 ${isLoading ? "bg-gray-100 animate-pulse" : ""}`}>
             <div className="relative w-24 h-24 ">
                 <div className="bg-gray-300 animate-pulse w-full h-full absolute"/>
-                <div className={`absolute z-10 bg-[url('https://api.toto.io/v2/pub/file/${quest?.story?.content?.logo}?v=s')] w-full h-full bg-cover`} />
+                <div 
+                    className={`absolute z-10 w-full h-full bg-cover`} 
+                    style={{ backgroundImage: `url('https://api.toto.io/v2/pub/file/${quest?.story?.content?.logo}?v=s')` }}/>
                 {quest?.session?.finishedAt && 
                     <div className="absolute z-20 w-full h-full bg-black opacity-40 flex justify-center items-center">
                         <FaCheck className="text-white w-12 h-12"/>
