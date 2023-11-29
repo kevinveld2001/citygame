@@ -53,5 +53,5 @@ export default {
     
     // game links component
     GAME_LINKS_TITLE: 'Livello successivo',
-    GAME_LINK_NO_LINKS: 'Non ci sono livelli successivi',
+    GAME_LINK_NO_LINKS: 'Torna alla panoramica delle missioni',
 };

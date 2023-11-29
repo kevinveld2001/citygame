@@ -53,5 +53,5 @@ export default {
     
     // game links component
     GAME_LINKS_TITLE: 'Naslednja stopnja',
-    GAME_LINK_NO_LINKS: 'Naslednjih ravni ni',
+    GAME_LINK_NO_LINKS: 'Nazaj na pregled naloge',
 };

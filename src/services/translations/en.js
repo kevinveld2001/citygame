@@ -53,5 +53,5 @@ export default {
 
     // game links component
     GAME_LINKS_TITLE: 'Next level(s)',
-    GAME_LINK_NO_LINKS: 'There are no next levels',
+    GAME_LINK_NO_LINKS: 'Go back to quest overview',
 };
