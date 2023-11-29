@@ -54,4 +54,9 @@ export default {
     // game links component
     GAME_LINKS_TITLE: 'Naslednja stopnja',
     GAME_LINK_NO_LINKS: 'Nazaj na pregled naloge',
+    
+    //quest screen
+    QUEST_SCREEN_TITLE: 'Iskanje',
+    QUEST_SCREEN_RESET_BUTTON: 'Ponastavitev Quest',
+    QUEST_SCREEN_CONTINUE_BUTTON: 'Nadaljujte z iskanjem',
 };

@@ -64,3 +64,16 @@ export async function acknowledge(sessionId, elementUuid) {
         })
     });
 }
+
+export async function reinit(sessionId) {
+    const session = await totoFetch(`/v2/session/${sessionId}/reinit`, {
+        method: "POST",
+    });
+    if (session?.session?.status === "Initialized") {
+        await totoFetch(`/v2/session/${session?.session?.id}/start`, {
+            method: "POST",
+            body: JSON.stringify({})
+        });
+    }
+    return session?.session?.id;
+}
