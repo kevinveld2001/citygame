@@ -15,6 +15,7 @@ function QuestScreen() {
     const translations = settings?.translations[settings?.language];
     const { id } = useParams();
     const [session, setSession] = useState(null);
+    const unFinishedSessions = session?.elements.filter(element => !element.processed)
     const [isLoading, setIsLoading] = useState(true);
     const navigate = useNavigate();
 
@@ -65,9 +66,16 @@ function QuestScreen() {
                 </div>
             </div>
 
-            <button className="bg-blue-500 py-3 mb-3 text-white">
-                {translations.QUEST_SCREEN_CONTINUE_BUTTON}
-            </button>
+            {unFinishedSessions?.length > 0 &&
+                <button className="bg-blue-500 py-3 mb-3 text-white"
+                    onClick={() => {
+                        const element = unFinishedSessions[0];
+                        navigate(`/game/${id}/${element?.id}`);
+                    }}
+                >
+                    {translations.QUEST_SCREEN_CONTINUE_BUTTON}
+                </button>
+            }
 
             {session && !isLoading && session?.elements.map((element, index) => 
             <Link key={element?.id} to={`/game/${id}/${element?.id}`} className='text-blue-500 my-2 flex flex-row items-center gap-4'>
