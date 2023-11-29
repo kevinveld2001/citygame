@@ -1,5 +1,6 @@
 export default {
     // tabs
+    TAB_HOME: 'domov',
     TAB_MAP: 'Zemljevid',
     TAB_QUEST: 'Naloge',
     TAB_SETTINGS: 'Nastavitve',

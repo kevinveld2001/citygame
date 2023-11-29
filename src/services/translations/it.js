@@ -1,5 +1,6 @@
 export default {
     // tabs
+    TAB_HOME: 'Casa',
     TAB_MAP: 'Carta geografica',
     TAB_QUEST: 'Missioni',
     TAB_SETTINGS: 'Impostazioni',

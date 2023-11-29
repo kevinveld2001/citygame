@@ -1,5 +1,6 @@
 export default {
     // tabs
+    TAB_HOME: 'Home',
     TAB_MAP: 'Map',
     TAB_QUEST: 'Quests',
     TAB_SETTINGS: 'Settings',

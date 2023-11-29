@@ -7,7 +7,9 @@ import Map from './pages/Map';
 import QuestList from './pages/QuestList';
 import Settings from './pages/Settings';
 import GameScreen from './pages/Game';
+import HomeScreen from './pages/Home';
 import InstallBar from './components/InstallBar';
+
 
 import AuthScreen from './pages/Auth';
 import LoginScreen from './pages/auth/Login';
@@ -21,7 +23,7 @@ scheduleNotificationFromStoreage();
 
 function App() {
   const location = useLocation(); 
-  const pathsWithTabbar = ['/quest', '/settings'];
+  const pathsWithTabbar = ['/quest', '/settings', '/map'	];
   const [settings, setSettings] = useState(rawSettings);
 
   useEffect(() => {
@@ -38,7 +40,8 @@ function App() {
         <div className='flex-1 flex overflow-auto'>
           {settings.auth === null && !location.pathname.includes("/auth") ? (<Navigate to="/auth" />) : <></>}
           <Routes>
-            <Route path='/' element={<Map />} />
+            <Route path='/' element={<HomeScreen />} />
+            <Route path='/map' element={<Map />} />
             <Route path='/quest/list' element={<QuestList />} />
             <Route path='/quest/:id' element={<QuestScreen />} />
             <Route path='/settings' element={<Settings />} />
