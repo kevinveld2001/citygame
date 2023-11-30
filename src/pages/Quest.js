@@ -100,6 +100,7 @@ function QuestScreen() {
 
             <button className="border-2 border-red-500 rounded p-2 self-center mt-6 text-red-500"
                 onClick={async () => {
+                    if (isLoading) return;
                     setIsLoading(true);
                     const oldId = session?.session?.id;
                     const newId = await reinit(id);
