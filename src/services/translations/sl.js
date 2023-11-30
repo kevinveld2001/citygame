@@ -5,6 +5,9 @@ export default {
     TAB_QUEST: 'Naloge',
     TAB_SETTINGS: 'Nastavitve',
 
+    // home screen
+    HOME_SCREEN_QR_BUTTON: 'Skenirajte kodo Qr',
+
     // settings screen
     SETTINGS_SCREEN_TITLE: 'Nastavitve',
     SETTINGS_LANGUAGE: 'Jezik',
