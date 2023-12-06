@@ -54,7 +54,12 @@ export default {
     
     // game links component
     GAME_LINKS_TITLE: 'Livello successivo',
-    GAME_LINK_NO_LINKS: 'Non ci sono livelli successivi',
+    GAME_LINK_NO_LINKS: 'Torna alla panoramica delle missioni',
+    
+    //quest screen
+    QUEST_SCREEN_TITLE: 'Ricerca',
+    QUEST_SCREEN_RESET_BUTTON: 'Ripristina la missione',
+    QUEST_SCREEN_CONTINUE_BUTTON: 'Continua alla ricerca',
 
     // quest list
     QUEST_LIST_SCREEN_TITLE: 'Missioni',
