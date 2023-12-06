@@ -56,6 +56,16 @@ export async function taskSolveMC(sessionId, elementId, text) {
     });
 }
 
+export async function taskSolveFreeText(sessionId, elementId, text) {
+    return await totoFetch(`/v2/session/${sessionId}/task/solve/text`, {
+        method: "POST",
+        body: JSON.stringify({
+            "id": elementId,
+            "text": text
+        })
+    });
+}
+
 export async function acknowledge(sessionId, elementUuid) {
     return await totoFetch(`/v2/session/${sessionId}/info/acknowledge`, {
         method: "POST",
@@ -63,4 +73,17 @@ export async function acknowledge(sessionId, elementUuid) {
             id: elementUuid
         })
     });
+}
+
+export async function reinit(sessionId) {
+    const session = await totoFetch(`/v2/session/${sessionId}/reinit`, {
+        method: "POST",
+    });
+    if (session?.session?.status === "Initialized") {
+        await totoFetch(`/v2/session/${session?.session?.id}/start`, {
+            method: "POST",
+            body: JSON.stringify({})
+        });
+    }
+    return session?.session?.id;
 }

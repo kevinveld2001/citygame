@@ -54,8 +54,20 @@ export default {
     SOLUTIONS_SCREEN_SUBMIT_WRONG_ANSWER: 'Wrong answer',
     SOLUTIONS_SCREEN_SUBMIT_SUCCESS: 'Correct answer',
     SOLUTIONS_SCREEN_SUBMIT_SCORE_TEXT: 'You solved the task ":task_name" and gained :score points.',
+    SOLUTIONS_SCREEN_INPUT_PLACEHOLDER: 'Your input',
 
     // game links component
     GAME_LINKS_TITLE: 'Next level(s)',
-    GAME_LINK_NO_LINKS: 'There are no next levels',
+    GAME_LINK_NO_LINKS: 'Go back to quest overview',
+
+    //quest screen
+    QUEST_SCREEN_TITLE: 'QuestScreen',
+    QUEST_SCREEN_RESET_BUTTON: 'Reset quest',
+    QUEST_SCREEN_CONTINUE_BUTTON: 'Continue quest',
+
+    // quest list
+    QUEST_LIST_SCREEN_TITLE: 'Quests',
+    QUEST_LIST_SCREEN_OPTION_ALL: 'All',
+    QUEST_LIST_SCREEN_OPTION_UNSOLVED: 'Unsolved',
+    QUEST_LIST_SCREEN_OPTION_SOLVED: 'Solved',
 };

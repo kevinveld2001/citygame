@@ -44,10 +44,10 @@ function GameLink({ elId, sessionId }) {
             <AiOutlineLoading className="animate-spin w-6 h-6" />
         </div>}
         {!isLoading && links.length === 0 && <div className="p-4 border-t">
-            <span className="flex flex-row items-center gap-4">
+            <Link to={`/quest/${sessionId}`} className="flex flex-row items-center gap-4">
                 <ImCross  className="h-8 w-8"/> 
                 {translations.GAME_LINK_NO_LINKS}
-            </span>    
+            </Link>    
         </div>}
         {links.map(element => <Link key={element.id} to={element.link} className="p-4 border-t" >
             {element.title}

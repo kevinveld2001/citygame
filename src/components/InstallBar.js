@@ -20,7 +20,7 @@ function InstallBar() {
 
     return (
         <div className='w-full flex flex-row bg-indigo-100 p-3 gap-2 items-center'>
-            <img alt='app logo' src="./logo512.png"  className='bg-white w-12 h-12 rounded-xl'/>
+            <img alt='app logo' src="/logo512.png"  className='bg-white w-12 h-12 rounded-xl'/>
             <span className='text-lg font-semibold'>{translations.INSTALL_BANNER_TITLE}</span>
 
             <div className='ml-auto flex flex-row gap-2'>

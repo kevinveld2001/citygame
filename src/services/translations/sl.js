@@ -54,8 +54,20 @@ export default {
     SOLUTIONS_SCREEN_SUBMIT_WRONG_ANSWER: 'Napačen odgovor',
     SOLUTIONS_SCREEN_SUBMIT_SUCCESS: 'Pravilen odgovor',
     SOLUTIONS_SCREEN_SUBMIT_SCORE_TEXT: 'Rešili ste nalogo ":task_name" in pridobili :score ocene.',
+    SOLUTIONS_SCREEN_INPUT_PLACEHOLDER: 'Vaš vnos',
     
     // game links component
     GAME_LINKS_TITLE: 'Naslednja stopnja',
-    GAME_LINK_NO_LINKS: 'Naslednjih ravni ni',
+    GAME_LINK_NO_LINKS: 'Nazaj na pregled naloge',
+    
+    //quest screen
+    QUEST_SCREEN_TITLE: 'Iskanje',
+    QUEST_SCREEN_RESET_BUTTON: 'Ponastavitev Quest',
+    QUEST_SCREEN_CONTINUE_BUTTON: 'Nadaljujte z iskanjem',
+
+    // quest list
+    QUEST_LIST_SCREEN_TITLE: 'Naloge',
+    QUEST_LIST_SCREEN_OPTION_ALL: 'Vse',
+    QUEST_LIST_SCREEN_OPTION_UNSOLVED: 'Nerešeno',
+    QUEST_LIST_SCREEN_OPTION_SOLVED: 'Rešeno',
 };
