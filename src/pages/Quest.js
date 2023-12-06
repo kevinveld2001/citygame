@@ -90,7 +90,7 @@ function QuestScreen() {
             {isLoading &&
                 <div className="flex flex-col gap-2">
                     {[1,2,3].map(id =>
-                        <div className="flex flex-row gap-4 animate-pulse">
+                        <div key={id} className="flex flex-row gap-4 animate-pulse">
                             <div className="w-10 h-10 bg-slate-200" />
                             <div className="bg-slate-200 h-10 flex-1" />
                         </div>
