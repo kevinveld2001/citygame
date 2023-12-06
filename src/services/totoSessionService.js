@@ -31,7 +31,7 @@ export async function sessionInit(sessionToken, lang = 'eng') {
 }
 
 export async function initAllDefaultSessions() {
-    const sessionTokens = ["115e1bd3-9666-49d8-95ce-a3b9687148fc"];
+    const sessionTokens = ["115e1bd3-9666-49d8-95ce-a3b9687148fc", "346ab5b7-ea77-4e35-904e-fc8108da9922", "ca3ba57f-fee0-4f5c-9a0d-cc2357f9b7f7"];
     const sessionObject = JSON.parse(window.localStorage.getItem('sessionids') ?? '{}');
 
     for (let i = 0; i < sessionTokens.length; i++) {

@@ -3,11 +3,13 @@ import { getIdentity } from '../services/accountService';
 import ProfileImage from '../components/ProfileImage';
 import { Link } from 'react-router-dom';
 import SettingsContext from '../services/SettingsContext';
+import QuestListItem from '../components/quest/QuestListItem';
 
 function HomeScreen() {
     const [settings, setSettings] = useContext(SettingsContext);
     const translations = settings?.translations[settings?.language];
     const [user, setUser] = useState(null);
+    const sessionIds = JSON.parse(localStorage.getItem("sessionids") ?? "{}");
 
     useEffect(() => {
         (async() => {
@@ -24,8 +26,10 @@ function HomeScreen() {
                 {user?.screenName ?? user?.email ?? (user === null ? "..." : 'Anonymous')}
             </span>
         </div>
-        <div className='flex-1 flex justify-center items-center'> 
-            <span className='text-gray-400'>TODO put quest and notification here</span>
+        <div className='flex-1 flex flex-col m-10 gap-3'> 
+            {Object.values(sessionIds).map((sessionId) => (
+                <QuestListItem key={sessionId} sessionId={sessionId} filter={"active"}/>
+            ))}
         </div>
         <div className='flex flex-col items-center'>
             <Link to="/qr" className='border-2 border-blue-500 rounded px-8 py-3 m-5 text-lg font-medium text-blue-500'>
