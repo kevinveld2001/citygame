@@ -50,6 +50,7 @@ export default {
     SOLUTIONS_SCREEN_SUBMIT_WRONG_ANSWER: 'Risposta sbagliata',
     SOLUTIONS_SCREEN_SUBMIT_SUCCESS: 'Risposta corretta',
     SOLUTIONS_SCREEN_SUBMIT_SCORE_TEXT: 'Hai risolto l\'attività ":task_name" e guadagnato :score di punteggio.',
+    SOLUTIONS_SCREEN_INPUT_PLACEHOLDER: 'Il tuo input',
     
     // game links component
     GAME_LINKS_TITLE: 'Livello successivo',
