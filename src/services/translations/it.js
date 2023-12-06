@@ -60,4 +60,10 @@ export default {
     QUEST_SCREEN_TITLE: 'Ricerca',
     QUEST_SCREEN_RESET_BUTTON: 'Ripristina la missione',
     QUEST_SCREEN_CONTINUE_BUTTON: 'Continua alla ricerca',
+
+    // quest list
+    QUEST_LIST_SCREEN_TITLE: 'Missioni',
+    QUEST_LIST_SCREEN_OPTION_ALL: 'Tutto',
+    QUEST_LIST_SCREEN_OPTION_UNSOLVED: 'Irrisolto',
+    QUEST_LIST_SCREEN_OPTION_SOLVED: 'Risolto',
 };

@@ -60,4 +60,10 @@ export default {
     QUEST_SCREEN_TITLE: 'QuestScreen',
     QUEST_SCREEN_RESET_BUTTON: 'Reset quest',
     QUEST_SCREEN_CONTINUE_BUTTON: 'Continue quest',
+
+    // quest list
+    QUEST_LIST_SCREEN_TITLE: 'Quests',
+    QUEST_LIST_SCREEN_OPTION_ALL: 'All',
+    QUEST_LIST_SCREEN_OPTION_UNSOLVED: 'Unsolved',
+    QUEST_LIST_SCREEN_OPTION_SOLVED: 'Solved',
 };

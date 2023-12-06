@@ -60,4 +60,10 @@ export default {
     QUEST_SCREEN_TITLE: 'Iskanje',
     QUEST_SCREEN_RESET_BUTTON: 'Ponastavitev Quest',
     QUEST_SCREEN_CONTINUE_BUTTON: 'Nadaljujte z iskanjem',
+
+    // quest list
+    QUEST_LIST_SCREEN_TITLE: 'Naloge',
+    QUEST_LIST_SCREEN_OPTION_ALL: 'Vse',
+    QUEST_LIST_SCREEN_OPTION_UNSOLVED: 'Nerešeno',
+    QUEST_LIST_SCREEN_OPTION_SOLVED: 'Rešeno',
 };
