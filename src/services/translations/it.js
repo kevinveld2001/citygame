@@ -55,4 +55,10 @@ export default {
     // game links component
     GAME_LINKS_TITLE: 'Livello successivo',
     GAME_LINK_NO_LINKS: 'Non ci sono livelli successivi',
+
+    // quest list
+    QUEST_LIST_SCREEN_TITLE: 'Missioni',
+    QUEST_LIST_SCREEN_OPTION_ALL: 'Tutto',
+    QUEST_LIST_SCREEN_OPTION_UNSOLVED: 'Irrisolto',
+    QUEST_LIST_SCREEN_OPTION_SOLVED: 'Risolto',
 };
