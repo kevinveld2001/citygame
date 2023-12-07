@@ -9,7 +9,7 @@ function QuestList() {
   const [filter, setFilter] = useState('all'); 
 
   return (
-    <div className='p-5 flex flex-col w-full'>
+    <div className='p-5 flex flex-col w-full gap-3'>
         <h1 className='text-2xl font-bold text-center mb-3'>{translations.QUEST_LIST_SCREEN_TITLE}</h1>
         <div className='flex flex-row justify-end py-3'>
           <select className='bg-blue-500 p-3 text-white'
