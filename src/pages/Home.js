@@ -15,7 +15,6 @@ function HomeScreen() {
         (async() => {
             const user = await getIdentity();
             setUser(user);
-            console.log(user);
         }) ();
     }, []);
 
@@ -26,7 +25,7 @@ function HomeScreen() {
                 {user?.screenName ?? user?.email ?? (user === null ? "..." : 'Anonymous')}
             </span>
         </div>
-        <div className='flex-1 flex flex-col m-10 gap-3'> 
+        <div className='flex-1 flex flex-col m-10 gap-3 overflow-y-scroll overflow-x-hidden'> 
             {Object.values(sessionIds).map((sessionId) => (
                 <QuestListItem key={sessionId} sessionId={sessionId} filter={"active"}/>
             ))}
