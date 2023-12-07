@@ -14,6 +14,8 @@ function Game({ elementId, sessionId }) {
     const [element, setElement] = useState(null);
     const [updateKey, setUpdateKey] = useState(Math.random());
 
+    const [customGame, setCustomGame] = useState("");
+
     useEffect(() => {
         setError(false);
         setShowSkeletonLoader(true);
@@ -37,12 +39,30 @@ function Game({ elementId, sessionId }) {
         };
 
         getMarkdown();
+
+        const checkForCustomGame = element?.content?.description.match(/{customgame:(.+)}/); // TODO: move? what is the correct place?
+        if (checkForCustomGame) {
+            switch (checkForCustomGame[1].toLowerCase()) {  // [1] contains the RegEx pattern from above if it was found
+                case "{customgame:catstory}":
+                    break;
+                /*TODO the other custom games*/
+                default:
+                    setError(true);
+                    console.error("Non-existent 'customgame' declaration in Toto CMS description of: " + checkForCustomGame[1].toLowerCase());
+            }
+        }
+        else {
+            // treat game as not custom, i.e. in the style of a vanilla Toto Element page
+        }
     }, [elementId, sessionId]);
 
     function updateLinks() {
         setUpdateKey(Math.random());
     }
 
+    // TODO: export the functional part of this return (after error) to components??
+    // <Solutions>: the input fields present from Toto for completing a Task Element
+    // <GameLink>: the "Next elements" present from Toto showing what next Elements can be accessed when this Element is completed
     return (<div>
         {showSkeletonLoader && <SkeletonLoader />}
 
