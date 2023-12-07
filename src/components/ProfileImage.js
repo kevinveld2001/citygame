@@ -2,7 +2,6 @@ import React from "react";
 import { FaRegUser } from "react-icons/fa";
 
 function ProfileImage({user}) {
-    console.log(user);
     return (
         <div className='w-36 h-36 rounded-full overflow-hidden'>
             {user === null && <div className='w-full h-full bg-slate-200 animate-pulse' />}
