@@ -9,5 +9,10 @@ module.exports = {
   plugins: [
     require('@tailwindcss/typography'),
   ],
+  variants: {
+    extend: {
+     backgroundOpacity: ['active'],
+    }
+  }
 }
 

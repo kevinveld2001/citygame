@@ -17,11 +17,12 @@ import Experimental from './pages/experimental/Experimental';
 import Notifications from './pages/experimental/Notifications';
 import { scheduleNotificationFromStoreage } from './services/NotificationService';
 import QuestScreen from './pages/Quest';
+import QrScreen from './pages/Qr';
 scheduleNotificationFromStoreage();
 
 function App() {
   const location = useLocation(); 
-  const pathsWithTabbar = ['/quest', '/settings'];
+  const pathsWithTabbar = ['/quest', '/settings', '/qr'];
   const [settings, setSettings] = useState(rawSettings);
 
   useEffect(() => {
@@ -50,6 +51,7 @@ function App() {
             <Route path='/auth' element={<AuthScreen />} />
             <Route path='/auth/login' element={<LoginScreen />} />
             <Route path='/auth/register' element={<RegisterScreen />} />
+            <Route path='/qr' element={<QrScreen />} />
           </Routes>
         </div>
         {pathsWithTabbar.some((pathWithTabbar) => location.pathname.includes(pathWithTabbar) || location.pathname === "/") ? <Tabbar /> : <></>}
