@@ -1,6 +1,6 @@
-import * as THREE from 'three';
+import * as THREE from 'threebox-plugin/src/three';     // threebox = three.js + GLTFLoader + more (for mapbox)
+import { Threebox } from 'threebox-plugin';
 import mapboxgl from 'mapbox-gl';
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 
 
 export default function spawnObject(id, file ,modelOrigin, modelAltitude, modelRotate, modalScale) {
@@ -28,11 +28,18 @@ export default function spawnObject(id, file ,modelOrigin, modelAltitude, modelR
             this.scene = new THREE.Scene();
 
         
-            // use the three.js GLTF loader to add the 3D model to the three.js scene
-            const loader = new GLTFLoader();
-            loader.load(file,
-                (gltf) => {
-                    this.scene.add(gltf.scene);
+            // TODO: model properties (pos/rot/scale/maybe others) are currently mangled between three.js and threebox
+            const tb = new Threebox( map, gl, { defaultLights: true } );
+            tb.loadObj({
+                    obj: file,
+                    type: 'gltf',
+                    scale: 1,
+                    units: 'meters',
+                    rotation: { x: 90, y: 0, z: 0 } //default rotation
+                },
+                (model) => {
+                    const modelAsObj = model.setCoords(origin);
+                    tb.add(modelAsObj);
                 }
             );
             this.map = map;
