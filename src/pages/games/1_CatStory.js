@@ -46,7 +46,7 @@ function CatStory() {
         
         // comment: am I really locked to typing map.current every time? if that's the case, can we not "escape" React there for a second?
         // which probably just shows that I need to learn more about refs.
-        const tb = new Threebox(map.current, map.current.getCanvas().getContext('webgl')/*, options: {} */ );
+        const tb = new Threebox(map.current, map.current.getCanvas().getContext('webgl'), { preserveDrawingBuffer: false } );
     
         map.current.on('style.load', () => {
             map.current.addLayer({

@@ -34,7 +34,7 @@ export default function spawnObject(id, file ,modelOrigin, modelAltitude, modelR
             // is read from the wrong options on init - if it isn't specified here, it's undefined and the world burns.
             // Worth opening a GitHub issue for.
             // !! ALSO TRY: Copy the Mapbox page tutorial with Threebox as much as possible and see if THAT renders at least.
-            const tb = (window.tb = new Threebox( map, gl, { defaultLights: true } ));
+            const tb = (window.tb = new Threebox( map, gl, { defaultLights: true, preserveDrawingBuffer: false } ));
             tb.loadObj({
                     obj: file,
                     type: 'gltf',
