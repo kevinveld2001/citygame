@@ -15,7 +15,6 @@ import React, {useRef, useEffect} from 'react';
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { Threebox } from 'threebox-plugin';
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 
 
 mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_KEY;
@@ -47,29 +46,30 @@ function CatStory() {
         
         // comment: am I really locked to typing map.current every time? if that's the case, can we not "escape" React there for a second?
         // which probably just shows that I need to learn more about refs.
-        const TBWrapper = new Threebox(map.current, map.current.getCanvas().getContext('webgl') /*, options{}*/);
-        const gltfLoader = new GLTFLoader();
+        const tb = new Threebox(map.current, map.current.getCanvas().getContext('webgl')/*, options: {} */ );
     
         map.current.on('style.load', () => {
             map.current.addLayer({
                 id: 'tb-cat-map',
                 type: 'custom',
                 renderingMode: '3d',
-                onAdd: function () {
-                    // loads from /public after webpack bundles it
-                    gltfLoader.load('/models/necklace_test.glb',
-                        (gltf) => {
-                            const gltfAsObj = TBWrapper.Object3D({ obj: gltf.scene });
-                            gltfAsObj.set( { coords: [13.63527, 45.95533],
-                                             scale: 1000
-                                            });
-                            TBWrapper.add(gltfAsObj);
+                onAdd: function (map, gl) {
+                    tb.loadObj({
+                            obj: '/models/necklace_test.glb',   // loads from /public after webpack bundles it
+                            type: 'gltf',
+                            scale: 1000,
+                            units: 'meters',
+                            rotation: { x: 90, y: 0, z: 0 } //default rotation
+                        }, 
+                        (model) => {
+                            const setModel = model.setCoords([13.63527, 45.95533]);
+                            tb.add(setModel);
                         }
                     );
                 },
                     
                 render: function () {
-                    TBWrapper.update();
+                    tb.update();
                 }
 
                 // TODO: when exiting this page -> dispose()?

@@ -23,13 +23,18 @@ export default function spawnObject(id, file ,modelOrigin, modelAltitude, modelR
         id: id,
         type: 'custom',
         renderingMode: '3d',
-        onAdd: function (map, gl) {
+        onAdd: function (map, gl) {     // this format MUST be called from Mapbox.Map.addLayer() (for the gl context)
             this.camera = new THREE.Camera();
             this.scene = new THREE.Scene();
 
         
             // TODO: model properties (pos/rot/scale/maybe others) are currently mangled between three.js and threebox
-            const tb = new Threebox( map, gl, { defaultLights: true } );
+            // !! TODO: RE preserveDrawingBuffer: Accidentally required, unlike any other option.
+            // I think Threebox has a scope oopsie in the options, such that this ONE setting
+            // is read from the wrong options on init - if it isn't specified here, it's undefined and the world burns.
+            // Worth opening a GitHub issue for.
+            // !! ALSO TRY: Copy the Mapbox page tutorial with Threebox as much as possible and see if THAT renders at least.
+            const tb = (window.tb = new Threebox( map, gl, { defaultLights: true } ));
             tb.loadObj({
                     obj: file,
                     type: 'gltf',
