@@ -20,7 +20,7 @@
     "remark-gfm": "^4.0.0",
     "three": "^0.158.0",
     "three-gltf-loader": "^1.111.0",
-    "threebox": "^0.1.5",
+    "threebox-plugin": "^2.2.7",
     "web-vitals": "^2.1.4"
   },
   "scripts": {

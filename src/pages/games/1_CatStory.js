@@ -11,10 +11,10 @@
 //  * QR codes? questions? should have here: a nice blend between "gameplay" map and the method to progress, not switching pages
 
 
-import React, {useRef, useEffect, useState, useContext} from 'react';
+import React, {useRef, useEffect} from 'react';
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
-import Threebox from 'threebox/src/Threebox';
+import { Threebox } from 'threebox-plugin';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 
 
