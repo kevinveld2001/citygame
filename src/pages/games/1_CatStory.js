@@ -21,69 +21,63 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_KEY;
 
 
-function CatStory({ elementId, sessionId }) {
-    // -- spawn map with Mapbox, still within React control
-    // set up for our target location
-    const mapContainer = useRef(null);
+function CatStory() {
+    const mapContainer = useRef(null);  // the ref from <div> doesn't get passed outside of the useEffect, i.e. container would be null
     const map = useRef(null);
-    const gltfLoader = new GLTFLoader();
 
-    if (map.current) return;
-    const startPosition = [45.95483, 13.63506];   // current start position = near NG train station; TODO un-hardcode the starting position
-    const boundSize = 0.05;
-    const bounds = [
-        [startPosition[0] - boundSize, startPosition[1] - boundSize],
-        [startPosition[0] + boundSize, startPosition[1] + boundSize]
-    ];
-    map.current = new mapboxgl.Map({
-        container: mapContainer.current,
-        style: 'mapbox://styles/mapbox/outdoors-v12',
-        center: startPosition,
-        zoom: 11,
-        pitch: 20/*, 
-        maxBounds: bounds*/
-    });
+    useEffect( () => {
+        if (map.current) return;
 
-    
-    const TBWrapper = new Threebox(map, map.getCanvas().getContext('webgl') /*, options{}*/);
-
-    map.on('style.load', () => {
-        map.addLayer({
-            id: 'tb-cat-map',
-            type: 'custom',
-            renderingMode: '3d',
-            onAdd: function () {
-                /**
-                const scale = 3.2;
-                const options = {
-                    obj: 'https://docs.mapbox.com/mapbox-gl-js/assets/metlife-building.gltf',
-                    type: 'gltf',
-                    scale: { x: scale, y: scale, z: 2.7 },
-                    units: 'meters',
-                    rotation: { x: 90, y: -90, z: 0 }
-                };
-                
-                TBWrapper.loadObj(options, (model) => {     // ONLY LOADS .obj FILES
-                    model.setCoords([-73.976799, 40.754145]);
-                    model.setRotation({ x: 0, y: 0, z: 241 });
-                    TBWrapper.add(model);
-                });
-                /**/
-                loader.load('./models/necklace_test.glb',
-                    (gltf) => {
-                        const gltfAsObj = TBWrapper.Object3D(gltf.scene);
-                        gltfAsObj.setCoords([45.95533, 13.63527]);
-                        TBWrapper.add(gltfAsObj);
-                    }
-                );
-            },
-                
-            render: function () {
-                tb.update();
-            }
+        // type: LngLatLike - REVERSE of the usual (lat, long) pairing, apparently a GeoJSON thing
+        const startPosition = [13.63506, 45.95483];   // current start position = near NG train station; TODO un-hardcode the starting position
+        const boundSize = 0.05;
+        const bounds = [
+            [startPosition[0] - boundSize, startPosition[1] - boundSize],
+            [startPosition[0] + boundSize, startPosition[1] + boundSize]
+        ];
+        map.current = new mapboxgl.Map({
+            container: mapContainer.current,
+            style: 'mapbox://styles/mapbox/outdoors-v12',
+            center: startPosition,
+            zoom: 45,
+            pitch: 75, 
+            maxBounds: bounds
         });
-    });
+    
+        
+        // comment: am I really locked to typing map.current every time? if that's the case, can we not "escape" React there for a second?
+        // which probably just shows that I need to learn more about refs.
+        const TBWrapper = new Threebox(map.current, map.current.getCanvas().getContext('webgl') /*, options{}*/);
+        const gltfLoader = new GLTFLoader();
+    
+        map.current.on('style.load', () => {
+            map.current.addLayer({
+                id: 'tb-cat-map',
+                type: 'custom',
+                renderingMode: '3d',
+                onAdd: function () {
+                    // loads from /public after webpack bundles it
+                    gltfLoader.load('/models/necklace_test.glb',
+                        (gltf) => {
+                            const gltfAsObj = TBWrapper.Object3D({ obj: gltf.scene });
+                            gltfAsObj.set( { coords: [13.63527, 45.95533],
+                                             scale: 1000
+                                            });
+                            TBWrapper.add(gltfAsObj);
+                        }
+                    );
+                },
+                    
+                render: function () {
+                    TBWrapper.update();
+                }
 
+                // TODO: when exiting this page -> dispose()?
+            });
+        });
+
+    }, []);
+    
 
     // TODO isLoading??
     // TODO don't forget resize callback (see Map.js)??
@@ -94,7 +88,6 @@ function CatStory({ elementId, sessionId }) {
             <div className='h-full w-full flex flex-col' > 
                 <div ref={mapContainer} className='flex-1' />
             </div>
-            <Game elementId={elementId} sessionId={sessionId} />
         </>
     );
 }
