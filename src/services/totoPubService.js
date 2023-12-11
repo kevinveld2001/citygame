@@ -16,5 +16,5 @@ export async function getPub({voucher, element, invite}) {
         query += `invite=${invite}`;
     }
 
-    return await totoFetch('/v2/session/init' + query);
+    return await totoFetch('/v2/pub' + query);
 }

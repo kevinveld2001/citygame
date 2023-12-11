@@ -2,6 +2,7 @@ import QrScanner from "qr-scanner";
 import React, {useState, useRef, useEffect} from "react";
 import { FaCamera } from "react-icons/fa6";
 import Sheet from 'react-modal-sheet'
+import QrResult from "../components/qr/QrResult";
 
 function QrScreen() {
     const [hasPermission, setHasPermission] = useState(false)
@@ -36,13 +37,6 @@ function QrScreen() {
         }
     }, [cameraRef]);
 
-
-    useEffect(() => {
-        // if (!scannedCode) return;
-        // const url = new URL(scannedCode);
-        // alert(url.pathname);
-    }, [scannedCode]);
-
     return <div className="h-full w-full" >
         {
             <>
@@ -62,7 +56,7 @@ function QrScreen() {
                     <Sheet.Container>
                         <Sheet.Header />
                         <Sheet.Content className="p-3">
-                            {scannedCode}
+                            <QrResult qrCode={scannedCode} />
                         </Sheet.Content>
                     </Sheet.Container>
                     </Sheet>
