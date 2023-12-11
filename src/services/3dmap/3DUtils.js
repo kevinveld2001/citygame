@@ -40,7 +40,7 @@ export function initThreeboxOnMap(mapLayerId, map, options) {
             type: 'custom',
             renderingMode: '3d',
                 
-            render: function () { tb.update(); }
+            render: function () { newTb.update(); }
         });
 
     return newTb;
