@@ -10,7 +10,6 @@ import SettingsContext from '../services/SettingsContext';
 import { getSessionInfo } from '../services/totoSessionService';
 
 
-mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_KEY;
 
 function Map() {
     const [settings] = useContext(SettingsContext);

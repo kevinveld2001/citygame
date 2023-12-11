@@ -1,4 +1,7 @@
 import './App.css';
+
+import mapboxgl from 'mapbox-gl';
+
 import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import SettingsContext, {rawSettings} from './services/SettingsContext';
@@ -18,6 +21,9 @@ import Notifications from './pages/experimental/Notifications';
 import { scheduleNotificationFromStoreage } from './services/NotificationService';
 import QuestScreen from './pages/Quest';
 scheduleNotificationFromStoreage();
+
+
+mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_KEY;
 
 function App() {
   const location = useLocation(); 

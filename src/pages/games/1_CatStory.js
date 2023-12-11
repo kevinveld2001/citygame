@@ -17,7 +17,6 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 import { Threebox } from 'threebox-plugin';
 
 
-mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_KEY;
 
 
 function CatStory() {
