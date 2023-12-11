@@ -48,13 +48,15 @@ export function initThreeboxOnMap(mapLayerId, map, options) {
 
 // @param tbox Threebox instance on whose underlying map the object will be loaded.
 /**
+ * DO NOT USE! The return is not proper because of ```Threebox.loadObj```, therefore this is useless. Use ```Threebox.loadObj``` directly!
  * Loads a new GLTF object from ```file``` on the specified ```tbox``` Threebox instance AND adds it.
  * 
  * @param file File to load the object from. Use ```/directory/file.extension``` absolute format to load from ```/public```.
  * @param options (optional) Threebox instance options. See: https://github.com/jscastro76/threebox/blob/master/docs/Threebox.md#loadobj . Defaults to GLTF type and metres scale. SET MODEL TRANSFORM USING ```set(options)``` ON THE RETURNED OBJECT INSTEAD!
  * 
- * @returns The successfully loaded and added object. Use this to set transforms, other options, or event listeners.
+ * 
  */
+// @returns The successfully loaded and added object. Use this to set transforms, other options, or event listeners.
 export function loadGLTFObject(tbox, file, options) {
     options = options === undefined ? {
         obj: file,   // loads from /public after webpack bundles it
