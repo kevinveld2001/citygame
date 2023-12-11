@@ -43,7 +43,7 @@ export default function spawnObject(id, file ,modelOrigin, modelAltitude, modelR
                     rotation: { x: 90, y: 0, z: 0 } //default rotation
                 },
                 (model) => {
-                    const modelAsObj = model.setCoords(origin);
+                    const modelAsObj = model.setCoords(origin); // "origin" is faultily called here and will fall back to window.origin AKA the current host address (spoiler: that's not a geo coordinate)
                     tb.add(modelAsObj);
                 }
             );
