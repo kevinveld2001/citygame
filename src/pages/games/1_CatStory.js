@@ -53,7 +53,7 @@ function CatStory() {
                 id: 'tb-cat-map',
                 type: 'custom',
                 renderingMode: '3d',
-                onAdd: function (map, gl) {
+                onAdd: function () {
                     tb.loadObj({
                             obj: '/models/necklace_test.glb',   // loads from /public after webpack bundles it
                             type: 'gltf',
