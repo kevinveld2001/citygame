@@ -92,3 +92,15 @@ export async function register(email, lang = "eng") {
     return res.status == 200;
 } 
 
+export async function getIdentity() {
+    const myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+
+    const csrfToken = getCookie('csrfToken');
+    if (csrfToken) {
+        myHeaders.append("csrf-token", csrfToken);
+    }
+    const res = await fetch("/totoapi/v2/auth/identity", {headers: myHeaders})
+    if (!res.ok) return null;
+    return res.json();
+}

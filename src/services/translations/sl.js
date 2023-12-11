@@ -1,8 +1,12 @@
 export default {
     // tabs
+    TAB_HOME: 'domov',
     TAB_MAP: 'Zemljevid',
     TAB_QUEST: 'Naloge',
     TAB_SETTINGS: 'Nastavitve',
+
+    // home screen
+    HOME_SCREEN_QR_BUTTON: 'Skenirajte kodo Qr',
 
     // settings screen
     SETTINGS_SCREEN_TITLE: 'Nastavitve',

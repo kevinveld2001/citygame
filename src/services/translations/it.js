@@ -1,8 +1,12 @@
 export default {
     // tabs
+    TAB_HOME: 'Casa',
     TAB_MAP: 'Carta geografica',
     TAB_QUEST: 'Missioni',
     TAB_SETTINGS: 'Impostazioni',
+
+    // home screen
+    HOME_SCREEN_QR_BUTTON: 'Scansiona il codice QR',
 
     // settings screen
     SETTINGS_SCREEN_TITLE: 'Impostazioni',
