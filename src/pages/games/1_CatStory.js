@@ -12,11 +12,7 @@
 
 
 import React, {useRef, useEffect} from 'react';
-import mapboxgl from 'mapbox-gl';
-import 'mapbox-gl/dist/mapbox-gl.css';
-import { Threebox } from 'threebox-plugin';
-
-
+import { initMapboxMap, initThreeboxOnMap, loadGLTFObject } from '../../services/3dmap/3DUtils';
 
 
 function CatStory() {
@@ -26,6 +22,7 @@ function CatStory() {
     useEffect( () => {
         if (map.current) return;
 
+        // -- map options setup - initMapboxMap leaves each implementing map/page to set those itself:
         // type: LngLatLike - REVERSE of the usual (lat, long) pairing, apparently a GeoJSON thing
         const startPosition = [13.63506, 45.95483];   // current start position = near NG train station; TODO un-hardcode the starting position
         const boundSize = 0.05;
@@ -33,7 +30,7 @@ function CatStory() {
             [startPosition[0] - boundSize, startPosition[1] - boundSize],
             [startPosition[0] + boundSize, startPosition[1] + boundSize]
         ];
-        map.current = new mapboxgl.Map({
+        map.current = initMapboxMap({
             container: mapContainer.current,
             style: 'mapbox://styles/mapbox/outdoors-v12',
             center: startPosition,
@@ -43,36 +40,26 @@ function CatStory() {
         });
     
         
-        // comment: am I really locked to typing map.current every time? if that's the case, can we not "escape" React there for a second?
-        // which probably just shows that I need to learn more about refs.
-        const tb = new Threebox(map.current, map.current.getCanvas().getContext('webgl'), { preserveDrawingBuffer: false } );
-    
         map.current.on('style.load', () => {
-            map.current.addLayer({
-                id: 'tb-cat-map',
-                type: 'custom',
-                renderingMode: '3d',
-                onAdd: function () {
-                    tb.loadObj({
-                            obj: '/models/necklace_test.glb',   // loads from /public after webpack bundles it
-                            type: 'gltf',
-                            scale: 1000,
-                            units: 'meters',
-                            rotation: { x: 90, y: 0, z: 0 } //default rotation
-                        }, 
-                        (model) => {
-                            const setModel = model.setCoords([13.63527, 45.95533]);
-                            tb.add(setModel);
-                        }
-                    );
-                },
-                    
-                render: function () {
-                    tb.update();
-                }
+            const tb = initThreeboxOnMap("tb-cat-map", map.current);
+            let theObj;
 
-                // TODO: when exiting this page -> dispose()?
-            });
+            //loadGLTFObject(tb, '/models/necklace_test.glb', );
+            tb.loadObj({
+                    obj: '/models/necklace_test.glb',
+                    type: 'gltf',
+                    units: 'meters',
+                    rotation: { x: 90, y: 0, z: 0 },
+                    scale: 1000
+                },
+                (loadedObj) => {
+                    loadedObj.setCoords([13.63527, 45.95533]);
+
+                    theObj = loadedObj;
+                    tb.add(loadedObj);
+                    //console.log("inner " + theObj);
+                },
+            );
         });
 
     }, []);
