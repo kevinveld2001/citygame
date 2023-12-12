@@ -78,6 +78,10 @@ function QrResult({qrCode}) {
                     <ReactMarkdown className={"text-gray-800"} remarkPlugins={[remarkGfm]} children={voucherData.publicInfo}/>
                     <button className="bg-blue-600 px-5 py-3 text-white mt-3"
                         onClick={async () => {
+                            let sessionObject = JSON.parse(window.localStorage.getItem('sessionids') ?? '{}');
+                            if (sessionObject.hasOwnProperty(voucherData.voucher)) {
+                                return navigate(`/quest/${sessionObject[voucherData.voucher]}`);
+                            }
                             const session = await sessionInit(voucherData.voucher)
                             const sessionid = session?.session?.id;
                             return navigate(`/quest/${sessionid}`);
