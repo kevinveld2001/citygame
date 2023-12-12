@@ -56,6 +56,7 @@ function App() {
             <Route path='/auth/login' element={<LoginScreen />} />
             <Route path='/auth/register' element={<RegisterScreen />} />
             <Route path='/qr' element={<QrScreen />} />
+            <Route path='/h/*' element={<HomeScreen />} />
           </Routes>
         </div>
         {pathsWithTabbar.some((pathWithTabbar) => location.pathname.includes(pathWithTabbar) || location.pathname === "/") ? <Tabbar /> : <></>}
