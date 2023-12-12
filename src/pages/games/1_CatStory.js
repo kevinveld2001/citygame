@@ -12,7 +12,8 @@
 
 
 import React, {useRef, useEffect} from 'react';
-import { initMapboxMap, initThreeboxOnMap, loadGLTFObject } from '../../services/3dmap/3DUtils';
+import { Threebox } from 'threebox-plugin';
+import mapboxgl from 'mapbox-gl';
 
 
 function CatStory() {
@@ -20,17 +21,16 @@ function CatStory() {
     const map = useRef(null);
 
     useEffect( () => {
-        if (map.current) return;
+        //if (map.current) return;
 
-        // -- map options setup - initMapboxMap leaves each implementing map/page to set those itself:
         // type: LngLatLike - REVERSE of the usual (lat, long) pairing, apparently a GeoJSON thing
-        const startPosition = [13.63506, 45.95483];   // current start position = near NG train station; TODO un-hardcode the starting position
+        const startPosition = [13.63506, 45.95483] /*[45.95483, 13.63506]*/;   // current start position = near NG train station; TODO un-hardcode the starting position
         const boundSize = 0.05;
         const bounds = [
             [startPosition[0] - boundSize, startPosition[1] - boundSize],
             [startPosition[0] + boundSize, startPosition[1] + boundSize]
         ];
-        map.current = initMapboxMap({
+        map.current = new mapboxgl.Map({
             container: mapContainer.current,
             style: 'mapbox://styles/mapbox/outdoors-v12',
             center: startPosition,
@@ -38,14 +38,19 @@ function CatStory() {
             pitch: 75, 
             maxBounds: bounds
         });
-    
+        window.tb = new Threebox(map.current, map.current.getCanvas().getContext('webgl'), { /*preserveDrawingBuffer: false*/ } );
         
-        map.current.on('style.load', () => {
-            const tb = initThreeboxOnMap("tb-cat-map", map.current);
-            let theObj;
+        map.current.on('style.load', async () => {
+            map.current.addLayer({
+                id: "tb-cat-map",
+                type: 'custom',
+                renderingMode: '3d',
+                    
+                render: function () { window.tb.update(); }
+            });
 
             //loadGLTFObject(tb, '/models/necklace_test.glb', );
-            tb.loadObj({
+            window.tb.loadObj({
                     obj: '/models/necklace_test.glb',
                     type: 'gltf',
                     units: 'meters',
@@ -53,22 +58,23 @@ function CatStory() {
                     scale: 1000
                 },
                 (loadedObj) => {
-                    loadedObj.setCoords([13.63527, 45.95533]);
+                    loadedObj.setCoords([13.63527, 45.95533] /*[45.95533, 13.63527]*/);
 
-                    theObj = loadedObj;
-                    tb.add(loadedObj);
-                    //console.log("inner " + theObj);
+                    window.tb.add(loadedObj);
                 },
             );
         });
+
+        return () => {
+            map.current.remove();   // useEffect inits map, this cleanup balances it out by removing the map.
+                                    // This passes React's Strict Mode without visible errors and also lets Mapbox dispose resources.
+                                    // Dangling remains the Threebox instance, but it seems it doesn't want to be dispose()d.
+        };
 
     }, []);
     
 
     // TODO isLoading??
-    // TODO don't forget resize callback (see Map.js)??
-    // return a mapContainer div -> has map -> has Threebox wrapper around the other setup
-    // AKA in human language: a display of the necessary background and objects (map, here: cat, anything else ??)
     return (
         <>  
             <div className='h-full w-full flex flex-col' > 
