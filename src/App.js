@@ -24,7 +24,7 @@ scheduleNotificationFromStoreage();
 
 function App() {
   const location = useLocation(); 
-  const pathsWithTabbar = ['/quest', '/settings', '/map', '/qr'	];
+  const pathsWithTabbar = ['/quest', '/settings', '/map', '/qr', '/h/'	];
 
   const [settings, setSettings] = useState(rawSettings);
 
