@@ -33,9 +33,11 @@ export default function spawnObject(id, file ,modelOrigin, modelAltitude, modelR
             // I think Threebox has a scope oopsie in the options, such that this ONE setting
             // is read from the wrong options on init - if it isn't specified here, it's undefined and the world burns.
             // Worth opening a GitHub issue for.
-            // !! ALSO TRY: Copy the Mapbox page tutorial with Threebox as much as possible and see if THAT renders at least.
-            const tb = (window.tb = new Threebox( map, gl, { defaultLights: true, preserveDrawingBuffer: false } ));
-            tb.loadObj({
+
+            // TODO make a Threebox lifecycle that starts and propagates current instance to window.tb
+            // per page on page enter, and nullifies and disposes current instance on page leave
+            window.tb = new Threebox( map, gl, { defaultLights: true, preserveDrawingBuffer: false } );
+            window.tb.loadObj({
                     obj: file,
                     type: 'gltf',
                     scale: 1,
@@ -44,7 +46,7 @@ export default function spawnObject(id, file ,modelOrigin, modelAltitude, modelR
                 },
                 (model) => {
                     const modelAsObj = model.setCoords(origin); // "origin" is faultily called here and will fall back to window.origin AKA the current host address (spoiler: that's not a geo coordinate)
-                    tb.add(modelAsObj);
+                    window.tb.add(modelAsObj);
                 }
             );
             this.map = map;
