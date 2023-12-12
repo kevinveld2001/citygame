@@ -1,8 +1,12 @@
 export default {
     // tabs
+    TAB_HOME: 'Casa',
     TAB_MAP: 'Carta geografica',
     TAB_QUEST: 'Missioni',
     TAB_SETTINGS: 'Impostazioni',
+
+    // home screen
+    HOME_SCREEN_QR_BUTTON: 'Scansiona il codice QR',
 
     // settings screen
     SETTINGS_SCREEN_TITLE: 'Impostazioni',
@@ -42,8 +46,28 @@ export default {
     REGISTER_SCREEN_BUTTON: 'Invia una email',
     REGISTER_SCREEN_FAILED: 'Impossibile creare un account',
     REGISTER_SEREEN_EMAIL_SENT: 'Email inviata',
+
+    //solutions component
+    SOLUTIONS_SCREEN_SUBMIT_BUTTON: 'Invia',
+    SOLUTIONS_SCREEN_SUBMIT_SELECT_ERROR: 'Seleziona una risposta da inviare',
+    SOLUTIONS_SCREEN_SUBMIT_GENERAL_ERROR: 'Qualcosa è andato storto',
+    SOLUTIONS_SCREEN_SUBMIT_WRONG_ANSWER: 'Risposta sbagliata',
+    SOLUTIONS_SCREEN_SUBMIT_SUCCESS: 'Risposta corretta',
+    SOLUTIONS_SCREEN_SUBMIT_SCORE_TEXT: 'Hai risolto l\'attività ":task_name" e guadagnato :score di punteggio.',
+    SOLUTIONS_SCREEN_INPUT_PLACEHOLDER: 'Il tuo input',
     
     // game links component
     GAME_LINKS_TITLE: 'Livello successivo',
-    GAME_LINK_NO_LINKS: 'Non ci sono livelli successivi',
+    GAME_LINK_NO_LINKS: 'Torna alla panoramica delle missioni',
+    
+    //quest screen
+    QUEST_SCREEN_TITLE: 'Ricerca',
+    QUEST_SCREEN_RESET_BUTTON: 'Ripristina la missione',
+    QUEST_SCREEN_CONTINUE_BUTTON: 'Continua alla ricerca',
+
+    // quest list
+    QUEST_LIST_SCREEN_TITLE: 'Missioni',
+    QUEST_LIST_SCREEN_OPTION_ALL: 'Tutto',
+    QUEST_LIST_SCREEN_OPTION_UNSOLVED: 'Irrisolto',
+    QUEST_LIST_SCREEN_OPTION_SOLVED: 'Risolto',
 };

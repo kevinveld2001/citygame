@@ -1,8 +1,12 @@
 export default {
     // tabs
+    TAB_HOME: 'domov',
     TAB_MAP: 'Zemljevid',
     TAB_QUEST: 'Naloge',
     TAB_SETTINGS: 'Nastavitve',
+
+    // home screen
+    HOME_SCREEN_QR_BUTTON: 'Skenirajte kodo Qr',
 
     // settings screen
     SETTINGS_SCREEN_TITLE: 'Nastavitve',
@@ -42,8 +46,28 @@ export default {
     REGISTER_SCREEN_BUTTON: 'Pošlji sporočilo',
     REGISTER_SCREEN_FAILED: 'Ni uspelo ustvariti računa',
     REGISTER_SEREEN_EMAIL_SENT: 'Email poslan',
+
+    //solutions component
+    SOLUTIONS_SCREEN_SUBMIT_BUTTON: 'Oddaj',
+    SOLUTIONS_SCREEN_SUBMIT_SELECT_ERROR: 'Izberite odgovor za oddajo',
+    SOLUTIONS_SCREEN_SUBMIT_GENERAL_ERROR: 'Nekaj ​​je šlo narobe',
+    SOLUTIONS_SCREEN_SUBMIT_WRONG_ANSWER: 'Napačen odgovor',
+    SOLUTIONS_SCREEN_SUBMIT_SUCCESS: 'Pravilen odgovor',
+    SOLUTIONS_SCREEN_SUBMIT_SCORE_TEXT: 'Rešili ste nalogo ":task_name" in pridobili :score ocene.',
+    SOLUTIONS_SCREEN_INPUT_PLACEHOLDER: 'Vaš vnos',
     
     // game links component
     GAME_LINKS_TITLE: 'Naslednja stopnja',
-    GAME_LINK_NO_LINKS: 'Naslednjih ravni ni',
+    GAME_LINK_NO_LINKS: 'Nazaj na pregled naloge',
+    
+    //quest screen
+    QUEST_SCREEN_TITLE: 'Iskanje',
+    QUEST_SCREEN_RESET_BUTTON: 'Ponastavitev Quest',
+    QUEST_SCREEN_CONTINUE_BUTTON: 'Nadaljujte z iskanjem',
+
+    // quest list
+    QUEST_LIST_SCREEN_TITLE: 'Naloge',
+    QUEST_LIST_SCREEN_OPTION_ALL: 'Vse',
+    QUEST_LIST_SCREEN_OPTION_UNSOLVED: 'Nerešeno',
+    QUEST_LIST_SCREEN_OPTION_SOLVED: 'Rešeno',
 };
