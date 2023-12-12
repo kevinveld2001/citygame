@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useState, useContext} from "react";
 import { AiOutlineLoading } from "react-icons/ai";
 import { BiSolidError } from "react-icons/bi";
 import { getPub } from "../../services/totoPubService";
@@ -6,9 +6,11 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from 'remark-gfm'
 import { sessionInit } from "../../services/totoSessionService";
 import { useNavigate } from "react-router-dom";
-
+import SettingsContext from "../../services/SettingsContext"
 
 function QrResult({qrCode}) {
+    const [settings] = useContext(SettingsContext);
+    const translations = settings?.translations[settings?.language];
     const navigate = useNavigate();
     const [isLoading, setIsLoading] = useState(true);
     const [voucherData, setVoucherData] = useState(null);
@@ -69,7 +71,7 @@ function QrResult({qrCode}) {
             <div className="w-full">
                 {error && <div className="flex flex-row items-center bg-red-300 text-red-600 border-2 border-red-600 rounded-xl p-3 gap-3"> 
                     <BiSolidError className="h-20 w-20"/>
-                    <span>It looks like you scaned a code that is not part of the game.</span>
+                    <span>{translations.QR_CODE_SCAN_ERROR}</span>
                 </div>}
                 {voucherData && <div className=""> 
                     <h1 className="text-2xl font-bold">{voucherData.title}</h1>
@@ -80,7 +82,7 @@ function QrResult({qrCode}) {
                             const sessionid = session?.session?.id;
                             return navigate(`/quest/${sessionid}`);
                         }}>
-                        Start Quest
+                        {translations.QR_CODE_SCAN_START_QUEST_BUTTON}
                     </button>
                 </div>}
             </div>

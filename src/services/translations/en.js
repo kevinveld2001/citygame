@@ -66,4 +66,11 @@ export default {
     QUEST_LIST_SCREEN_OPTION_ALL: 'All',
     QUEST_LIST_SCREEN_OPTION_UNSOLVED: 'Unsolved',
     QUEST_LIST_SCREEN_OPTION_SOLVED: 'Solved',
+
+    // qr code scan
+    QR_CODE_SCAN_PERMISSION_TITLE: "Enable camera permissions",
+    QR_CODE_SCAN_PERMISSION_DESCRIPTION: "To use the in app Qr code scanner, you need to give permission to use the camera. If you don't want to give permission you can also use the qr code scanner on you phone.",
+    QR_CODE_SCAN_ERROR: "It looks like you scaned a code that is not part of the game.",
+    QR_CODE_SCAN_START_QUEST_BUTTON: "Start Quest"
+
 };

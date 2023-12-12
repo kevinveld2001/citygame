@@ -1,10 +1,14 @@
 import QrScanner from "qr-scanner";
-import React, {useState, useRef, useEffect} from "react";
+import React, {useState, useRef, useEffect, useContext} from "react";
 import { FaCamera } from "react-icons/fa6";
 import Sheet from 'react-modal-sheet'
 import QrResult from "../components/qr/QrResult";
+import SettingsContext from "../services/SettingsContext"
 
 function QrScreen() {
+    const [settings] = useContext(SettingsContext);
+    const translations = settings?.translations[settings?.language];
+
     const [hasPermission, setHasPermission] = useState(false)
     const [scannedCode, setScannedCode] = useState(null);
     const cameraRef = useRef(null);
@@ -64,8 +68,8 @@ function QrScreen() {
                 {!hasPermission &&
                     <div className="flex flex-col items-center p-8 gap-3">
                         <FaCamera className="w-20 h-20"/>
-                        <h1 className="text-center text-2xl font-bold">Enable camera permissions</h1>
-                        <span className="text-center">To use the in app Qr code scanner, you need to give permission to use the camera. If you don't want to give permission you can also use the qr code scanner on you phone.</span>
+                        <h1 className="text-center text-2xl font-bold">{translations.QR_CODE_SCAN_PERMISSION_TITLE}</h1>
+                        <span className="text-center">{translations.QR_CODE_SCAN_PERMISSION_DESCRIPTION}</span>
                     </div>
                 }
             </>

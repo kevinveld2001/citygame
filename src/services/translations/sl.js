@@ -66,4 +66,11 @@ export default {
     QUEST_LIST_SCREEN_OPTION_ALL: 'Vse',
     QUEST_LIST_SCREEN_OPTION_UNSOLVED: 'Nerešeno',
     QUEST_LIST_SCREEN_OPTION_SOLVED: 'Rešeno',
+
+    // qr code scan
+    QR_CODE_SCAN_PERMISSION_TITLE: "Omogoči dovoljenja za kamero",
+    QR_CODE_SCAN_PERMISSION_DESCRIPTION: "Če želite uporabiti skener APP QR kode, morate dati dovoljenje za uporabo kamere. Če ne želite dati dovoljenja, lahko uporabite tudi skener QR kode na telefonu.",
+    QR_CODE_SCAN_ERROR: "Videti je, da ste pregledali kodo, ki ni del igre.",
+    QR_CODE_SCAN_START_QUEST_BUTTON: "Start Quest"
+
 };
