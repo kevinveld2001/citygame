@@ -4,9 +4,12 @@ import { BiSolidError } from "react-icons/bi";
 import { getPub } from "../../services/totoPubService";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from 'remark-gfm'
+import { sessionInit } from "../../services/totoSessionService";
+import { useNavigate } from "react-router-dom";
 
 
 function QrResult({qrCode}) {
+    const navigate = useNavigate();
     const [isLoading, setIsLoading] = useState(true);
     const [voucherData, setVoucherData] = useState(null);
     const [error, setError] = useState(false);
@@ -42,7 +45,8 @@ function QrResult({qrCode}) {
                     setVoucherData({
                         title,
                         publicInfo,
-                        logo: info?.content?.logo
+                        logo: info?.content?.logo,
+                        voucher: params
                     })
 
                     break;
@@ -68,8 +72,16 @@ function QrResult({qrCode}) {
                     <span>It looks like you scaned a code that is not part of the game.</span>
                 </div>}
                 {voucherData && <div className=""> 
-                    <h1>{voucherData.title}</h1>
+                    <h1 className="text-2xl font-bold">{voucherData.title}</h1>
                     <ReactMarkdown className={"text-gray-800"} remarkPlugins={[remarkGfm]} children={voucherData.publicInfo}/>
+                    <button className="bg-blue-600 px-5 py-3 text-white mt-3"
+                        onClick={async () => {
+                            const session = await sessionInit(voucherData.voucher)
+                            const sessionid = session?.session?.id;
+                            return navigate(`/quest/${sessionid}`);
+                        }}>
+                        Start Quest
+                    </button>
                 </div>}
             </div>
         }
