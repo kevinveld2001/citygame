@@ -1,8 +1,12 @@
 export default {
     // tabs
+    TAB_HOME: 'Home',
     TAB_MAP: 'Map',
     TAB_QUEST: 'Quests',
     TAB_SETTINGS: 'Settings',
+
+    // home screen
+    HOME_SCREEN_QR_BUTTON: 'Scan Qr-code',
 
     // settings screen
     SETTINGS_SCREEN_TITLE: 'Settings',
