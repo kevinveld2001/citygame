@@ -17,6 +17,11 @@ function QrResult({qrCode}) {
     const [error, setError] = useState(false);
 
     useEffect(() => {
+        //reset state
+        setVoucherData(null);
+        setError(false);
+
+        //get qr data
         if (!qrCode || !new RegExp(/\/h\/(.)\/(.+)/).test(qrCode)) {
             setError(true);
             setIsLoading(false);
