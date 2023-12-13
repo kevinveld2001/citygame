@@ -2,7 +2,7 @@ import { getCookie } from "./cookieService";
 import totoFetch from "./totoApiService.js";
 import {initAllDefaultSessions} from './totoSessionService.js';
 
-export async function anonymousLogin() {
+export async function anonymousLogin(lang = "eng") {
     const myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
 
@@ -15,7 +15,7 @@ export async function anonymousLogin() {
         method: 'POST',
         headers: myHeaders,
         body: JSON.stringify({
-            "lang": "eng",
+            lang,
             "screenName": `anon${(Math.random() + 1).toString(36).substring(6)}` 
         })
     })
