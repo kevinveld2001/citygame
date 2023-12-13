@@ -34,6 +34,7 @@ function App() {
 
     //load language
     (async () => {
+      if (location.pathname.includes("/auth")) return;
       const user = await getIdentity();
       setSettings({
         ...settings,
