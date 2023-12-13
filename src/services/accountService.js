@@ -26,6 +26,12 @@ export async function anonymousLogin() {
 }
 
 export async function login(username, password) {
+    try {
+        await logout();
+    } catch(e) {
+        //logout if loged in else ignore
+    }
+
     const myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
 

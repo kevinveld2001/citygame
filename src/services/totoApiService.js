@@ -1,4 +1,4 @@
-import { getCookie } from "./cookieService";
+import { clearAllCookies, getCookie } from "./cookieService";
 
 export default function totoFetch(url, options) {
     options = {...{
@@ -17,7 +17,8 @@ export default function totoFetch(url, options) {
             if (!response.ok) {
                 if (response.status === 401) {
                     localStorage.clear();
-                    window.location.href = "/auth";
+                    clearAllCookies();
+                    window.location.href = "/auth?error=1";
                     return;
                 }
                 throw new Error(response.statusText);

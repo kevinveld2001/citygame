@@ -20,6 +20,7 @@ import Notifications from './pages/experimental/Notifications';
 import { scheduleNotificationFromStoreage } from './services/NotificationService';
 import QuestScreen from './pages/Quest';
 import { getIdentity } from './services/accountService'; 
+import { clearAllCookies } from './services/cookieService';
 scheduleNotificationFromStoreage();
 
 function App() {
@@ -32,17 +33,20 @@ function App() {
       navigator.serviceWorker.register("/serviceworker.js");
     }
 
-    async function checkIdentity() {
+    async function checkIdentity() {      
       const identity = await getIdentity();
-      if (identity?.id && !location.pathname.includes("/auth")) {
+      if (!identity?.id && !location.pathname.includes("/auth")) {
         // go to login screen
         localStorage.clear();
-        window.location.href = "/auth";
+        clearAllCookies();
+        window.location.href = "/auth?error=1";
       }
     }
 
     checkIdentity();
-    setTimeout(checkIdentity, 60000);
+    if (!location.pathname.includes("/auth")) {
+      setTimeout(checkIdentity, 60000);
+    }
   }, [])
 
 
