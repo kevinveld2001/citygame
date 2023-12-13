@@ -14,7 +14,7 @@ function AuthScreen() {
     const error = searchParams.get('error');
 
     return (<div className="p-7 flex flex-col items-center w-full">
-        {error && <div className="bg-blue-300 border-2 border-blue-600 text-blue-900 rounded-xl p-3">
+        {error && <div className="bg-blue-300 border-2 border-blue-600 text-blue-900 rounded-xl p-3 mb-3">
             <span>{translations[`AUTH_SCREEN_ERROR_${error}`]}</span>
         </div>}
         {window.localStorage.getItem('auth') === null ? <></> : <Navigate to="/" />}
