@@ -35,7 +35,7 @@ function App() {
 
     async function checkIdentity() {      
       const identity = await getIdentity();
-      if (!identity?.id && !location.pathname.includes("/auth")) {
+      if (!identity?.id && !location.pathname.includes("/auth") && window.localStorage.getItem("auth")) {
         // go to login screen
         localStorage.clear();
         clearAllCookies();
