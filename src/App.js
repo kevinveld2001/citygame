@@ -19,6 +19,7 @@ import Experimental from './pages/experimental/Experimental';
 import Notifications from './pages/experimental/Notifications';
 import { scheduleNotificationFromStoreage } from './services/NotificationService';
 import QuestScreen from './pages/Quest';
+import { getIdentity, languageMap } from './services/accountService';
 scheduleNotificationFromStoreage();
 
 function App() {
@@ -30,6 +31,18 @@ function App() {
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register("/serviceworker.js");
     }
+
+    //load language
+    (async () => {
+      if (location.pathname.includes("/auth")) return;
+      const user = await getIdentity();
+
+      if (!user?.lang) return;
+      setSettings({
+        ...settings,
+        language: languageMap.find(map => map.toto === user?.lang)?.local
+      });
+    }) ();
   }, [])
 
 

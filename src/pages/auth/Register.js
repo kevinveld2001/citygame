@@ -1,7 +1,7 @@
 import React, {useContext, useState} from "react";
 import {Link} from "react-router-dom";
 import SettingsContext from "../../services/SettingsContext";
-import { register } from "../../services/accountService";
+import { register, languageMap } from "../../services/accountService";
 import { AiOutlineLoading } from "react-icons/ai";
 
 function RegisterScreen() {
@@ -38,7 +38,7 @@ function RegisterScreen() {
                 setLoading(true);
                 setError("");
                 setEmailSend(false);
-                const emailSend = await register(email);
+                const emailSend = await register(email, languageMap.find(map => map.local === settings.language).toto);
                 if (!emailSend) {
                     setError(translations.REGISTER_SCREEN_FAILED);
                     setLoading(false);

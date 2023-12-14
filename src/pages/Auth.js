@@ -1,7 +1,7 @@
 import React, {useContext, useState} from "react";
 import { Link } from "react-router-dom";
 import { Navigate } from 'react-router-dom';
-import { anonymousLogin } from "../services/accountService"
+import { anonymousLogin, languageMap } from "../services/accountService"
 import SettingsContext from "../services/SettingsContext";
 import LanguagePicker from "../components/settings/LanguagePicker";
 import { AiOutlineLoading } from "react-icons/ai";
@@ -26,7 +26,7 @@ function AuthScreen() {
             onClick={async () => {
                 if (loading === true) return;
                 setLoading(true);
-                const credentials = await anonymousLogin();
+                const credentials = await anonymousLogin(languageMap.find(map => map.local === settings.language).toto);
                 window.localStorage.setItem('auth', JSON.stringify(credentials));
                 setSettings({...settings, auth: credentials});
             }}> 

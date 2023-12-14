@@ -3,14 +3,21 @@ import SettingsContext from "../../services/SettingsContext";
 import { ReactComponent as Gb } from "./../../assets/flags/gb.svg"; 
 import { ReactComponent as It } from "./../../assets/flags/it.svg"; 
 import { ReactComponent as Si } from "./../../assets/flags/si.svg"; 
+import { getIdentity, saveLanguage } from "../../services/accountService";
 
 
-export default function LanguagePicker() {
+export default function LanguagePicker({ saveToToto = false }) {
     const [settings, setSettings] = useContext(SettingsContext);
     const translations = settings?.translations[settings?.language];
 
     function changeLanguage(event) {
         setSettings({...settings, language: event?.target?.value});
+        if (saveToToto) {
+            (async () => {
+                const user = await getIdentity();
+                saveLanguage(user?.id ,event?.target?.value);
+            })();
+        }
     }
 
     return (
