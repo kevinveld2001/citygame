@@ -51,10 +51,13 @@ export default {
     SOLUTIONS_SCREEN_SUBMIT_BUTTON: 'Oddaj',
     SOLUTIONS_SCREEN_SUBMIT_SELECT_ERROR: 'Izberite odgovor za oddajo',
     SOLUTIONS_SCREEN_SUBMIT_GENERAL_ERROR: 'Nekaj ​​je šlo narobe',
+    SOLUTIONS_SCREEN_SUBMIT_GEOFENCE_NOPERM: 'Za uporabo geofence dovolite dovoljenja za lokacijo v vaši napravi.',
     SOLUTIONS_SCREEN_SUBMIT_WRONG_ANSWER: 'Napačen odgovor',
     SOLUTIONS_SCREEN_SUBMIT_SUCCESS: 'Pravilen odgovor',
     SOLUTIONS_SCREEN_SUBMIT_SCORE_TEXT: 'Rešili ste nalogo ":task_name" in pridobili :score ocene.',
     SOLUTIONS_SCREEN_INPUT_PLACEHOLDER: 'Vaš vnos',
+    
+    SOLUTIONS_GEOFENCE_BUTTON_EXPLANATION: "Gumb Geofence - od vas se lahko zahteva, da dodelite dovoljenja za lokacijo!",
     
     // game links component
     GAME_LINKS_TITLE: 'Naslednja stopnja',

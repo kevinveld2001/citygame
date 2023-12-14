@@ -57,6 +57,8 @@ export default {
     SOLUTIONS_SCREEN_SUBMIT_SCORE_TEXT: 'You solved the task ":task_name" and gained :score points.',
     SOLUTIONS_SCREEN_INPUT_PLACEHOLDER: 'Your input',
 
+    SOLUTIONS_GEOFENCE_BUTTON_EXPLANATION: "Geofence button - you can be asked to grant location permissions!",
+
     // game links component
     GAME_LINKS_TITLE: 'Next level(s)',
     GAME_LINK_NO_LINKS: 'Go back to quest overview',

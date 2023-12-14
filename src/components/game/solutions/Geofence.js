@@ -20,7 +20,6 @@ function Geofence({element, data, elementId, sessionId, finish }) {
         setError("");
         setLoading(true);
 
-        //const allowedLocation = await navigator.permissions.query({ name: "geolocation" });
         navigator.geolocation.getCurrentPosition(
             async (position) => {
                 const res = await taskSolveGeofence(sessionId, elementId, position.coords.latitude, position.coords.longitude);
@@ -34,7 +33,7 @@ function Geofence({element, data, elementId, sessionId, finish }) {
                 finish("GEOFENCE");
             },
             async (error) => {
-                //console.log(error.code);  // assuming 1 (PERMISSION_DENIED), not technical error // https://developer.mozilla.org/en-US/docs/Web/API/GeolocationPositionError
+                // error message below assumes error code 1 (PERMISSION_DENIED), AKA user fault
                 setError(translations.SOLUTIONS_SCREEN_SUBMIT_GEOFENCE_NOPERM);
                 setLoading(false);
             });
@@ -50,7 +49,7 @@ function Geofence({element, data, elementId, sessionId, finish }) {
 
         
         {!success && <>
-            <p className="mt-3 font-bold">Geofence button - you can be asked to grant location permissions!</p>
+            <p className="mt-3 font-bold">{translations.SOLUTIONS_GEOFENCE_BUTTON_EXPLANATION}</p>
             <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-xl mt-3 flex items-center justify-center" 
                 onClick={submit}> 
                 {loading ? <AiOutlineLoading className="animate-spin w-6 h-6"/> : translations.SOLUTIONS_SCREEN_SUBMIT_BUTTON}
