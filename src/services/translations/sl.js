@@ -1,8 +1,12 @@
 export default {
     // tabs
+    TAB_HOME: 'domov',
     TAB_MAP: 'Zemljevid',
     TAB_QUEST: 'Naloge',
     TAB_SETTINGS: 'Nastavitve',
+
+    // home screen
+    HOME_SCREEN_QR_BUTTON: 'Skenirajte kodo Qr',
 
     // settings screen
     SETTINGS_SCREEN_TITLE: 'Nastavitve',
@@ -20,6 +24,7 @@ export default {
   
 
     // auth screen
+    AUTH_SCREEN_ERROR_1: 'Vaša seja je potekla in se morate preusmeriti',
     AUTH_SCREEN_TITLE: 'Mestna igra',
     AUTH_SCREEN_EXPLANATION: 'Če želite igrati mestno igro, potrebujete acount. Lahko naredite acount. Če imate enega, se lahko prijavite s tem. Lahko pa poskusite tudi z aplikacijo z računom AnoneyMous.',
     AUTH_SCREEN_BUTTON_LOGIN: 'Vpiši se',
@@ -47,10 +52,13 @@ export default {
     SOLUTIONS_SCREEN_SUBMIT_BUTTON: 'Oddaj',
     SOLUTIONS_SCREEN_SUBMIT_SELECT_ERROR: 'Izberite odgovor za oddajo',
     SOLUTIONS_SCREEN_SUBMIT_GENERAL_ERROR: 'Nekaj ​​je šlo narobe',
+    SOLUTIONS_SCREEN_SUBMIT_GEOFENCE_NOPERM: 'Za uporabo geofence dovolite dovoljenja za lokacijo v vaši napravi.',
     SOLUTIONS_SCREEN_SUBMIT_WRONG_ANSWER: 'Napačen odgovor',
     SOLUTIONS_SCREEN_SUBMIT_SUCCESS: 'Pravilen odgovor',
     SOLUTIONS_SCREEN_SUBMIT_SCORE_TEXT: 'Rešili ste nalogo ":task_name" in pridobili :score ocene.',
     SOLUTIONS_SCREEN_INPUT_PLACEHOLDER: 'Vaš vnos',
+    
+    SOLUTIONS_GEOFENCE_BUTTON_EXPLANATION: "Gumb Geofence - od vas se lahko zahteva, da dodelite dovoljenja za lokacijo!",
     
     // game links component
     GAME_LINKS_TITLE: 'Naslednja stopnja',

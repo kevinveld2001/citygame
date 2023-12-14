@@ -10,7 +10,9 @@ import Map from './pages/Map';
 import QuestList from './pages/QuestList';
 import Settings from './pages/Settings';
 import GameScreen from './pages/Game';
+import HomeScreen from './pages/Home';
 import InstallBar from './components/InstallBar';
+
 
 import AuthScreen from './pages/Auth';
 import LoginScreen from './pages/auth/Login';
@@ -20,6 +22,8 @@ import Experimental from './pages/experimental/Experimental';
 import Notifications from './pages/experimental/Notifications';
 import { scheduleNotificationFromStoreage } from './services/NotificationService';
 import QuestScreen from './pages/Quest';
+import { clearAllCookies } from './services/cookieService';
+import { getIdentity, languageMap } from './services/accountService';
 scheduleNotificationFromStoreage();
 
 
@@ -27,13 +31,40 @@ mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_KEY;
 
 function App() {
   const location = useLocation(); 
-  const pathsWithTabbar = ['/quest', '/settings'];
+  const pathsWithTabbar = ['/quest', '/settings', '/map'	];
   const [settings, setSettings] = useState(rawSettings);
 
   useEffect(() => {
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register("/serviceworker.js");
     }
+
+    async function checkIdentity() {      
+      const identity = await getIdentity();
+      if (!identity?.id && !location.pathname.includes("/auth") && window.localStorage.getItem("auth")) {
+        // go to login screen
+        localStorage.clear();
+        clearAllCookies();
+        window.location.href = "/auth?error=1";
+      }
+    }
+
+    checkIdentity();
+    if (!location.pathname.includes("/auth")) {
+      setInterval(checkIdentity, 60000);
+    }
+    
+    //load language
+    (async () => {
+      if (location.pathname.includes("/auth")) return;
+      const user = await getIdentity();
+
+      if (!user?.lang) return;
+      setSettings({
+        ...settings,
+        language: languageMap.find(map => map.toto === user?.lang)?.local
+      });
+    }) ();
   }, [])
 
 
@@ -44,7 +75,8 @@ function App() {
         <div className='flex-1 flex overflow-auto'>
           {settings.auth === null && !location.pathname.includes("/auth") ? (<Navigate to="/auth" />) : <></>}
           <Routes>
-            <Route path='/' element={<Map />} />
+            <Route path='/' element={<HomeScreen />} />
+            <Route path='/map' element={<Map />} />
             <Route path='/quest/list' element={<QuestList />} />
             <Route path='/quest/:id' element={<QuestScreen />} />
             <Route path='/settings' element={<Settings />} />

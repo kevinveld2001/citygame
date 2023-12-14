@@ -31,15 +31,16 @@ export async function sessionInit(sessionToken, lang = 'eng') {
 }
 
 export async function initAllDefaultSessions() {
-    const sessionTokens = ["115e1bd3-9666-49d8-95ce-a3b9687148fc"];
+    const sessionTokens = ["115e1bd3-9666-49d8-95ce-a3b9687148fc", "346ab5b7-ea77-4e35-904e-fc8108da9922", "ca3ba57f-fee0-4f5c-9a0d-cc2357f9b7f7", "2474edc4-815a-4c9d-aedd-1d5fe945c0bb", "9eb07df8-1e15-4498-a7e7-f7c37e76abc3"];
     const sessionObject = JSON.parse(window.localStorage.getItem('sessionids') ?? '{}');
+    const promises = [];
 
     for (let i = 0; i < sessionTokens.length; i++) {
         if (sessionObject.hasOwnProperty(sessionTokens[i])) continue;
 
-        await sessionInit(sessionTokens[i]);
+        promises.push(sessionInit(sessionTokens[i]));
     }
-
+    await Promise.all(promises);
 }
 
 export async function getSessionInfo(sessionId) {
@@ -62,6 +63,19 @@ export async function taskSolveFreeText(sessionId, elementId, text) {
         body: JSON.stringify({
             "id": elementId,
             "text": text
+        })
+    });
+}
+
+export async function taskSolveGeofence(sessionId, elementId, lat, lon) {
+    return await totoFetch(`/v2/session/${sessionId}/task/solve/geofence`, {
+        method: "POST",
+        body: JSON.stringify({
+            "id": elementId,
+            "location": {
+                "lat": lat,
+                "lon": lon
+            }
         })
     });
 }

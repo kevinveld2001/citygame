@@ -1,8 +1,12 @@
 export default {
     // tabs
+    TAB_HOME: 'Casa',
     TAB_MAP: 'Carta geografica',
     TAB_QUEST: 'Missioni',
     TAB_SETTINGS: 'Impostazioni',
+
+    // home screen
+    HOME_SCREEN_QR_BUTTON: 'Scansiona il codice QR',
 
     // settings screen
     SETTINGS_SCREEN_TITLE: 'Impostazioni',
@@ -20,6 +24,7 @@ export default {
     
 
     // auth screen
+    AUTH_SCREEN_ERROR_1: 'La tua sessione è scaduta e devi respingere',
     AUTH_SCREEN_TITLE: 'Gioco di città',
     AUTH_SCREEN_EXPLANATION: 'Per giocare al gioco della città hai bisogno di un contratto. Puoi fare un conteggio. Se ne hai uno puoi accedere con quello. Ma puoi anche provare l\'app con un account Anoneyous.',
     AUTH_SCREEN_BUTTON_LOGIN: 'Login',
@@ -47,11 +52,14 @@ export default {
     SOLUTIONS_SCREEN_SUBMIT_BUTTON: 'Invia',
     SOLUTIONS_SCREEN_SUBMIT_SELECT_ERROR: 'Seleziona una risposta da inviare',
     SOLUTIONS_SCREEN_SUBMIT_GENERAL_ERROR: 'Qualcosa è andato storto',
+    SOLUTIONS_SCREEN_SUBMIT_GEOFENCE_NOPERM: 'Consenti le autorizzazioni di localizzazione sul tuo dispositivo per utilizzare il geofence.',
     SOLUTIONS_SCREEN_SUBMIT_WRONG_ANSWER: 'Risposta sbagliata',
     SOLUTIONS_SCREEN_SUBMIT_SUCCESS: 'Risposta corretta',
     SOLUTIONS_SCREEN_SUBMIT_SCORE_TEXT: 'Hai risolto l\'attività ":task_name" e guadagnato :score di punteggio.',
     SOLUTIONS_SCREEN_INPUT_PLACEHOLDER: 'Il tuo input',
     
+    SOLUTIONS_GEOFENCE_BUTTON_EXPLANATION: "Pulsante Geofence: ti potrebbe essere chiesto di concedere autorizzazioni di localizzazione!",
+
     // game links component
     GAME_LINKS_TITLE: 'Livello successivo',
     GAME_LINK_NO_LINKS: 'Torna alla panoramica delle missioni',
