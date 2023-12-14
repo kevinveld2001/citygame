@@ -36,6 +36,8 @@ function App() {
     (async () => {
       if (location.pathname.includes("/auth")) return;
       const user = await getIdentity();
+
+      if (!user?.lang) return;
       setSettings({
         ...settings,
         language: languageMap.find(map => map.toto === user?.lang)?.local
