@@ -1,6 +1,7 @@
 import { getCookie } from "./cookieService";
 import totoFetch from "./totoApiService.js";
 import {initAllDefaultSessions} from './totoSessionService.js';
+import totoFetch from "./totoApiService.js";
 
 export async function anonymousLogin(lang = "eng") {
     const myHeaders = new Headers();
@@ -48,7 +49,18 @@ export async function login(username, password) {
 
     const res = await fetch("/totoapi/v2/auth/identity", {headers: myHeaders});
     if (res.status !== 200) return null;
+    const user = await res.json()
   
+    //load existing sessions
+    const sessionObject = JSON.parse(window.localStorage.getItem('sessionids') ?? '{}');
+    const sessions = await acountGetSessions(user?.id);
+    sessions?.forEach(session => {
+        //storyId was not suposed to be the key. But we don't have access to voucher id. And we need a unique key
+        sessionObject[session.storyId] = session.id;
+    });
+    window.localStorage.setItem('sessionids', JSON.stringify(sessionObject));
+
+    //load initional sessions
     await initAllDefaultSessions();
 
     return await cridentionals;
@@ -106,6 +118,7 @@ export async function getIdentity() {
     return res.json();
 }
 
+
 export const languageMap = [
     {
         toto: "eng",
@@ -121,7 +134,6 @@ export const languageMap = [
     }
 ];
 
-
 export async function saveLanguage(userId, lang) {
     await totoFetch(`/v2/account/${userId}`, {
         method: "PUT",
@@ -129,4 +141,9 @@ export async function saveLanguage(userId, lang) {
                 lang: languageMap.find(map => map.local === lang)?.toto
             })
     })
+}
+
+
+export async function acountGetSessions(userUuid) {
+    return (await totoFetch(`/v2/account/${userUuid}/go`))?.sessions;
 }
