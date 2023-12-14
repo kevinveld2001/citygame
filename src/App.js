@@ -17,6 +17,7 @@ import RegisterScreen from './pages/auth/Register';
 
 import Experimental from './pages/experimental/Experimental';
 import Notifications from './pages/experimental/Notifications';
+import QrGenScreen from './pages/experimental/QrGen';
 import { scheduleNotificationFromStoreage } from './services/NotificationService';
 import QuestScreen from './pages/Quest';
 import QrScreen from './pages/Qr';
@@ -80,6 +81,7 @@ function App() {
             {process.env.REACT_APP_EXPERIMENTAL_FEATURES === 'true' && <>
               <Route path='/experimental' element={<Experimental />} />
               <Route path='/experimental/notifications' element={<Notifications />} />
+              <Route path='/experimental/qrgen' element={<QrGenScreen />} />
             </> }
             <Route path='/auth' element={<AuthScreen />} />
             <Route path='/auth/login' element={<LoginScreen />} />

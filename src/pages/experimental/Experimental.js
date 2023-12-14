@@ -11,5 +11,8 @@ export default function Experimental() {
 
         <h2 className="text-xl font-semibold mt-3">Notifications</h2>
         <Link to="/experimental/notifications" className="text-blue-500 underline">Notifications</Link>
+        
+        <h2 className="text-xl font-semibold mt-3">Qr-code generator</h2>
+        <Link to="/experimental/qrgen" className="text-blue-500 underline">Qr-code generator</Link>
     </div>);
 }
