@@ -45,7 +45,7 @@ function App() {
 
     checkIdentity();
     if (!location.pathname.includes("/auth")) {
-      setTimeout(checkIdentity, 60000);
+      setInterval(checkIdentity, 60000);
     }
   }, [])
 
