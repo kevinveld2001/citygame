@@ -20,6 +20,8 @@ import Notifications from './pages/experimental/Notifications';
 import { scheduleNotificationFromStoreage } from './services/NotificationService';
 import QuestScreen from './pages/Quest';
 import QrScreen from './pages/Qr';
+import { clearAllCookies } from './services/cookieService';
+import { getIdentity, languageMap } from './services/accountService';
 scheduleNotificationFromStoreage();
 
 function App() {
@@ -32,6 +34,33 @@ function App() {
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register("/serviceworker.js");
     }
+
+    async function checkIdentity() {      
+      const identity = await getIdentity();
+      if (!identity?.id && !location.pathname.includes("/auth") && window.localStorage.getItem("auth")) {
+        // go to login screen
+        localStorage.clear();
+        clearAllCookies();
+        window.location.href = "/auth?error=1";
+      }
+    }
+
+    checkIdentity();
+    if (!location.pathname.includes("/auth")) {
+      setInterval(checkIdentity, 60000);
+    }
+    
+    //load language
+    (async () => {
+      if (location.pathname.includes("/auth")) return;
+      const user = await getIdentity();
+
+      if (!user?.lang) return;
+      setSettings({
+        ...settings,
+        language: languageMap.find(map => map.toto === user?.lang)?.local
+      });
+    }) ();
   }, [])
 
 

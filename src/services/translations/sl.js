@@ -24,6 +24,7 @@ export default {
   
 
     // auth screen
+    AUTH_SCREEN_ERROR_1: 'Vaša seja je potekla in se morate preusmeriti',
     AUTH_SCREEN_TITLE: 'Mestna igra',
     AUTH_SCREEN_EXPLANATION: 'Če želite igrati mestno igro, potrebujete acount. Lahko naredite acount. Če imate enega, se lahko prijavite s tem. Lahko pa poskusite tudi z aplikacijo z računom AnoneyMous.',
     AUTH_SCREEN_BUTTON_LOGIN: 'Vpiši se',

@@ -24,6 +24,7 @@ export default {
 
 
     // auth screen
+    AUTH_SCREEN_ERROR_1: 'Your session has expired and you need to relogin',
     AUTH_SCREEN_TITLE: 'City Game',
     AUTH_SCREEN_EXPLANATION: 'To play the city game you need a acount. You can make a acount. If you have one you can login with that one. But you can also try the app with a anoneymous account. ',
     AUTH_SCREEN_BUTTON_LOGIN: 'Login',

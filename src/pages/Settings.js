@@ -14,7 +14,7 @@ function Settings() {
     <div className='p-6 overflow-y-scroll w-full'>
         <h1 className='font-semibold text-5xl mb-6'>{translations.SETTINGS_SCREEN_TITLE}</h1>
 
-        <LanguagePicker />
+        <LanguagePicker saveToToto={true} />
         
         <h2 className="font-semibold text-xl">
           {translations.SETTINGS_ACOUNTSETTING_TITLE}

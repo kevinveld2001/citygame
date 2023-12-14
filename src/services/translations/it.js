@@ -24,6 +24,7 @@ export default {
     
 
     // auth screen
+    AUTH_SCREEN_ERROR_1: 'La tua sessione è scaduta e devi respingere',
     AUTH_SCREEN_TITLE: 'Gioco di città',
     AUTH_SCREEN_EXPLANATION: 'Per giocare al gioco della città hai bisogno di un contratto. Puoi fare un conteggio. Se ne hai uno puoi accedere con quello. Ma puoi anche provare l\'app con un account Anoneyous.',
     AUTH_SCREEN_BUTTON_LOGIN: 'Login',
