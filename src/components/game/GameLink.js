@@ -21,7 +21,7 @@ function GameLink({ elId, sessionId }) {
                 const elementNonRefId = challenge.graph.nodes.find(node => node.refId === elementId)?.id;
                 for (const link of challenge.graph.links) {
                     if (link.source !== elementNonRefId) continue;
-                    const targetElementId = challenge.graph.nodes.find(node => node.id === link.target).refId;
+                    const targetElementId = challenge.graph.nodes.find(node => node.id === link.target)?.refId;
                     const element = session.elements.find(element => element.elementId === targetElementId);
                     
                     if (!element) continue;

@@ -14,7 +14,6 @@ function FreeInput({element, data, elementId, sessionId, finish}) {
         ? element?.content?.successMessage ?? translations.SOLUTIONS_SCREEN_SUBMIT_SUCCESS  
         : ""
     );
-    console.log(element?.processed?.text)
     const [freeInputText, setFreeInputText] = useState(element?.processed?.text ?? "");
     
 
