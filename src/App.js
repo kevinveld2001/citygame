@@ -19,6 +19,7 @@ import Experimental from './pages/experimental/Experimental';
 import Notifications from './pages/experimental/Notifications';
 import { scheduleNotificationFromStoreage } from './services/NotificationService';
 import QuestScreen from './pages/Quest';
+import { clearAllCookies } from './services/cookieService';
 import { getIdentity, languageMap } from './services/accountService';
 scheduleNotificationFromStoreage();
 
@@ -32,6 +33,21 @@ function App() {
       navigator.serviceWorker.register("/serviceworker.js");
     }
 
+    async function checkIdentity() {      
+      const identity = await getIdentity();
+      if (!identity?.id && !location.pathname.includes("/auth") && window.localStorage.getItem("auth")) {
+        // go to login screen
+        localStorage.clear();
+        clearAllCookies();
+        window.location.href = "/auth?error=1";
+      }
+    }
+
+    checkIdentity();
+    if (!location.pathname.includes("/auth")) {
+      setInterval(checkIdentity, 60000);
+    }
+    
     //load language
     (async () => {
       if (location.pathname.includes("/auth")) return;

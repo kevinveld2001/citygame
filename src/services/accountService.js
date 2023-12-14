@@ -1,7 +1,6 @@
 import { getCookie } from "./cookieService";
 import totoFetch from "./totoApiService.js";
 import {initAllDefaultSessions} from './totoSessionService.js';
-import totoFetch from "./totoApiService.js";
 
 export async function anonymousLogin(lang = "eng") {
     const myHeaders = new Headers();
@@ -27,6 +26,12 @@ export async function anonymousLogin(lang = "eng") {
 }
 
 export async function login(username, password) {
+    try {
+        await logout();
+    } catch(e) {
+        //logout if loged in else ignore
+    }
+
     const myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
 
