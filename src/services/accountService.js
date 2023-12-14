@@ -1,7 +1,8 @@
 import { getCookie } from "./cookieService";
+import totoFetch from "./totoApiService.js";
 import {initAllDefaultSessions} from './totoSessionService.js';
 
-export async function anonymousLogin() {
+export async function anonymousLogin(lang = "eng") {
     const myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
 
@@ -14,7 +15,7 @@ export async function anonymousLogin() {
         method: 'POST',
         headers: myHeaders,
         body: JSON.stringify({
-            "lang": "eng",
+            lang,
             "screenName": `anon${(Math.random() + 1).toString(36).substring(6)}` 
         })
     })
@@ -103,4 +104,29 @@ export async function getIdentity() {
     const res = await fetch("/totoapi/v2/auth/identity", {headers: myHeaders})
     if (!res.ok) return null;
     return res.json();
+}
+
+export const languageMap = [
+    {
+        toto: "eng",
+        local: "en"
+    },
+    {
+        toto: "nor", //fake map (norsk = italian)
+        local: "it"
+    },
+    {
+        toto: "srp", //fake map (srpski = Slovenian)
+        local: "sl"
+    }
+];
+
+
+export async function saveLanguage(userId, lang) {
+    await totoFetch(`/v2/account/${userId}`, {
+        method: "PUT",
+            body: JSON.stringify({
+                lang: languageMap.find(map => map.local === lang)?.toto
+            })
+    })
 }
