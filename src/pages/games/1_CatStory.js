@@ -40,7 +40,9 @@ function CatStory() {
             style: 'mapbox://styles/mapbox/outdoors-v12',
             center: startPosition,
             zoom: 45,
-            pitch: 75, 
+            pitch: 80,
+            maxPitch: 80,
+            minPitch: 80, 
             maxBounds: bounds
         });
         window.tb = new Threebox(map.current, map.current.getCanvas().getContext('webgl'), { /*preserveDrawingBuffer: false*/ } );
@@ -83,6 +85,100 @@ function CatStory() {
                     window.tb.add(loadedObj);
                 },
             );
+
+            map.current.addSource('route-game-cat-story', {
+                "type": "geojson",
+                "data": {   // TODO: export to dedicated .geojson file
+                    "type": "FeatureCollection",
+                    "features": [
+                        {   // Ms. Novak's house (gotta start somewhere in case the user doesn't allow location tracking)
+                            "type": "Feature",
+                            "geometry": {
+                                "type": "Point",
+                                "coordinates": [13.6343074, 45.953702]  // Via Caterina Percoto, 1
+                            },
+                            "properties": {
+                                "title": "Ms. Novak's house",
+                                //"marker-symbol": "monument"
+                            }
+                        },
+                        {   // Bus stop (Via Caprin)
+                            "type": "Feature",
+                            "geometry": {
+                                "type": "Point",
+                                "coordinates": [13.6338457, 45.9553166]
+                            },
+                            "properties": {
+                                "title": "Via Caprin bus stop",
+                                //"marker-symbol": "monument"
+                            }
+                        },
+                        {   // Caffe Bordo bar (at the railway building + Europe Square)
+                            "type": "Feature",
+                            "geometry": {
+                                "type": "Point",
+                                "coordinates": [13.6350897, 45.9553188]
+                            },
+                            "properties": {
+                                "title": "Caffe Bordo",
+                                //"marker-symbol": "monument"
+                            }
+                        },
+                    ]
+                }
+            });
+            map.current.addLayer({
+                id: "route-game-cat-story",
+                type: 'circle',
+                source: "route-game-cat-story",
+                paint: {
+                    'circle-color': '#4264fb',
+                    'circle-radius': 3,
+                    'circle-stroke-width': 1,
+                    'circle-stroke-color': '#ffffff'
+                }
+            });
+
+            // ~~this is absolute butts - need to make util methods out of this(?)
+            map.current.addSource('leg1-game-cat-story', {
+                "type": "geojson",
+                "data": {   // TODO: export to dedicated .geojson file
+                    "type": "FeatureCollection",
+                    "features": [
+                        {   // Leg 1: Between Ms. Novak's house and bus stop (over Kolodvorska pot + Trg Europe?)
+                            "type": "Feature",
+                            'geometry': {
+                                'type': 'LineString',
+                                'coordinates': [
+                                    [13.6343074, 45.953702],    // house
+                                    [13.634572, 45.953769],     // street, directly east of house
+                                    [13.635025, 45.955278],     // street, near Trg Europe
+                                    [13.634201, 45.955421],     // bus stop
+                                ]
+                            },
+                            "properties": {
+                                "title": "Route leg 1"
+                            }
+                        }
+                    ]
+                }
+            });
+            map.current.loadImage("/paw_prints_64.png", (error, image) => {    // !! TODO: use latest approved version from eg. OneDrive, not Discord download
+                if (error) throw error;
+                map.current.addImage("paw-prints", image);
+                map.current.addLayer({
+                    id: "leg1-game-cat-story",
+                    type: 'symbol',
+                    source: "leg1-game-cat-story",
+                    layout: {
+                        'symbol-placement': "line",
+                        'icon-image': ["image", "paw-prints"]  // https://docs.mapbox.com/style-spec/reference/expressions/#types-image
+                    }
+                });
+            });
+            
+
+            map.current.jumpTo({center: [13.6343074, 45.953702]});
         });
 
         // -- CLEANUP (ON PAGE LEAVE)
