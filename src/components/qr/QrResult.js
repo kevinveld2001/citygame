@@ -4,9 +4,10 @@ import { BiSolidError } from "react-icons/bi";
 import { getPub } from "../../services/totoPubService";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from 'remark-gfm'
-import { sessionInit } from "../../services/totoSessionService";
+import { sessionInit, taskSolveSecret } from "../../services/totoSessionService";
 import { useNavigate } from "react-router-dom";
 import SettingsContext from "../../services/SettingsContext"
+import { getIdentity } from "../../services/accountService";
 
 function QrResult({qrCode}) {
     const [settings] = useContext(SettingsContext);
@@ -14,11 +15,13 @@ function QrResult({qrCode}) {
     const navigate = useNavigate();
     const [isLoading, setIsLoading] = useState(true);
     const [voucherData, setVoucherData] = useState(null);
+    const [taskData, setTaskData] = useState(null);
     const [error, setError] = useState(false);
 
     useEffect(() => {
         //reset state
         setVoucherData(null);
+        setTaskData(null);
         setError(false);
 
         //get qr data
@@ -35,9 +38,8 @@ function QrResult({qrCode}) {
             switch (type) {
                 case "v":
                     const info = await getPub({voucher: params});
-                    
-                    //TODO use lang of user
-                    const lang = "eng";
+                    const user = await getIdentity();
+                    const lang = user?.lang ?? "eng";
 
                     let title = info?.content?.title.find(entry => entry.lang === lang)?.text;
                     if (!title) {
@@ -60,6 +62,8 @@ function QrResult({qrCode}) {
                 case "c":
                     break;
                 case "t":
+                    const [storyId, elementId, secret] = params.split('/')
+                    setTaskData({storyId, elementId, secret})
                     break;
                 default:
                     setError(true);
@@ -78,7 +82,7 @@ function QrResult({qrCode}) {
                     <BiSolidError className="h-20 w-20"/>
                     <span>{translations.QR_CODE_SCAN_ERROR}</span>
                 </div>}
-                {voucherData && <div className=""> 
+                {voucherData && <div className="flex flex-col"> 
                     <h1 className="text-2xl font-bold">{voucherData.title}</h1>
                     <ReactMarkdown className={"text-gray-800"} remarkPlugins={[remarkGfm]} children={voucherData.publicInfo}/>
                     <button className="bg-blue-600 px-5 py-3 text-white mt-3"
@@ -92,6 +96,27 @@ function QrResult({qrCode}) {
                             return navigate(`/quest/${sessionid}`);
                         }}>
                         {translations.QR_CODE_SCAN_START_QUEST_BUTTON}
+                    </button>
+                </div>}
+                {taskData && <div className="flex flex-col">
+                    <h1 className="text-2xl font-bold">
+                        Finish task
+                    </h1>
+                    <span className="text-gray-800">
+                        This qr-code solves a task for a quest.
+                    </span>
+                    <button className="bg-blue-600 px-5 py-3 text-white mt-3"
+                        onClick={async () => {
+                            const sessionids = JSON.parse(localStorage.getItem("sessionids") ?? {});
+                            const res = await taskSolveSecret({
+                                sessionId: sessionids[taskData.storyId],
+                                elementId: taskData.elementId,
+                                secret: taskData.secret
+                            });
+
+                            console.log(res);
+                        }}>
+                        Finish task
                     </button>
                 </div>}
             </div>

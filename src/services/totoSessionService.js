@@ -82,3 +82,13 @@ export async function reinit(sessionId) {
     }
     return session?.session?.id;
 }
+
+export async function taskSolveSecret({sessionId, elementId, secret}) {
+    return await totoFetch(`/v2/session/${sessionId}/task/solve/secret`, {
+        method: "POST",
+        body: JSON.stringify({
+            "id": elementId,
+            secret
+        })
+    });
+}
