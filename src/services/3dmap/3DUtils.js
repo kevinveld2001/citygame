@@ -46,27 +46,107 @@ export function initThreeboxOnMap(mapLayerId, map, options) {
     return newTb;
 }
 
-// @param tbox Threebox instance on whose underlying map the object will be loaded.
 /**
- * DO NOT USE! The return is not proper because of ```Threebox.loadObj```, therefore this is useless. Use ```Threebox.loadObj``` directly!
- * Loads a new GLTF object from ```file``` on the specified ```tbox``` Threebox instance AND adds it.
+ * Adds a Mapbox layer configured to render 3D models. The new layer must be identified by other Mapbox functions via its unique ID.
  * 
- * @param file File to load the object from. Use ```/directory/file.extension``` absolute format to load from ```/public```.
- * @param options (optional) Threebox instance options. See: https://github.com/jscastro76/threebox/blob/master/docs/Threebox.md#loadobj . Defaults to GLTF type and metres scale. SET MODEL TRANSFORM USING ```set(options)``` ON THE RETURNED OBJECT INSTEAD!
- * 
+ * @param mapboxMap Map to add the layer to.
+ * @param layerId Unique ID string for the newly created map layer.
  * 
  */
-// @returns The successfully loaded and added object. Use this to set transforms, other options, or event listeners.
-export function loadGLTFObject(tbox, file, options) {
-    options = options === undefined ? {
-        obj: file,   // loads from /public after webpack bundles it
-        type: 'gltf',
-        units: 'meters'
-    }
-    : options;
+export function add3DRenderLayer(mapboxMap, layerId) {
+    mapboxMap.addLayer({
+        id: layerId,
+        type: 'custom',
+        renderingMode: '3d',
+            
+        render: function () { window.tb.update(); }
+    });
+}
 
-    tbox.loadObj(options, (obj) => {
-        tbox.add(obj);
-        return obj;
+/**
+ * Adds a Mapbox source of data. This must be added to a layer afterwards to be displayed. Use `````` for that.
+ * 
+ * @param mapboxMap Map to add the source to.
+ * @param sourceId Unique ID string for the source.
+ * @param file File path to a ```.geojson``` file in ```/public``` folder. File must be formatted as valid GeoJSON (see ```/public/dataJSON/Example.js```).
+ * 
+ */
+export function addSourceGeoJSON(mapboxMap, sourceId, file) {
+    mapboxMap.addSource(sourceId, {
+        "type": "geojson",
+        "data": file
+    });
+}
+
+/**
+ * Adds a Mapbox layer connected to a previously added source of data (with the same ID used here).
+ * This displays the source data features on the map as circles, with the given paint options.
+ * 
+ * @param mapboxMap Map to add the layer to.
+ * @param layerId Unique ID string for the newly created map layer. This MUST match a sourceId from a previously added source.
+ * @param paintOptions See properties at https://docs.mapbox.com/style-spec/reference/layers/#circle.
+ * 
+ */
+export function addLayerFeaturePointsAsCircles(mapboxMap, layerId, paintOptions) {
+    mapboxMap.addLayer({
+        id: layerId,
+        type: 'circle',
+        source: layerId,
+        paint: paintOptions
+    });
+}
+
+/**
+ * Adds a Mapbox layer connected to a previously added source of data (with the same ID used here).
+ * This displays the source data on the map as a line route under Mapbox ```symbol``` type, with the given layout options.
+ * 
+ * @param mapboxMap Map to add the layer to.
+ * @param layerId Unique ID string for the newly created map layer. This MUST match a sourceId from a previously added source.
+ * @param imageFile File path to an image in ```/public``` folder. The image will be loaded as the repeating symbol on the line route.
+ * @param imageId Unique ID string for the image.
+ * @param layoutOptions See properties at https://docs.mapbox.com/style-spec/reference/layers/#symbol.
+ * 
+ */
+export function addLayerFeaturePointsAsLineRouteWithImage(mapboxMap, layerId, imageFile, imageId, layoutOptions) { 
+    mapboxMap.loadImage(imageFile,
+        (error, image) => {    // !! TODO: use latest approved version from eg. OneDrive, not Discord download
+            if (error) throw error;
+
+            mapboxMap.addImage(imageId, image);
+
+            layoutOptions["symbol-placement"] = "line";
+            layoutOptions["icon-image"] = ["image", imageId];   // https://docs.mapbox.com/style-spec/reference/expressions/#types-image
+
+            mapboxMap.addLayer({
+                id: layerId,
+                type: 'symbol',
+                source: layerId,
+                layout: layoutOptions
+            });
+        }
+);
+}
+
+// @param tbox Threebox instance on whose underlying map the object will be loaded.
+/**
+ * Loads a new GLTF object from ```file``` in scale "meters" on current global Threebox instance AND adds it.
+ * RETURNS NOTHING! Set up properties of the loaded object directly using ```callback```.
+ * If this is insufficient, try using ```Threebox.loadObj``` directly!
+ * 
+ * @param file File to load the object from. Use ```/directory/file.extension``` absolute format to load from ```/public```.
+ * @param options (optional) Threebox instance setup options. THE REQUIRED OPTIONS ARE ALREADY HARDCODED. See: https://github.com/jscastro76/threebox/blob/master/docs/Threebox.md#loadobj . SET ROTATION AND SCALE DIRECTLY HERE!!  SET COORDINATES IN THE CALLBACK INSTEAD!!
+ * @param callback (optional) Function to run when the object has finished loading. Use this to set up properties. The object is already added to Threebox after this, DO NOT add it again.
+ *
+ */
+// @returns The successfully loaded and added object. Use this to set transforms, other options, or event listeners.
+export function loadGLTFObject(file, options, callback) {
+    options["obj"] = file;   // loads from /public after webpack bundles it
+    options["type"] = 'gltf';
+    options["units"] = 'meters';
+
+    if (!window.tb) throw new Error("No Threebox global instance found on window! Cannot use Threebox on this page!");
+    window.tb.loadObj(options, (obj) => {
+        callback(obj);
+        window.tb.add(obj);
     });
 }
