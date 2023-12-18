@@ -1,0 +1,46 @@
+{
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "type": "Feature",
+            "geometry":
+            {
+                "type": "Point",
+                "coordinates": [13.6343074, 45.953702]
+            },
+            "properties":
+            {
+                "title": "Ms. Novak's house",
+                "marker-symbol": "monument"
+            }
+        },
+
+        {
+            "type": "Feature",
+            "geometry":
+            {
+                "type": "Point",
+                "coordinates": [13.6338457, 45.9553166]
+            },
+            "properties":
+            {
+                "title": "Via Caprin bus stop"
+            }
+        },
+
+        {
+            "type": "Feature",
+            "geometry":
+            {
+                "type": "Point",
+                "coordinates": [13.6350897, 45.9553188]
+            },
+            "properties":
+            {
+                "title": "Caffe Bordo"
+            }
+        }
+
+
+    ]
+}
