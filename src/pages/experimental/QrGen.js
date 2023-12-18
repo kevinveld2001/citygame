@@ -82,7 +82,7 @@ function QrGenScreen() {
                         const downloadLink = document.createElement("a");
                         document.body.appendChild(downloadLink);
                         downloadLink.setAttribute("href", qrcodeDataUrl);
-                        downloadLink.setAttribute("download", "qrcode.svg");
+                        downloadLink.setAttribute("download", code?.attributes["qr-name"]?.value + ".svg");
                         downloadLink.click();
 
                         // sources for downloading svg's:
@@ -97,7 +97,7 @@ function QrGenScreen() {
             <h2 className="text-xl font-bold">Vouchers:</h2>
             <div className="w-full overflow-x-scroll flex flex-row gap-3">
                 {vouchers.map(voucher => <div key={voucher?.id} className="flex flex-col">
-                    <QRCode className="qrcode" level="H" value={`${window.location.protocol}//${window.location.host}/h/v/${voucher.token}`} />
+                    <QRCode className="qrcode" qr-name={`voucher-${voucher?.name ? voucher.name : voucher.token}`} level="H" value={`${window.location.protocol}//${window.location.host}/h/v/${voucher.token}`} />
                     <a className="text-xs text-blue-600 underline" 
                         href={`${window.location.protocol}//${window.location.host}/h/v/${voucher.token}`}
                     >
@@ -113,11 +113,11 @@ function QrGenScreen() {
             <h2 className="text-xl font-bold">Tasks:</h2>
             <div className="w-full overflow-x-scroll flex flex-row gap-3">
                 {tasks.map(task => <div key={task?.id} className="flex flex-col">
-                    <QRCode className="qrcode" level="H" value={`${window.location.protocol}//${window.location.host}/h/t/${task.id}/${task.secret}`} />
+                    <QRCode className="qrcode" qr-name={`task-${task?.title ? task.title[0]?.text : task.id}`} level="H" value={`${window.location.protocol}//${window.location.host}/h/t/${task.id}/${task.secret}`} />
                     <a className="text-xs text-blue-600 underline" 
                         href={`${window.location.protocol}//${window.location.host}/h/t/${task.id}/${task.secret}`}
                     >
-                        /h/t/${task.id}/${task.secret}
+                        /h/t/{task.id}/{task.secret}
                     </a>           
                     {task?.title &&
                         task.title.map( title =>
@@ -131,11 +131,12 @@ function QrGenScreen() {
             <h2 className="text-xl font-bold">Coins:</h2>
             <div className="w-full overflow-x-scroll flex flex-row gap-3">
                 {coins.map(coin => <div key={coin?.id} className="flex flex-col">
-                    <QRCode className="qrcode" level="H" value={`${window.location.protocol}//${window.location.host}/h/c/${coin.id}/${coin.secret}`} />
+                    {coin?.title.lenght}
+                    <QRCode className="qrcode" qr-name={`coin-${coin?.title ? coin.title[0]?.text : coin.id}`} level="H" value={`${window.location.protocol}//${window.location.host}/h/c/${coin.id}/${coin.secret}`} />
                     <a className="text-xs text-blue-600 underline" 
                         href={`${window.location.protocol}//${window.location.host}/h/c/${coin.id}/${coin.secret}`}
                     >
-                        /h/c/${coin.id}/${coin.secret}
+                        /h/c/{coin.id}/{coin.secret}
                     </a>           
                     {coin?.title &&
                         coin.title.map( title =>
