@@ -75,14 +75,13 @@ function CatStory() {
                 },
             );
 
-            Utils.addSourceGeoJSON(map.current, "route-game-cat-story", "/dataJSON/CatStory_Points.geojson");
-            Utils.addLayerFeaturePointsAsCircles(map.current, "route-game-cat-story", { 'circle-color': '#4264fb', 'circle-radius': 3, 'circle-stroke-width': 1, 'circle-stroke-color': '#ffffff' });
+            Utils.addSourceGeoJSON(map.current, "route-game-charles-x", "/dataJSON/CharlesX_Points.geojson");
+            Utils.addLayerFeaturePointsAsCircles(map.current, "route-game-charles-x", { 'circle-color': '#4264fb', 'circle-radius': 3, 'circle-stroke-width': 1, 'circle-stroke-color': '#ffffff' });
 
-            Utils.addSourceGeoJSON(map.current, "leg1-game-cat-story", "/dataJSON/CatStory_Leg1Lines.geojson");
-            Utils.addLayerFeaturePointsAsLineRouteWithImage(map.current, "leg1-game-cat-story", "/paw_prints_64.png", "paw-prints", { "symbol-spacing": 25 /*default 250*/ });
+            Utils.addSourceGeoJSON(map.current, "leg1-game-charles-x", "/dataJSON/CharlesX_Leg1Lines.geojson");
+            Utils.addLayerFeaturePointsAsLineRouteWithImage(map.current, "leg1-game-charles-x", "/paw_prints_64.png", "paw-prints", { "symbol-spacing": 25 /*default 250*/ });
             
-
-            map.current.jumpTo({center: [13.6343074, 45.953702]});
+            map.current.jumpTo({center: [13.62038, 45.94922] /* hardcoded, from first point of relevant mission (here: from CharlesX_Points) */ });
         });
 
         // -- CLEANUP (ON PAGE LEAVE)

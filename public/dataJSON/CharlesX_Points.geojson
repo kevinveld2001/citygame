@@ -6,11 +6,11 @@
             "geometry":
             {
                 "type": "Point",
-                "coordinates": [13.6343074, 45.953702]
+                "coordinates": [13.62038, 45.94922]
             },
             "properties":
             {
-                "title": "Ms. Novak's house",
+                "title": "Palazzo Coronini Cronberg",
                 "marker-symbol": "monument"
             }
         },
@@ -20,11 +20,11 @@
             "geometry":
             {
                 "type": "Point",
-                "coordinates": [13.6338457, 45.9553166]
+                "coordinates": [13.618812, 45.945856]
             },
             "properties":
             {
-                "title": "Via Caprin bus stop"
+                "title": "Musei Provinciali Palazzo Attems-Petzenstein"
             }
         },
 
@@ -33,11 +33,11 @@
             "geometry":
             {
                 "type": "Point",
-                "coordinates": [13.6350897, 45.9553188]
+                "coordinates": [13.636667, 45.950278]
             },
             "properties":
             {
-                "title": "Caffe Bordo"
+                "title": "Convent Kostanjevica"
             }
         }
 
