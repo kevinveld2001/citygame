@@ -53,7 +53,7 @@ function Game({ elementId, sessionId }) {
         switch (customGame[1].toLowerCase()) {  // [1] contains only the RegEx pattern from above if it was found
             case "catstory":
                 return (
-                    <CatStory />
+                    <CatStory element={element} elementId={elementId} sessionId={sessionId} />
                     // any other components to be added (Solutions in a different format)??
                 );
             /*TODO case: the other custom games*/
