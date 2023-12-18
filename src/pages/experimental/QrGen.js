@@ -70,12 +70,34 @@ function QrGenScreen() {
                     : <option> Loading stroies... </option>
                 }
             </select>
+
+            <button className="bg-blue-600 text-white py-2 rounded"
+                onClick={() => {
+                    const qrCodeElements = document.getElementsByClassName("qrcode");
+                    Array.from(qrCodeElements).forEach(code => {
+                        const qrcodeHtml = code.outerHTML;
+                        const qrcodeBlob = new Blob([qrcodeHtml], {type:"image/svg+xml;charset=utf-8"});
+                        const qrcodeDataUrl = URL.createObjectURL(qrcodeBlob);
+
+                        const downloadLink = document.createElement("a");
+                        document.body.appendChild(downloadLink);
+                        downloadLink.setAttribute("href", qrcodeDataUrl);
+                        downloadLink.setAttribute("download", "qrcode.svg");
+                        downloadLink.click();
+
+                        // sources for downloading svg's:
+                        // https://stackoverflow.com/questions/23218174/how-do-i-save-export-an-svg-file-after-creating-an-svg-with-d3-js-ie-safari-an
+                        // https://gist.github.com/curran/7cf9967028259ea032e8
+                    });
+                }}>
+                Download all
+            </button>
         </div>
         <div className="overflow-y-scroll p-6">
             <h2 className="text-xl font-bold">Vouchers:</h2>
             <div className="w-full overflow-x-scroll flex flex-row gap-3">
                 {vouchers.map(voucher => <div key={voucher?.id} className="flex flex-col">
-                    <QRCode level="H" value={`${window.location.protocol}//${window.location.host}/h/v/${voucher.token}`} />
+                    <QRCode className="qrcode" level="H" value={`${window.location.protocol}//${window.location.host}/h/v/${voucher.token}`} />
                     <a className="text-xs text-blue-600 underline" 
                         href={`${window.location.protocol}//${window.location.host}/h/v/${voucher.token}`}
                     >
@@ -91,7 +113,7 @@ function QrGenScreen() {
             <h2 className="text-xl font-bold">Tasks:</h2>
             <div className="w-full overflow-x-scroll flex flex-row gap-3">
                 {tasks.map(task => <div key={task?.id} className="flex flex-col">
-                    <QRCode level="H" value={`${window.location.protocol}//${window.location.host}/h/t/${task.id}/${task.secret}`} />
+                    <QRCode className="qrcode" level="H" value={`${window.location.protocol}//${window.location.host}/h/t/${task.id}/${task.secret}`} />
                     <a className="text-xs text-blue-600 underline" 
                         href={`${window.location.protocol}//${window.location.host}/h/t/${task.id}/${task.secret}`}
                     >
@@ -109,7 +131,7 @@ function QrGenScreen() {
             <h2 className="text-xl font-bold">Coins:</h2>
             <div className="w-full overflow-x-scroll flex flex-row gap-3">
                 {coins.map(coin => <div key={coin?.id} className="flex flex-col">
-                    <QRCode level="H" value={`${window.location.protocol}//${window.location.host}/h/c/${coin.id}/${coin.secret}`} />
+                    <QRCode className="qrcode" level="H" value={`${window.location.protocol}//${window.location.host}/h/c/${coin.id}/${coin.secret}`} />
                     <a className="text-xs text-blue-600 underline" 
                         href={`${window.location.protocol}//${window.location.host}/h/c/${coin.id}/${coin.secret}`}
                     >
