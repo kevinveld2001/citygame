@@ -113,11 +113,11 @@ function QrGenScreen() {
             <h2 className="text-xl font-bold">Tasks:</h2>
             <div className="w-full overflow-x-scroll flex flex-row gap-3">
                 {tasks.map(task => <div key={task?.id} className="flex flex-col">
-                    <QRCode className="qrcode" qr-name={`task-${task?.title ? task.title[0]?.text : task.id}`} level="H" value={`${window.location.protocol}//${window.location.host}/h/t/${task.id}/${task.secret}`} />
+                    <QRCode className="qrcode" qr-name={`task-${task?.title ? task.title[0]?.text : task.id}`} level="H" value={`${window.location.protocol}//${window.location.host}/h/t/${selectedStory}/${task.id}/${task.secret}`} />
                     <a className="text-xs text-blue-600 underline" 
-                        href={`${window.location.protocol}//${window.location.host}/h/t/${task.id}/${task.secret}`}
+                        href={`${window.location.protocol}//${window.location.host}/h/t/${selectedStory}/${task.id}/${task.secret}`}
                     >
-                        /h/t/{task.id}/{task.secret}
+                        /h/t/{selectedStory}/{task.id}/{task.secret}
                     </a>           
                     {task?.title &&
                         task.title.map( title =>
@@ -132,11 +132,11 @@ function QrGenScreen() {
             <div className="w-full overflow-x-scroll flex flex-row gap-3">
                 {coins.map(coin => <div key={coin?.id} className="flex flex-col">
                     {coin?.title.lenght}
-                    <QRCode className="qrcode" qr-name={`coin-${coin?.title ? coin.title[0]?.text : coin.id}`} level="H" value={`${window.location.protocol}//${window.location.host}/h/c/${coin.id}/${coin.secret}`} />
+                    <QRCode className="qrcode" qr-name={`coin-${coin?.title ? coin.title[0]?.text : coin.id}`} level="H" value={`${window.location.protocol}//${window.location.host}/h/c/${selectedStory}/${coin.id}/${coin.secret}`} />
                     <a className="text-xs text-blue-600 underline" 
-                        href={`${window.location.protocol}//${window.location.host}/h/c/${coin.id}/${coin.secret}`}
+                        href={`${window.location.protocol}//${window.location.host}/h/c/${selectedStory}/${coin.id}/${coin.secret}`}
                     >
-                        /h/c/{coin.id}/{coin.secret}
+                        /h/c/{selectedStory}/{coin.id}/{coin.secret}
                     </a>           
                     {coin?.title &&
                         coin.title.map( title =>
