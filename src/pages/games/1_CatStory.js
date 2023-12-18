@@ -14,6 +14,7 @@
 import React, {useRef, useEffect} from 'react';
 import { Threebox } from 'threebox-plugin';
 import mapboxgl from 'mapbox-gl';
+import * as Utils from "../../services/3dmap/3DUtils";
 
 
 function CatStory() {
@@ -40,9 +41,9 @@ function CatStory() {
             style: 'mapbox://styles/mapbox/outdoors-v12',
             center: startPosition,
             zoom: 45,
-            pitch: 80,
-            maxPitch: 80,
-            minPitch: 80, 
+            pitch: 70,
+            maxPitch: 70,
+            minPitch: 70, 
             maxBounds: bounds
         });
         window.tb = new Threebox(map.current, map.current.getCanvas().getContext('webgl'), { /*preserveDrawingBuffer: false*/ } );
@@ -61,121 +62,24 @@ function CatStory() {
                 console.error(error);
             });
         
-        // -- LOAD 3D MODELS ON THE MAP
-        map.current.on('style.load', async () => {
-            map.current.addLayer({
-                id: "tb-cat-map",
-                type: 'custom',
-                renderingMode: '3d',
-                    
-                render: function () { window.tb.update(); }
-            });
+        // -- LOAD ALL MAP ELEMENTS (3d elements, layer of important points, layer of line route between points...)
+        map.current.on('style.load', () => {
+            Utils.add3DRenderLayer(map.current, "tb-cat-map");
 
-            //loadGLTFObject(tb, '/models/necklace_test.glb', );
-            window.tb.loadObj({
-                    obj: '/models/necklace_test.glb',
-                    type: 'gltf',
-                    units: 'meters',
+            Utils.loadGLTFObject('/models/necklace_test.glb', {
                     rotation: { x: 90, y: 0, z: 0 },
                     scale: 1000
                 },
                 (loadedObj) => {
                     loadedObj.setCoords([13.63527, 45.95533] /*[45.95533, 13.63527]*/);
-
-                    window.tb.add(loadedObj);
                 },
             );
 
-            map.current.addSource('route-game-cat-story', {
-                "type": "geojson",
-                "data": {   // TODO: export to dedicated .geojson file
-                    "type": "FeatureCollection",
-                    "features": [
-                        {   // Ms. Novak's house (gotta start somewhere in case the user doesn't allow location tracking)
-                            "type": "Feature",
-                            "geometry": {
-                                "type": "Point",
-                                "coordinates": [13.6343074, 45.953702]  // Via Caterina Percoto, 1
-                            },
-                            "properties": {
-                                "title": "Ms. Novak's house",
-                                //"marker-symbol": "monument"
-                            }
-                        },
-                        {   // Bus stop (Via Caprin)
-                            "type": "Feature",
-                            "geometry": {
-                                "type": "Point",
-                                "coordinates": [13.6338457, 45.9553166]
-                            },
-                            "properties": {
-                                "title": "Via Caprin bus stop",
-                                //"marker-symbol": "monument"
-                            }
-                        },
-                        {   // Caffe Bordo bar (at the railway building + Europe Square)
-                            "type": "Feature",
-                            "geometry": {
-                                "type": "Point",
-                                "coordinates": [13.6350897, 45.9553188]
-                            },
-                            "properties": {
-                                "title": "Caffe Bordo",
-                                //"marker-symbol": "monument"
-                            }
-                        },
-                    ]
-                }
-            });
-            map.current.addLayer({
-                id: "route-game-cat-story",
-                type: 'circle',
-                source: "route-game-cat-story",
-                paint: {
-                    'circle-color': '#4264fb',
-                    'circle-radius': 3,
-                    'circle-stroke-width': 1,
-                    'circle-stroke-color': '#ffffff'
-                }
-            });
+            Utils.addSourceGeoJSON(map.current, "route-game-cat-story", "/dataJSON/CatStory_Points.geojson");
+            Utils.addLayerFeaturePointsAsCircles(map.current, "route-game-cat-story", { 'circle-color': '#4264fb', 'circle-radius': 3, 'circle-stroke-width': 1, 'circle-stroke-color': '#ffffff' });
 
-            // ~~this is absolute butts - need to make util methods out of this(?)
-            map.current.addSource('leg1-game-cat-story', {
-                "type": "geojson",
-                "data": {   // TODO: export to dedicated .geojson file
-                    "type": "FeatureCollection",
-                    "features": [
-                        {   // Leg 1: Between Ms. Novak's house and bus stop (over Kolodvorska pot + Trg Europe?)
-                            "type": "Feature",
-                            'geometry': {
-                                'type': 'LineString',
-                                'coordinates': [
-                                    [13.6343074, 45.953702],    // house
-                                    [13.634572, 45.953769],     // street, directly east of house
-                                    [13.635025, 45.955278],     // street, near Trg Europe
-                                    [13.634201, 45.955421],     // bus stop
-                                ]
-                            },
-                            "properties": {
-                                "title": "Route leg 1"
-                            }
-                        }
-                    ]
-                }
-            });
-            map.current.loadImage("/paw_prints_64.png", (error, image) => {    // !! TODO: use latest approved version from eg. OneDrive, not Discord download
-                if (error) throw error;
-                map.current.addImage("paw-prints", image);
-                map.current.addLayer({
-                    id: "leg1-game-cat-story",
-                    type: 'symbol',
-                    source: "leg1-game-cat-story",
-                    layout: {
-                        'symbol-placement': "line",
-                        'icon-image': ["image", "paw-prints"]  // https://docs.mapbox.com/style-spec/reference/expressions/#types-image
-                    }
-                });
-            });
+            Utils.addSourceGeoJSON(map.current, "leg1-game-cat-story", "/dataJSON/CatStory_Leg1Lines.geojson");
+            Utils.addLayerFeaturePointsAsLineRouteWithImage(map.current, "leg1-game-cat-story", "/paw_prints_64.png", "paw-prints", { "symbol-spacing": 25 /*default 250*/ });
             
 
             map.current.jumpTo({center: [13.6343074, 45.953702]});
