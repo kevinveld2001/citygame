@@ -8,11 +8,17 @@ function QrGenScreen() {
     const [vouchers, setVouchers] = useState([]);
     const [tasks, setTasks] = useState([]);
     const [coins, setCoins] = useState([]);
+    const [error, setError] = useState("")
 
     useEffect(() => {
         (async () => {
-            const res = await fetch("/totoapi/v2/edit/e0c1defb-c75d-4c3b-8ef2-69d7ec8e224c/story/search");
-            setStories(await res.json());
+            try {
+                const res = await fetch(`/totoapi/v2/edit/${process.env.REACT_APP_REPO_ID}/story/search`);
+                setStories(await res.json());
+            } catch(e) {
+                setError("Could not load Toto data. Make sure that you are logged in with a toto account that has access to the repo.");
+            } 
+
         }) ();
     }, []);
 
@@ -21,13 +27,15 @@ function QrGenScreen() {
         if (selectedStory == null) return;
         //fetch vouchers
         (async () => {
-            const res = await fetch("/totoapi/v2/edit/e0c1defb-c75d-4c3b-8ef2-69d7ec8e224c/voucher/search?dead=false&library=false&storyId=" + selectedStory);
+            const res = await fetch(`/totoapi/v2/edit/${process.env.REACT_APP_REPO_ID}/voucher/search?dead=false&library=false&storyId=${selectedStory}`);
             setVouchers((await res.json())?.voucher);
         }) ();
+
+        //fetch coins and tasks
         (async () => {
             setTasks([]);
             setCoins([]);
-            const res = await fetch(`/totoapi/v2/edit/e0c1defb-c75d-4c3b-8ef2-69d7ec8e224c/story/${selectedStory}/footage`);
+            const res = await fetch(`/totoapi/v2/edit/${process.env.REACT_APP_REPO_ID}/story/${selectedStory}/footage`);
             const footage = await res.json();
             footage.forEach(code => {
                 switch(code?.t) {
@@ -41,11 +49,14 @@ function QrGenScreen() {
                         break;
                 } 
             });
-            
         }) ();
     }, [selectedStory])
 
-    return <div className="w-full">
+    return <div className="w-full h-full overflow-y-hidden flex flex-col">
+        {error && <div className="border border-red-700 bg-red-300 text-red-700 rounded-xl p-3 m-3">
+            {error}
+        </div>}
+
         <div className="p-6 flex flex-col">
             <Link to="/experimental/" className="underline text-blue-600">back</Link>
             
@@ -93,7 +104,7 @@ function QrGenScreen() {
                 Download all
             </button>
         </div>
-        <div className="overflow-y-scroll p-6">
+        <div className="overflow-y-scroll p-6 flex-1">
             <h2 className="text-xl font-bold">Vouchers:</h2>
             <div className="w-full overflow-x-scroll flex flex-row gap-3">
                 {vouchers.map(voucher => <div key={voucher?.id} className="flex flex-col">
