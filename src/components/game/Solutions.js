@@ -22,7 +22,7 @@ function Solutions({element, data, elementId, sessionId, updateLinks }) {
         {data.text && (finished === "" || finished === "TEXT") && 
             <FreeInput element={element} data={data} elementId={elementId} sessionId={sessionId} finish={finish}/>}
         {data.secret && (finished === "" || finished === "SECRET") &&
-            <ScanButton finish={finish} />}
+            <ScanButton finished={finished}/>}
     </>
 }
 

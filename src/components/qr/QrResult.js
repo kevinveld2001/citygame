@@ -4,7 +4,7 @@ import { BiSolidError } from "react-icons/bi";
 import { getPub } from "../../services/totoPubService";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from 'remark-gfm'
-import { sessionInit, taskSolveSecret } from "../../services/totoSessionService";
+import { getSessionInfo, sessionInit, taskSolveSecret } from "../../services/totoSessionService";
 import { useNavigate } from "react-router-dom";
 import SettingsContext from "../../services/SettingsContext"
 import { getIdentity } from "../../services/accountService";
@@ -16,17 +16,17 @@ function QrResult({qrCode}) {
     const [isLoading, setIsLoading] = useState(true);
     const [voucherData, setVoucherData] = useState(null);
     const [taskData, setTaskData] = useState(null);
-    const [error, setError] = useState(false);
+    const [error, setError] = useState(null);
 
     useEffect(() => {
         //reset state
         setVoucherData(null);
         setTaskData(null);
-        setError(false);
+        setError(null);
 
         //get qr data
         if (!qrCode || !new RegExp(/\/h\/(.)\/(.+)/).test(qrCode)) {
-            setError(true);
+            setError(translations.QR_CODE_SCAN_ERROR);
             setIsLoading(false);
             return;
         };
@@ -66,7 +66,7 @@ function QrResult({qrCode}) {
                     setTaskData({storyId, elementId, secret})
                     break;
                 default:
-                    setError(true);
+                    setError(translations.QR_CODE_SCAN_ERROR);
                     break;
             };
             setIsLoading(false);
@@ -78,9 +78,9 @@ function QrResult({qrCode}) {
         {isLoading ? 
             <AiOutlineLoading className="animate-spin w-6 h-6" /> : 
             <div className="w-full">
-                {error && <div className="flex flex-row items-center bg-red-300 text-red-600 border-2 border-red-600 rounded-xl p-3 gap-3"> 
+                {error && <div className="flex flex-row items-center bg-red-200 text-red-600 border-2 border-red-600 rounded-xl p-3 gap-3"> 
                     <BiSolidError className="h-20 w-20"/>
-                    <span>{translations.QR_CODE_SCAN_ERROR}</span>
+                    <span>{error}</span>
                 </div>}
                 {voucherData && <div className="flex flex-col"> 
                     <h1 className="text-2xl font-bold">{voucherData.title}</h1>
@@ -107,14 +107,25 @@ function QrResult({qrCode}) {
                     </span>
                     <button className="bg-blue-600 px-5 py-3 text-white mt-3"
                         onClick={async () => {
-                            const sessionids = JSON.parse(localStorage.getItem("sessionids") ?? {});
-                            const res = await taskSolveSecret({
-                                sessionId: sessionids[taskData.storyId],
-                                elementId: taskData.elementId,
-                                secret: taskData.secret
-                            });
+                            setTaskData(null);
+                            setIsLoading(true);
+                            try {
+                                const sessionids = JSON.parse(localStorage.getItem("sessionids") ?? {});
 
-                            console.log(res);
+                                const quest = await getSessionInfo(sessionids[taskData.storyId]);
+                                const questElement = quest?.elements?.find(element => element.elementId == taskData.elementId);
+
+                                await taskSolveSecret({
+                                    sessionId: sessionids[taskData.storyId],
+                                    elementId: questElement.id,
+                                    secret: taskData.secret
+                                });
+
+                                return navigate(`/game/${sessionids[taskData.storyId]}/${questElement?.id}`)
+                            } catch (e) {
+                                setError('You have already scaned this code. Or this part of the game is not unlocked jet.');
+                                setIsLoading(false);
+                            }
                         }}>
                         Finish task
                     </button>
