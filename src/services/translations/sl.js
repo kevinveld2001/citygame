@@ -76,6 +76,9 @@ export default {
     QR_CODE_SCAN_PERMISSION_TITLE: "Omogoči dovoljenja za kamero",
     QR_CODE_SCAN_PERMISSION_DESCRIPTION: "Če želite uporabiti skener APP QR kode, morate dati dovoljenje za uporabo kamere. Če ne želite dati dovoljenja, lahko uporabite tudi skener QR kode na telefonu.",
     QR_CODE_SCAN_ERROR: "Videti je, da ste pregledali kodo, ki ni del igre.",
-    QR_CODE_SCAN_START_QUEST_BUTTON: "Start Quest"
+    QR_CODE_SCAN_START_QUEST_BUTTON: "Start Quest",
 
+    QR_CODE_SCAN_TASK_TITLE: "Naloga zaključka",
+    QR_CODE_SCAN_TASK_BODY: "Ta QR-koda rešuje nalogo za iskanje.",
+    QR_CODE_SCAN_TASK_ERROR: "To kodo ste že pregledali. Ali pa ta del igre ni odklenjen curek.",
 };

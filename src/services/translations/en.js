@@ -76,6 +76,9 @@ export default {
     QR_CODE_SCAN_PERMISSION_TITLE: "Enable camera permissions",
     QR_CODE_SCAN_PERMISSION_DESCRIPTION: "To use the in app Qr code scanner, you need to give permission to use the camera. If you don't want to give permission you can also use the qr code scanner on you phone.",
     QR_CODE_SCAN_ERROR: "It looks like you scaned a code that is not part of the game.",
-    QR_CODE_SCAN_START_QUEST_BUTTON: "Start Quest"
+    QR_CODE_SCAN_START_QUEST_BUTTON: "Start Quest",
 
+    QR_CODE_SCAN_TASK_TITLE: "Finish task",
+    QR_CODE_SCAN_TASK_BODY: "This qr-code solves a task for a quest.",
+    QR_CODE_SCAN_TASK_ERROR: "You have already scanned this code. Or this part of the game is not an unlocked jet.",
 };

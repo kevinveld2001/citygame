@@ -100,10 +100,10 @@ function QrResult({qrCode}) {
                 </div>}
                 {taskData && <div className="flex flex-col">
                     <h1 className="text-2xl font-bold">
-                        Finish task
+                        {translations.QR_CODE_SCAN_TASK_TITLE}
                     </h1>
                     <span className="text-gray-800">
-                        This qr-code solves a task for a quest.
+                        {translations.QR_CODE_SCAN_TASK_BODY}
                     </span>
                     <button className="bg-blue-600 px-5 py-3 text-white mt-3"
                         onClick={async () => {
@@ -123,11 +123,11 @@ function QrResult({qrCode}) {
 
                                 return navigate(`/game/${sessionids[taskData.storyId]}/${questElement?.id}`)
                             } catch (e) {
-                                setError('You have already scaned this code. Or this part of the game is not unlocked jet.');
+                                setError(translations.QR_CODE_SCAN_TASK_ERROR);
                                 setIsLoading(false);
                             }
                         }}>
-                        Finish task
+                        {translations.QR_CODE_SCAN_TASK_TITLE}
                     </button>
                 </div>}
             </div>
