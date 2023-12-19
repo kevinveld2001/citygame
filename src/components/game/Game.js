@@ -20,6 +20,8 @@ function Game({ elementId, sessionId }) {
     useEffect(() => {
         setError(false);
         setShowSkeletonLoader(true);
+
+        // TODO: might need to move this to DefaultTotoGame
         async function getMarkdown ()  {
             const sessionInfo = await getSessionInfo(sessionId);
             if (sessionInfo === undefined) {
@@ -53,7 +55,7 @@ function Game({ elementId, sessionId }) {
         switch (customGame[1].toLowerCase()) {  // [1] contains only the RegEx pattern from above if it was found
             case "catstory":
                 return (
-                    <CatStory element={element} elementId={elementId} sessionId={sessionId} />
+                    <CatStory />
                     // any other components to be added (Solutions in a different format)??
                 );
             /*TODO case: the other custom games*/

@@ -15,7 +15,8 @@ import { getSessionInfo, taskSolveFreeText } from '../../services/totoSessionSer
 import { useNavigate } from 'react-router-dom';
 
 
-function CatStory({ element, elementId, sessionId }) {
+function CatStory() {
+    const { sessionId, elementId } = useParams();
     const [finished, setFinished] = useState(false);
 
     const mapContainer = useRef(null);  // the ref from <div> doesn't get passed outside of the useEffect, i.e. container would be null
