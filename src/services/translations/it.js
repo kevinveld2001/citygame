@@ -84,4 +84,6 @@ export default {
     QR_CODE_SCAN_TASK_TITLE: "Tenna attività",
     QR_CODE_SCAN_TASK_BODY: "Questo codice QR risolve un'attività per una ricerca.",
     QR_CODE_SCAN_TASK_ERROR: "Hai già scansionato questo codice. O questa parte del gioco non è un getto sbloccato.",
+
+    QR_CODE_SCAN_COIN_ERROR: "La moneta al momento non è valida o è già stata raccolta"
 };

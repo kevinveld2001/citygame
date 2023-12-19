@@ -84,4 +84,6 @@ export default {
     QR_CODE_SCAN_TASK_TITLE: "Finish task",
     QR_CODE_SCAN_TASK_BODY: "This qr-code solves a task for a quest.",
     QR_CODE_SCAN_TASK_ERROR: "You have already scanned this code. Or this part of the game is not an unlocked jet.",
+
+    QR_CODE_SCAN_COIN_ERROR: "Coin is curently not valid or is allready collected"
 };

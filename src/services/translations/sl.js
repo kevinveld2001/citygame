@@ -84,4 +84,6 @@ export default {
     QR_CODE_SCAN_TASK_TITLE: "Naloga zaključka",
     QR_CODE_SCAN_TASK_BODY: "Ta QR-koda rešuje nalogo za iskanje.",
     QR_CODE_SCAN_TASK_ERROR: "To kodo ste že pregledali. Ali pa ta del igre ni odklenjen curek.",
+
+    QR_CODE_SCAN_COIN_ERROR: "Kovanec trenutno ni veljaven ali pa je že zbran"
 };

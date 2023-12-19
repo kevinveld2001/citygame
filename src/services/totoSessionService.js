@@ -105,3 +105,17 @@ export async function taskSolveSecret({sessionId, elementId, secret}) {
         })
     });
 }
+
+export async function collectCoin({sessionId, id, secret}) {
+    return await totoFetch(`/v2/session/${sessionId}/coin/collect`, {
+        method: "POST",
+        body: JSON.stringify({
+            id,
+            secret,
+            "location": {
+                "lat": 0,
+                "lon": 0
+            }
+        })
+    });
+}

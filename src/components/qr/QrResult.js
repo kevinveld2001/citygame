@@ -4,10 +4,11 @@ import { BiSolidError } from "react-icons/bi";
 import { getPub } from "../../services/totoPubService";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from 'remark-gfm'
-import { getSessionInfo, sessionInit, taskSolveSecret } from "../../services/totoSessionService";
+import { collectCoin, getSessionInfo, sessionInit, taskSolveSecret } from "../../services/totoSessionService";
 import { useNavigate } from "react-router-dom";
 import SettingsContext from "../../services/SettingsContext"
 import { getIdentity } from "../../services/accountService";
+import Score from "../game/solutions/Score";
 
 function QrResult({qrCode}) {
     const [settings] = useContext(SettingsContext);
@@ -16,6 +17,7 @@ function QrResult({qrCode}) {
     const [isLoading, setIsLoading] = useState(true);
     const [voucherData, setVoucherData] = useState(null);
     const [taskData, setTaskData] = useState(null);
+    const [coinData, setCoinData] = useState(null);
     const [error, setError] = useState(null);
 
     useEffect(() => {
@@ -60,6 +62,24 @@ function QrResult({qrCode}) {
 
                     break;
                 case "c":
+                    const [coinStoryId, coinElementId, coinSecret] = params.split('/')
+                    const sessionids = JSON.parse(localStorage.getItem("sessionids") ?? {});
+
+                    const coin = await collectCoin({
+                        sessionId: sessionids[coinStoryId],
+                        id: coinElementId,
+                        secret: coinSecret
+                    });
+
+                    if (coin?.updatedElement?.id) {
+                        setCoinData({
+                            sessionId: sessionids[coinStoryId],
+                            elementid: coin?.updatedElement?.id
+                        });
+                    } else {
+                        setError(translations.QR_CODE_SCAN_COIN_ERROR);
+                    }
+
                     break;
                 case "t":
                     const [storyId, elementId, secret] = params.split('/')
@@ -130,7 +150,11 @@ function QrResult({qrCode}) {
                         {translations.QR_CODE_SCAN_TASK_TITLE}
                     </button>
                 </div>}
+                {coinData && 
+                    <Score sessionId={coinData.sessionId} elementid={coinData.elementid} />
+                }
             </div>
+            
         }
     </div>
 }
