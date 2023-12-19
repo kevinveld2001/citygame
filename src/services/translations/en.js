@@ -52,10 +52,13 @@ export default {
     SOLUTIONS_SCREEN_SUBMIT_BUTTON: 'Submit',
     SOLUTIONS_SCREEN_SUBMIT_SELECT_ERROR: 'Select a answer to submit',
     SOLUTIONS_SCREEN_SUBMIT_GENERAL_ERROR: 'Something went wrong',
+    SOLUTIONS_SCREEN_SUBMIT_GEOFENCE_NOPERM: 'Please allow location permissions on your device to use the geofence.',
     SOLUTIONS_SCREEN_SUBMIT_WRONG_ANSWER: 'Wrong answer',
     SOLUTIONS_SCREEN_SUBMIT_SUCCESS: 'Correct answer',
     SOLUTIONS_SCREEN_SUBMIT_SCORE_TEXT: 'You solved the task ":task_name" and gained :score points.',
     SOLUTIONS_SCREEN_INPUT_PLACEHOLDER: 'Your input',
+
+    SOLUTIONS_GEOFENCE_BUTTON_EXPLANATION: "Geofence button - you can be asked to grant location permissions!",
 
     // game links component
     GAME_LINKS_TITLE: 'Next level(s)',

@@ -61,6 +61,19 @@ export async function taskSolveFreeText(sessionId, elementId, text) {
     });
 }
 
+export async function taskSolveGeofence(sessionId, elementId, lat, lon) {
+    return await totoFetch(`/v2/session/${sessionId}/task/solve/geofence`, {
+        method: "POST",
+        body: JSON.stringify({
+            "id": elementId,
+            "location": {
+                "lat": lat,
+                "lon": lon
+            }
+        })
+    });
+}
+
 export async function acknowledge(sessionId, elementUuid) {
     return await totoFetch(`/v2/session/${sessionId}/info/acknowledge`, {
         method: "POST",
