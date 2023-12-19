@@ -109,7 +109,7 @@ export function addLayerFeaturePointsAsCircles(mapboxMap, layerId, paintOptions)
  */
 export function addLayerFeaturePointsAsLineRouteWithImage(mapboxMap, layerId, imageFile, imageId, layoutOptions) { 
     mapboxMap.loadImage(imageFile,
-        (error, image) => {    // !! TODO: use latest approved version from eg. OneDrive, not Discord download
+        (error, image) => {
             if (error) throw error;
 
             mapboxMap.addImage(imageId, image);
@@ -130,8 +130,7 @@ export function addLayerFeaturePointsAsLineRouteWithImage(mapboxMap, layerId, im
 // @param tbox Threebox instance on whose underlying map the object will be loaded.
 /**
  * Loads a new GLTF object from ```file``` in scale "meters" on current global Threebox instance AND adds it.
- * RETURNS NOTHING! Set up properties of the loaded object directly using ```callback```.
- * If this is insufficient, try using ```Threebox.loadObj``` directly!
+ * IF YOU NEED TO KEEP REFERENCE TO THE OBJECT OR SET UP ITS PROPERTIES, USE ```callback```!
  * 
  * @param file File to load the object from. Use ```/directory/file.extension``` absolute format to load from ```/public```.
  * @param options (optional) Threebox instance setup options. THE REQUIRED OPTIONS ARE ALREADY HARDCODED. See: https://github.com/jscastro76/threebox/blob/master/docs/Threebox.md#loadobj . SET ROTATION AND SCALE DIRECTLY HERE!!  SET COORDINATES IN THE CALLBACK INSTEAD!!
