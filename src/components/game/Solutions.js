@@ -21,8 +21,9 @@ function Solutions({element, data, elementId, sessionId, updateLinks }) {
 
         {data.text && (finished === "" || finished === "TEXT") && 
             <FreeInput element={element} data={data} elementId={elementId} sessionId={sessionId} finish={finish}/>}
+
         {data.secret && (finished === "" || finished === "SECRET") &&
-            <ScanButton finished={finished}/>}
+            <ScanButton finished={finished} element={element} sessionId={sessionId} />}
     </>
 }
 
