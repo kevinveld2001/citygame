@@ -24,6 +24,7 @@ function QrResult({qrCode}) {
         //reset state
         setVoucherData(null);
         setTaskData(null);
+        setCoinData(null);
         setError(null);
 
         //get qr data
