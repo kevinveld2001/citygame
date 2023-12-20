@@ -15,6 +15,7 @@ function QuestScreen() {
     const translations = settings?.translations[settings?.language];
     const { id } = useParams();
     const [session, setSession] = useState(null);
+    const elements = session?.elements?.filter(element => element?.t !== "Coin");
     const unFinishedSessions = session?.elements.filter(element => !element.processed)
     const [isLoading, setIsLoading] = useState(true);
     const navigate = useNavigate();
@@ -77,7 +78,7 @@ function QuestScreen() {
                 </button>
             }
 
-            {session && !isLoading && session?.elements.map((element, index) => 
+            {session && !isLoading && elements.map((element, index) => 
             <Link key={element?.id} to={`/game/${id}/${element?.id}`} className='text-blue-500 my-2 flex flex-row items-center gap-4'>
                 <div className="w-10 h-10 bg-slate-200"> 
                     {element?.processed && <div className="w-full h-full bg-blue-500 flex justify-center items-center">
