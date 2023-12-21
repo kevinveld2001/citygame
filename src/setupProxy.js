@@ -14,4 +14,13 @@ module.exports = function(app) {
             logLevel: 'debug',
         })
     );
+    app.use(
+        '/socket.io/',
+        createProxyMiddleware('/socket.io/', {
+            target: 'http://localhost:3001',
+            changeOrigin: true,
+            ws: true, 
+            logLevel: 'debug',
+        })
+    )
 }

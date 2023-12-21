@@ -21,6 +21,7 @@ import { scheduleNotificationFromStoreage } from './services/NotificationService
 import QuestScreen from './pages/Quest';
 import { clearAllCookies } from './services/cookieService';
 import { getIdentity, languageMap } from './services/accountService';
+import { socketInit } from './services/socketService';
 scheduleNotificationFromStoreage();
 
 function App() {
@@ -48,16 +49,20 @@ function App() {
       setInterval(checkIdentity, 60000);
     }
     
-    //load language
     (async () => {
       if (location.pathname.includes("/auth")) return;
       const user = await getIdentity();
 
-      if (!user?.lang) return;
-      setSettings({
-        ...settings,
-        language: languageMap.find(map => map.toto === user?.lang)?.local
-      });
+      if (user?.lang) {
+        setSettings({
+          ...settings,
+          language: languageMap.find(map => map.toto === user?.lang)?.local
+        });
+      }
+
+      if (user?.id) {
+        socketInit(user.id);
+      }
     }) ();
   }, [])
 
