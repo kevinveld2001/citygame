@@ -49,8 +49,6 @@ function ScrMult() {
                                 Screen {element.elementId}
                     </button>)
                 }
-            {/* not GameLink ?? */}
-            {/*<GameLink key={updateKey} sessionId={sessionId} elId={elementId}/>*/}
         </div>}
 
         
