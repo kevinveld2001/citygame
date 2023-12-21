@@ -45,7 +45,7 @@ function ScrMult() {
                 {dynamicElements.map( (element) =>
                     <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-xl mt-3 flex items-center justify-center"
                             key={element.id}
-                            onClick={ () => { processScreenButton(sessionId, element.id); console.log(element.id); } } >
+                            onClick={ () => { processScreenButton(sessionId, element.id); } } >
                                 Screen {element.elementId}
                     </button>)
                 }
