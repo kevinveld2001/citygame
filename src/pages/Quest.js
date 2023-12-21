@@ -8,6 +8,7 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from 'remark-gfm'
 import { useNavigate } from "react-router-dom";
 import {AiOutlineLoading} from "react-icons/ai";
+import { element } from "prop-types";
 
 
 function QuestScreen() {
@@ -77,7 +78,8 @@ function QuestScreen() {
                 </button>
             }
 
-            {session && !isLoading && session?.elements.map((element, index) => 
+            {session && !isLoading 
+            && session?.elements?.filter(element => element?.content?.showOnList)?.map((element, index) => 
             <Link key={element?.id} to={`/game/${id}/${element?.id}`} className='text-blue-500 my-2 flex flex-row items-center gap-4'>
                 <div className="w-10 h-10 bg-slate-200"> 
                     {element?.processed && <div className="w-full h-full bg-blue-500 flex justify-center items-center">
