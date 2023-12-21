@@ -68,6 +68,7 @@ export default {
     QUEST_SCREEN_TITLE: 'QuestScreen',
     QUEST_SCREEN_RESET_BUTTON: 'Reset quest',
     QUEST_SCREEN_CONTINUE_BUTTON: 'Continue quest',
+    QUEST_SCREEN_SCORE: 'You earned ":points" points with this quest',
 
     // quest list
     QUEST_LIST_SCREEN_TITLE: 'Quests',

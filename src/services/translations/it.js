@@ -68,6 +68,7 @@ export default {
     QUEST_SCREEN_TITLE: 'Ricerca',
     QUEST_SCREEN_RESET_BUTTON: 'Ripristina la missione',
     QUEST_SCREEN_CONTINUE_BUTTON: 'Continua alla ricerca',
+    QUEST_SCREEN_SCORE: 'Hai guadagnato punti ":points" con questa missione',
 
     // quest list
     QUEST_LIST_SCREEN_TITLE: 'Missioni',

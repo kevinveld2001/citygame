@@ -99,6 +99,20 @@ function QuestScreen() {
                     )}
                 </div>
             }
+            {!isLoading && <div className="relative border rounded-lg p-4 pt-11 mt-11 flex flex-col">
+                <div className="absolute rounded-full border h-16 w-16 flex justify-center items-center top-[-2rem] bg-white self-center">
+                    <span className="font-bold text-2xl">{session?.session?.score ?? 0}</span>
+                </div>
+                
+                <div className="flex flex-col">
+                    <span>
+                        {
+                        translations.QUEST_SCREEN_SCORE
+                            .replace(':points', session?.session?.score ?? 0)
+                        }
+                    </span>
+                </div>
+            </div>}
 
             <button className="border-2 border-red-500 rounded p-2 self-center mt-6 text-red-500"
                 onClick={async () => {
