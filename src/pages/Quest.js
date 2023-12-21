@@ -70,7 +70,7 @@ function QuestScreen() {
             {unFinishedSessions?.length > 0 &&
                 <button className="bg-blue-500 py-3 mb-3 text-white"
                     onClick={() => {
-                        const element = unFinishedSessions[0];
+                        const element = unFinishedSessions[Math.floor(Math.random() * unFinishedSessions.length)];
                         navigate(`/game/${id}/${element?.id}`);
                     }}
                 >
