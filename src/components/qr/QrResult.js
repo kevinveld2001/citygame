@@ -114,6 +114,9 @@ function QrResult({qrCode}) {
                             }
                             const session = await sessionInit(voucherData.voucher)
                             const sessionid = session?.session?.id;
+
+                            sessionObject[session?.session?.storyId] = session?.session?.id
+                            window.localStorage.setItem('sessionids', JSON.stringify(sessionObject));
                             return navigate(`/quest/${sessionid}`);
                         }}>
                         {translations.QR_CODE_SCAN_START_QUEST_BUTTON}
