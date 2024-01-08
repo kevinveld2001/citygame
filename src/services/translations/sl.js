@@ -75,4 +75,7 @@ export default {
     QUEST_LIST_SCREEN_OPTION_ALL: 'Vse',
     QUEST_LIST_SCREEN_OPTION_UNSOLVED: 'Nerešeno',
     QUEST_LIST_SCREEN_OPTION_SOLVED: 'Rešeno',
+    
+    //next button
+    NEXT_BUTTON: "Naslednji",
 };

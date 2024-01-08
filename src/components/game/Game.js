@@ -1,18 +1,25 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
+import SettingsContext from '../../services/SettingsContext';
 import SkeletonLoader from "./SkeletonLoader";
 import ReactMarkdown from "react-markdown";
 import { acknowledge, getSessionInfo } from "../../services/totoSessionService";
 import remarkGfm from 'remark-gfm'
 import Solutions from './Solutions';
 import GameLink from "./GameLink";
+import { useNavigate, useParams } from "react-router-dom";
 
 
 function Game({ elementId, sessionId }) {
+    const [settings, setSettings] = useContext(SettingsContext);
+    const translations = settings?.translations[settings?.language];
     const [showSkeletonLoader, setShowSkeletonLoader] = useState(true);
     const [error, setError] = useState(false);
     const [markdown, setMarkdown] = useState("");
     const [element, setElement] = useState(null);
+    const [session, setSession] = useState(null);
+    const unFinishedSessions = session?.elements.filter(element => !element.processed)
     const [updateKey, setUpdateKey] = useState(Math.random());
+    const navigate = useNavigate();
 
     useEffect(() => {
         setError(false);
@@ -32,12 +39,13 @@ function Game({ elementId, sessionId }) {
                 }
                 setMarkdown(element?.content?.description);
                 setElement(element);
+                setSession(sessionInfo);
                 setShowSkeletonLoader(false);
             }
         };
 
         getMarkdown();
-    }, [elementId, sessionId]);
+    }, [elementId, sessionId, updateKey]);
 
     function updateLinks() {
         setUpdateKey(Math.random());
@@ -56,7 +64,24 @@ function Game({ elementId, sessionId }) {
             </div>
 
             <Solutions element={element} data={element.solutions} elementId={elementId} sessionId={sessionId} updateLinks={updateLinks} />
-            <GameLink key={updateKey} sessionId={sessionId} elId={elementId}/>
+            {session.session.storyId !== "03725d6b-b0af-4a91-883f-6203b2b2f617" ?
+                <GameLink key={updateKey} sessionId={sessionId} elId={elementId}/>
+            : <>
+                {element?.processed && <div className='flex flex-row justify-end'>
+                    <button className='bg-blue-500 text-white rounded-xl px-4 py-2 mt-3'
+                    onClick={() => {
+                        console.log(unFinishedSessions);
+                        if (unFinishedSessions.length == 0) {
+                            navigate(`/quest/${session?.session?.id}`);
+                        }
+                        const element = unFinishedSessions[Math.floor(Math.random() * unFinishedSessions.length)];
+                        navigate(`/game/${session?.session?.id}/${element?.id}`);
+                    }}>
+                        {translations.NEXT_BUTTON}
+                    </button>
+                </div>}
+            </>
+            }
         </div>}
     </div>)
 }

@@ -8,7 +8,6 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from 'remark-gfm'
 import { useNavigate } from "react-router-dom";
 import {AiOutlineLoading} from "react-icons/ai";
-import { element } from "prop-types";
 
 
 function QuestScreen() {

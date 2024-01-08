@@ -75,4 +75,7 @@ export default {
     QUEST_LIST_SCREEN_OPTION_ALL: 'All',
     QUEST_LIST_SCREEN_OPTION_UNSOLVED: 'Unsolved',
     QUEST_LIST_SCREEN_OPTION_SOLVED: 'Solved',
+
+    //next button
+    NEXT_BUTTON: "next",
 };
