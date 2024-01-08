@@ -20,7 +20,7 @@ function HomeScreen() {
 
     return <div className='w-full h-full flex flex-col items-stretch pt-10'>
         <div className='flex flex-col items-center'>
-            <ProfileImage user={user} />
+            <ProfileImage user={user} size="h-36 w-36"/>
             <span className='text-2xl font-bold mt-4'>
                 {user?.screenName ?? user?.email ?? (user === null ? "..." : 'Anonymous')}
             </span>

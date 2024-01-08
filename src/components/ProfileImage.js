@@ -1,9 +1,9 @@
 import React from "react";
 import { FaRegUser } from "react-icons/fa";
 
-function ProfileImage({user}) {
+function ProfileImage({user, size}) {
     return (
-        <div className='w-36 h-36 rounded-full overflow-hidden'>
+        <div className={`${size} rounded-full overflow-hidden`}>
             {user === null && <div className='w-full h-full bg-slate-200 animate-pulse' />}
             {user?.avatar && <img src={`https://api.toto.io/v2/account/${user?.avatar}/avatar`} className='w-full h-full object-cover' />}
             {!user?.avatar && <div className="w-full h-full bg-slate-200 flex justify-center items-center">
