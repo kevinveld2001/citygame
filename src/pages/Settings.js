@@ -59,12 +59,12 @@ function Settings() {
 
             {uploadingStatus === "WAITING" && <>
               <FaFileUpload className="h-10 w-10 mr-3" />
-              <span className="font-semibold text-lg">Upload file</span>
+              <span className="font-semibold text-lg">{translations.SETTINGS_ACOUNTSETTING_UPLOAD_FILE}</span>
             </>}
 
             {uploadingStatus === "FAILED" && <>
               <LuFileQuestion className="h-10 w-10 mr-3 text-red-600" />
-              <span className="font-semibold text-lg text-red-600">Failed to upload file</span>
+              <span className="font-semibold text-lg text-red-600">{translations.SETTINGS_ACOUNTSETTING_UPLOAD_FAILED}</span>
             </>}
 
             {uploadingStatus === "UPLOADING" && <>
@@ -73,7 +73,7 @@ function Settings() {
 
             {uploadingStatus === "UPLOADED" && <>
               <LuFileCheck className="h-10 w-10 mr-3 text-green-600" />
-              <span className="font-semibold text-lg text-green-600">File uploaded</span>
+              <span className="font-semibold text-lg text-green-600">{translations.SETTINGS_ACOUNTSETTING_UPLOADED}</span>
             </>}
 
             <input type="file" id="dropzone" className="hidden" accept=".png, .gif, .jpeg"
