@@ -1,7 +1,7 @@
 import React, {useContext, useState} from "react";
 import {Link} from "react-router-dom";
 import SettingsContext from "../../services/SettingsContext";
-import { login } from "../../services/accountService";
+import { getIdentity, login } from "../../services/accountService";
 import { AiOutlineLoading } from "react-icons/ai";
 
 
@@ -48,8 +48,10 @@ function LoginScreen() {
                     return;
                 }
 
-                window.localStorage.setItem('auth', JSON.stringify(credentials));
-                setSettings({...settings, auth: credentials});
+                const user = await getIdentity();
+
+                window.localStorage.setItem('auth', JSON.stringify(user));
+                setSettings({...settings, auth: user});
                 window.location.href = "/";
             }}>
             {loading? <AiOutlineLoading className="animate-spin w-6 h-6" />: translations.LOGIN_SCREEN_LOGIN_BUTTON_LABLE}

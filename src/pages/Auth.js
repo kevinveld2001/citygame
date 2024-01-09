@@ -1,7 +1,7 @@
 import React, {useContext, useState} from "react";
 import { Link } from "react-router-dom";
 import { Navigate, useSearchParams } from 'react-router-dom';
-import { anonymousLogin, languageMap } from "../services/accountService"
+import { anonymousLogin, getIdentity, languageMap } from "../services/accountService"
 import SettingsContext from "../services/SettingsContext";
 import LanguagePicker from "../components/settings/LanguagePicker";
 import { AiOutlineLoading } from "react-icons/ai";
@@ -32,8 +32,11 @@ function AuthScreen() {
                 if (loading === true) return;
                 setLoading(true);
                 const credentials = await anonymousLogin(languageMap.find(map => map.local === settings.language).toto);
-                window.localStorage.setItem('auth', JSON.stringify(credentials));
-                setSettings({...settings, auth: credentials});
+
+                const user = await getIdentity();
+
+                window.localStorage.setItem('auth', JSON.stringify(user));
+                setSettings({...settings, auth: user});
             }}> 
             {loading? <AiOutlineLoading className="animate-spin w-6 h-6" /> :translations.AUTH_SCREEN_BUTTON_TRY}
         </button>

@@ -21,6 +21,7 @@ import { scheduleNotificationFromStoreage } from './services/NotificationService
 import QuestScreen from './pages/Quest';
 import { clearAllCookies } from './services/cookieService';
 import { getIdentity, languageMap } from './services/accountService';
+import AccountUpgrade from './pages/settings/AccountUpgrade';
 scheduleNotificationFromStoreage();
 
 function App() {
@@ -74,6 +75,7 @@ function App() {
             <Route path='/quest/list' element={<QuestList />} />
             <Route path='/quest/:id' element={<QuestScreen />} />
             <Route path='/settings' element={<Settings />} />
+            <Route path='/settings/upgrade' element={<AccountUpgrade />} />
             <Route path='/game/:sessionId/:elementId' element={<GameScreen />} />
             {process.env.REACT_APP_EXPERIMENTAL_FEATURES === 'true' && <>
               <Route path='/experimental' element={<Experimental />} />

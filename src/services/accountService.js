@@ -1,5 +1,5 @@
 import { getCookie } from "./cookieService";
-import totoFetch from "./totoApiService.js";
+import totoFetch, { totoFetchAsync } from "./totoApiService.js";
 import {initAllDefaultSessions} from './totoSessionService.js';
 
 export async function anonymousLogin(lang = "eng") {
@@ -151,4 +151,14 @@ export async function saveLanguage(userId, lang) {
 
 export async function acountGetSessions(userUuid) {
     return (await totoFetch(`/v2/account/${userUuid}/go`))?.sessions;
+}
+
+export async function migrate(email) {
+    return await totoFetchAsync(`/v2/auth/migrate/init`, {
+        method: "POST",
+        body: JSON.stringify({
+            email,
+            app: "city game app"
+        })
+    }, true)
 }

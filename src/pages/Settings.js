@@ -32,6 +32,11 @@ function Settings() {
           </div>
         </a>
 
+        { settings?.auth?.role === "Anonymised" && 
+        <Link to="/settings/upgrade" className="underline cursor-pointer border my-4 rounded-lg flex flex-col p-3">
+               Upgrade account
+        </Link>
+        }
         
         {process.env.REACT_APP_EXPERIMENTAL_FEATURES === 'true' && <>
           <Link to='/experimental' className='text-blue-500 underline'>experimental features</Link>
