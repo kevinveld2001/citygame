@@ -5,6 +5,8 @@ import LanguagePicker from "../components/settings/LanguagePicker";
 import { getIdentity, logout, uploadProfile } from "../services/accountService";
 import { AiOutlineLoading } from "react-icons/ai";
 import ProfileImage from "../components/ProfileImage";
+import { FaFileUpload } from "react-icons/fa";
+import { LuFileCheck, LuFileQuestion } from "react-icons/lu";
 
 function Settings() {
   const [settings, setSettings] = useContext(SettingsContext);
@@ -13,18 +15,25 @@ function Settings() {
   const [user, setUser] = useState(null);
   const [uploadingStatus, setUploadingStatus] = useState("WAITING");
 
+  async function getUser() {
+    const user = await getIdentity();
+    setUser(user);
+  }
+
   useEffect(() => {
-      (async() => {
-          const user = await getIdentity();
-          setUser(user);
-      }) ();
+    getUser();
   }, []);
   
   async function handleFileUpload(file) {
     setUploadingStatus("UPLOADING");
     const res = await uploadProfile(user?.id, file);
-    console.log(res);
     
+    if (res.ok) {
+      setUploadingStatus("UPLOADED");
+      getUser();
+    } else {
+      setUploadingStatus("FAILED");
+    }
   }
 
   return (
@@ -39,7 +48,7 @@ function Settings() {
         <div className="flex flex-row mt-3">
           <ProfileImage user={user} size="h-16 w-16" />
           <label htmlFor="dropzone" 
-            className="ml-3 border-dashed border-4 border-stone-200 hover:border-stone-400 flex-1 rounded-lg cursor-pointer"
+            className="ml-3 border-dashed border-4 border-stone-200 hover:border-stone-400 flex-1 rounded-lg cursor-pointer flex justify-center items-center"
             onDrop={(event) => {
               event.preventDefault();
               if (event.dataTransfer.files.length > 0) {
@@ -49,15 +58,22 @@ function Settings() {
             onDragOver={(event) => event.preventDefault()}>
 
             {uploadingStatus === "WAITING" && <>
-              drop file
+              <FaFileUpload className="h-10 w-10 mr-3" />
+              <span className="font-semibold text-lg">Upload file</span>
             </>}
 
-            {uploadingStatus === "UPLOADING" && <div className="flex justify-center items-center h-full">
+            {uploadingStatus === "FAILED" && <>
+              <LuFileQuestion className="h-10 w-10 mr-3 text-red-600" />
+              <span className="font-semibold text-lg text-red-600">Failed to upload file</span>
+            </>}
+
+            {uploadingStatus === "UPLOADING" && <>
               <AiOutlineLoading className="animate-spin w-6 h-6" />
-            </div>}
+            </>}
 
             {uploadingStatus === "UPLOADED" && <>
-              file uploaded
+              <LuFileCheck className="h-10 w-10 mr-3 text-green-600" />
+              <span className="font-semibold text-lg text-green-600">File uploaded</span>
             </>}
 
             <input type="file" id="dropzone" className="hidden" accept=".png, .gif, .jpeg"
