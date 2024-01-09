@@ -22,6 +22,12 @@ export default {
     INSTALL_BANNER_TITLE: 'Namestite aplikacijo City Game',
     INSTALL_BANNER_INSTALL_BUTTON: 'Namestite',
   
+    SETTINGS_UPGRADE_ACCOUNT_TITLE: 'Nadgradnja računa',
+    SETTINGS_UPGRADE_ACCOUNT_ERROR: 'Ni mogel poslati e -pošte.',
+    SETTINGS_UPGRADE_ACCOUNT_SUCCESS: 'E -pošta je pošiljala. Preverite svoj e -poštni naslov, da končate nadgradnjo računa.',
+    SETTINGS_UPGRADE_ACCOUNT_LABEL: 'E-naslov',
+    SETTINGS_UPGRADE_ACCOUNT_BUTTON: 'Nadgradnja računa',
+
 
     // auth screen
     AUTH_SCREEN_ERROR_1: 'Vaša seja je potekla in se morate preusmeriti',
