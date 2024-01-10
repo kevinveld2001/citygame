@@ -1,3 +1,6 @@
+// THIS IS GOOGLE TRANSLATED
+// TODO: REPLACE WITH FITTING TRANSLATIONS
+
 export default {
     // tabs
     TAB_HOME: 'domov',
@@ -74,4 +77,11 @@ export default {
     QUEST_LIST_SCREEN_OPTION_ALL: 'Vse',
     QUEST_LIST_SCREEN_OPTION_UNSOLVED: 'Nerešeno',
     QUEST_LIST_SCREEN_OPTION_SOLVED: 'Rešeno',
+
+
+    // inventory title and tabs
+    INVENTORY_TITLE: 'Inventar',
+    INVENTORY_TAB_ACHIEVEMENTS: 'Dosežki',
+    INVENTORY_TAB_STORIES: 'Zgodbe',
+    INVENTORY_TAB_COLLECTIBLES: 'Zbirateljski predmeti',
 };

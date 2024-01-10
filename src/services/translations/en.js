@@ -74,4 +74,11 @@ export default {
     QUEST_LIST_SCREEN_OPTION_ALL: 'All',
     QUEST_LIST_SCREEN_OPTION_UNSOLVED: 'Unsolved',
     QUEST_LIST_SCREEN_OPTION_SOLVED: 'Solved',
+
+
+    // inventory title and tabs
+    INVENTORY_TITLE: 'Inventory',
+    INVENTORY_TAB_ACHIEVEMENTS: 'Achievements',
+    INVENTORY_TAB_STORIES: 'Stories',
+    INVENTORY_TAB_COLLECTIBLES: 'Collectibles',
 };

@@ -1,3 +1,6 @@
+// THIS IS GOOGLE TRANSLATED
+// TODO: REPLACE WITH FITTING TRANSLATIONS
+
 export default {
     // tabs
     TAB_HOME: 'Casa',
@@ -74,4 +77,11 @@ export default {
     QUEST_LIST_SCREEN_OPTION_ALL: 'Tutto',
     QUEST_LIST_SCREEN_OPTION_UNSOLVED: 'Irrisolto',
     QUEST_LIST_SCREEN_OPTION_SOLVED: 'Risolto',
+
+
+    // inventory title and tabs
+    INVENTORY_TITLE: 'Inventario',
+    INVENTORY_TAB_ACHIEVEMENTS: 'Risultati',
+    INVENTORY_TAB_STORIES: 'Storie',
+    INVENTORY_TAB_COLLECTIBLES: 'Oggetti da collezione',
 };

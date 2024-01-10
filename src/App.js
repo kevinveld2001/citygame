@@ -5,6 +5,7 @@ import SettingsContext, {rawSettings} from './services/SettingsContext';
 import Tabbar from './components/tabbar/Tabbar';
 import Map from './pages/Map';
 import QuestList from './pages/QuestList';
+import Inventory from './pages/Inventory';
 import Settings from './pages/Settings';
 import GameScreen from './pages/Game';
 import HomeScreen from './pages/Home';
@@ -73,6 +74,7 @@ function App() {
             <Route path='/map' element={<Map />} />
             <Route path='/quest/list' element={<QuestList />} />
             <Route path='/quest/:id' element={<QuestScreen />} />
+            <Route path='/inventory' element={<Inventory />} />
             <Route path='/settings' element={<Settings />} />
             <Route path='/game/:sessionId/:elementId' element={<GameScreen />} />
             {process.env.REACT_APP_EXPERIMENTAL_FEATURES === 'true' && <>
