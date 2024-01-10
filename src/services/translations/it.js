@@ -25,6 +25,12 @@ export default {
     INSTALL_BANNER_TITLE: 'Installa l\'app di gioco della città',
     INSTALL_BANNER_INSTALL_BUTTON: 'Installare',
     
+    SETTINGS_UPGRADE_ACCOUNT_TITLE: 'Account di aggiornamento',
+    SETTINGS_UPGRADE_ACCOUNT_ERROR: 'Impossibile inviare e -mail.',
+    SETTINGS_UPGRADE_ACCOUNT_SUCCESS: 'L\'e -mail viene inviata. Controlla la tua email per finire l\'aggiornamento dell\'account.',
+    SETTINGS_UPGRADE_ACCOUNT_LABEL: 'E-mail',
+    SETTINGS_UPGRADE_ACCOUNT_BUTTON: 'Account di aggiornamento',
+
 
     // auth screen
     AUTH_SCREEN_ERROR_1: 'La tua sessione è scaduta e devi respingere',

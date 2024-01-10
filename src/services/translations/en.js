@@ -26,6 +26,12 @@ export default {
     INSTALL_BANNER_INSTALL_BUTTON: 'Install',
 
 
+    SETTINGS_UPGRADE_ACCOUNT_TITLE: 'Upgrade account',
+    SETTINGS_UPGRADE_ACCOUNT_ERROR: 'Could not send email.',
+    SETTINGS_UPGRADE_ACCOUNT_SUCCESS: 'Email is send. Check your email to finish account upgrade.',
+    SETTINGS_UPGRADE_ACCOUNT_LABEL: 'Email',
+    SETTINGS_UPGRADE_ACCOUNT_BUTTON: 'Upgrade account',
+
     // auth screen
     AUTH_SCREEN_ERROR_1: 'Your session has expired and you need to relogin',
     AUTH_SCREEN_TITLE: 'City Game',

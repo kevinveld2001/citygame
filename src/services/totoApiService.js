@@ -1,6 +1,6 @@
 import { clearAllCookies, getCookie } from "./cookieService";
 
-export default function totoFetch(url, options) {
+function addOptions(options) {
     options = {...{
         headers: {
             'Content-Type': 'application/json'
@@ -11,6 +11,12 @@ export default function totoFetch(url, options) {
     if (csrfToken) {
         options.headers['csrf-token'] = csrfToken;
     }
+    return options;
+}
+
+
+export default function totoFetch(url, options) {
+    options = addOptions(options);
 
     return fetch("/totoapi" + url, options)
         .then(response => {
@@ -28,5 +34,16 @@ export default function totoFetch(url, options) {
         .catch(error => {
             console.error(error);
         });
+}
+
+export async function totoFetchAsync(url, options, raw) {
+    options = addOptions(options);
+
+    const res = await fetch("/totoapi" + url, options); 
+    if (raw) {
+        return res;
+    }
+    return await res.json();
+
 }
 
