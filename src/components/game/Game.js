@@ -5,6 +5,7 @@ import { acknowledge, getSessionInfo } from "../../services/totoSessionService";
 import remarkGfm from 'remark-gfm'
 import Solutions from './Solutions';
 import GameLink from "./GameLink";
+import ScrMult from '../../pages/games/ScrMult';
 
 
 function Game({ elementId, sessionId }) {
@@ -12,6 +13,7 @@ function Game({ elementId, sessionId }) {
     const [error, setError] = useState(false);
     const [markdown, setMarkdown] = useState("");
     const [element, setElement] = useState(null);
+    const [session, setSession] = useState(null);
     const [updateKey, setUpdateKey] = useState(Math.random());
 
     useEffect(() => {
@@ -32,6 +34,7 @@ function Game({ elementId, sessionId }) {
                 }
                 setMarkdown(element?.content?.description);
                 setElement(element);
+                setSession(sessionInfo);
                 setShowSkeletonLoader(false);
             }
         };
@@ -55,8 +58,12 @@ function Game({ elementId, sessionId }) {
                 <ReactMarkdown remarkPlugins={[remarkGfm]} children={markdown}/>
             </div>
 
-            <Solutions element={element} data={element.solutions} elementId={elementId} sessionId={sessionId} updateLinks={updateLinks} />
-            <GameLink key={updateKey} sessionId={sessionId} elId={elementId}/>
+            {session.story.content.title === "Memory puzzle with screens" ? /* HARDCODED // RESOLVE MERGE CONFLICTS */
+            <ScrMult /> :
+            <>
+                <Solutions element={element} data={element.solutions} elementId={elementId} sessionId={sessionId} updateLinks={updateLinks} />
+                <GameLink key={updateKey} sessionId={sessionId} elId={elementId}/>
+            </>}
         </div>}
     </div>)
 }

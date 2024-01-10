@@ -31,7 +31,7 @@ export async function sessionInit(sessionToken, lang = 'eng') {
 }
 
 export async function initAllDefaultSessions() {
-    const sessionTokens = ["115e1bd3-9666-49d8-95ce-a3b9687148fc", "346ab5b7-ea77-4e35-904e-fc8108da9922", "ca3ba57f-fee0-4f5c-9a0d-cc2357f9b7f7", "2474edc4-815a-4c9d-aedd-1d5fe945c0bb", "9eb07df8-1e15-4498-a7e7-f7c37e76abc3"];
+    const sessionTokens = ["115e1bd3-9666-49d8-95ce-a3b9687148fc", "346ab5b7-ea77-4e35-904e-fc8108da9922", "ca3ba57f-fee0-4f5c-9a0d-cc2357f9b7f7", "2474edc4-815a-4c9d-aedd-1d5fe945c0bb", "9eb07df8-1e15-4498-a7e7-f7c37e76abc3", "0f43b842-b001-439a-9f0e-31190962c7f7"];
     const sessionObject = JSON.parse(window.localStorage.getItem('sessionids') ?? '{}');
     const promises = [];
 
@@ -76,6 +76,31 @@ export async function taskSolveGeofence(sessionId, elementId, lat, lon) {
                 "lat": lat,
                 "lon": lon
             }
+        })
+    });
+}
+
+/**
+ * Only use this for dynamic Toto elements that have a defined ```script``` in Toto CMS that returns a Toto element!
+ * For payload processing you can also use manual triggers on any Toto element - see ```processManualTrigger```.
+ */
+export async function processDynamicElement(sessionId, elementUuid) {
+    return await totoFetch(`/v2/session/${sessionId}/dynamic/process`, {
+        method: "POST",
+        body: JSON.stringify({
+            id: elementUuid
+        })
+    });
+}
+
+export async function processManualTrigger(sessionId, elementUuid) {
+    return await totoFetch(`/v2/session/${sessionId}/element/trigger`, {
+        method: "POST",
+        body: JSON.stringify({
+            id: elementUuid,
+            input: `Toto API fallacy: This parameter is not used.
+                Use Toto CMS for payload. If you see this input printed in a usable place,
+                modify 'processManualTrigger' to use this parameter.`
         })
     });
 }
