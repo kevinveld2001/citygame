@@ -56,11 +56,11 @@ function Map() {
             // You can add 3d items on the map here:
             // map.current.addLayer(
             //    spawnObject(
-            //      'name of object',
+            //      'unique name of object',
             //      'location of glb file in public folder',
-            //      [x, y],
+            //      [longitude, latitude], // location 
             //      modelAltitude,
-            //      [0, 0, 0],
+            //      [x, y, z], //rotation
             //      scale
             //    )
             // )
