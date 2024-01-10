@@ -17,6 +17,9 @@ export default {
     SETTINGS_LANGUAGE_SL: 'Slovena',
     SETTINGS_ACOUNTSETTING_TITLE: 'Impostazioni dell\'account',
     SETTINGS_ACOUNTSETTING_LOG_OUT_BUTTON: 'Disconnettersi',
+    SETTINGS_ACOUNTSETTING_UPLOAD_FILE: 'Caricare un file',
+    SETTINGS_ACOUNTSETTING_UPLOAD_FAILED: 'Impossibile caricare il file',
+    SETTINGS_ACOUNTSETTING_UPLOADED: 'File caricato',
 
     // Instalation banner
     INSTALL_BANNER_TITLE: 'Installa l\'app di gioco della città',

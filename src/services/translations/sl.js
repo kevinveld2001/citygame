@@ -17,6 +17,9 @@ export default {
     SETTINGS_LANGUAGE_SL: 'Slovenščina',
     SETTINGS_ACOUNTSETTING_TITLE: 'Nastavitve računa',
     SETTINGS_ACOUNTSETTING_LOG_OUT_BUTTON: 'Odjava',
+    SETTINGS_ACOUNTSETTING_UPLOAD_FILE: 'Naloži datoteko',
+    SETTINGS_ACOUNTSETTING_UPLOAD_FAILED: 'Datoteke ni bilo mogoče naložiti',
+    SETTINGS_ACOUNTSETTING_UPLOADED: 'Datoteka naložena',
 
     // Instalation banner
     INSTALL_BANNER_TITLE: 'Namestite aplikacijo City Game',

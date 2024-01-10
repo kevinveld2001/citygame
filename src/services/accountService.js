@@ -152,3 +152,18 @@ export async function saveLanguage(userId, lang) {
 export async function acountGetSessions(userUuid) {
     return (await totoFetch(`/v2/account/${userUuid}/go`))?.sessions;
 }
+
+export async function uploadProfile(id, file) {
+    const formData = new FormData();
+    formData.append('file', file, file.name);
+
+    const csrfToken = getCookie('csrfToken');
+
+    return await fetch(`/totoapi/v2/account/${id}/avatar`, {
+        method: "POST",
+        body: formData,
+        headers: {
+            "csrf-token": csrfToken
+        }
+    });
+}

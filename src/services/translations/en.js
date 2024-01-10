@@ -17,6 +17,9 @@ export default {
     SETTINGS_LANGUAGE_SL: 'Slovenian',
     SETTINGS_ACOUNTSETTING_TITLE: 'Account settings',
     SETTINGS_ACOUNTSETTING_LOG_OUT_BUTTON: 'Log out',
+    SETTINGS_ACOUNTSETTING_UPLOAD_FILE: 'Upload file',
+    SETTINGS_ACOUNTSETTING_UPLOAD_FAILED: 'Failed to upload file',
+    SETTINGS_ACOUNTSETTING_UPLOADED: 'File uploaded',
 
     // Instalation banner
     INSTALL_BANNER_TITLE: 'Install city game app',
