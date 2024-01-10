@@ -17,15 +17,18 @@ import RegisterScreen from './pages/auth/Register';
 
 import Experimental from './pages/experimental/Experimental';
 import Notifications from './pages/experimental/Notifications';
+import QrGenScreen from './pages/experimental/QrGen';
 import { scheduleNotificationFromStoreage } from './services/NotificationService';
 import QuestScreen from './pages/Quest';
+import QrScreen from './pages/Qr';
 import { clearAllCookies } from './services/cookieService';
 import { getIdentity, languageMap } from './services/accountService';
 scheduleNotificationFromStoreage();
 
 function App() {
   const location = useLocation(); 
-  const pathsWithTabbar = ['/quest', '/settings', '/map'	];
+  const pathsWithTabbar = ['/quest', '/settings', '/map', '/qr', '/h/'	];
+
   const [settings, setSettings] = useState(rawSettings);
 
   useEffect(() => {
@@ -78,10 +81,13 @@ function App() {
             {process.env.REACT_APP_EXPERIMENTAL_FEATURES === 'true' && <>
               <Route path='/experimental' element={<Experimental />} />
               <Route path='/experimental/notifications' element={<Notifications />} />
+              <Route path='/experimental/qrgen' element={<QrGenScreen />} />
             </> }
             <Route path='/auth' element={<AuthScreen />} />
             <Route path='/auth/login' element={<LoginScreen />} />
             <Route path='/auth/register' element={<RegisterScreen />} />
+            <Route path='/qr' element={<QrScreen />} />
+            <Route path='/h/*' element={<HomeScreen />} />
           </Routes>
         </div>
         {pathsWithTabbar.some((pathWithTabbar) => location.pathname.includes(pathWithTabbar) || location.pathname === "/") ? <Tabbar /> : <></>}

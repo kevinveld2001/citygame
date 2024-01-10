@@ -55,18 +55,18 @@ export async function login(username, password) {
     const res = await fetch("/totoapi/v2/auth/identity", {headers: myHeaders});
     if (res.status !== 200) return null;
     const user = await res.json()
+    
+    //load initional sessions
+    await initAllDefaultSessions();
   
     //load existing sessions
     const sessionObject = JSON.parse(window.localStorage.getItem('sessionids') ?? '{}');
     const sessions = await acountGetSessions(user?.id);
     sessions?.forEach(session => {
-        //storyId was not suposed to be the key. But we don't have access to voucher id. And we need a unique key
         sessionObject[session.storyId] = session.id;
     });
     window.localStorage.setItem('sessionids', JSON.stringify(sessionObject));
 
-    //load initional sessions
-    await initAllDefaultSessions();
 
     return await cridentionals;
 }

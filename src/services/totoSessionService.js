@@ -14,12 +14,6 @@ export async function sessionInit(sessionToken, lang = 'eng') {
     });
     
     let sessionid = session?.session?.id;
-    let sessionObject = JSON.parse(window.localStorage.getItem('sessionids') ?? '{}');
-    if (!sessionObject.hasOwnProperty(sessionToken)) {
-        sessionObject[sessionToken] = sessionid;
-    }
-    window.localStorage.setItem('sessionids', JSON.stringify(sessionObject));
-
     if (session?.session?.status === "Initialized") {
         await totoFetch(`/v2/session/${sessionid}/start`, {
             method: "POST",
@@ -31,7 +25,7 @@ export async function sessionInit(sessionToken, lang = 'eng') {
 }
 
 export async function initAllDefaultSessions() {
-    const sessionTokens = ["115e1bd3-9666-49d8-95ce-a3b9687148fc", "346ab5b7-ea77-4e35-904e-fc8108da9922", "ca3ba57f-fee0-4f5c-9a0d-cc2357f9b7f7", "2474edc4-815a-4c9d-aedd-1d5fe945c0bb", "9eb07df8-1e15-4498-a7e7-f7c37e76abc3", "0f43b842-b001-439a-9f0e-31190962c7f7"];
+    const sessionTokens = process.env.REACT_APP_INIT_SESSIONS.split(',');
     const sessionObject = JSON.parse(window.localStorage.getItem('sessionids') ?? '{}');
     const promises = [];
 
@@ -125,4 +119,28 @@ export async function reinit(sessionId) {
         });
     }
     return session?.session?.id;
+}
+
+export async function taskSolveSecret({sessionId, elementId, secret}) {
+    return await totoFetch(`/v2/session/${sessionId}/task/solve/secret`, {
+        method: "POST",
+        body: JSON.stringify({
+            "id": elementId,
+            secret
+        })
+    });
+}
+
+export async function collectCoin({sessionId, id, secret}) {
+    return await totoFetch(`/v2/session/${sessionId}/coin/collect`, {
+        method: "POST",
+        body: JSON.stringify({
+            id,
+            secret,
+            "location": {
+                "lat": 0,
+                "lon": 0
+            }
+        })
+    });
 }

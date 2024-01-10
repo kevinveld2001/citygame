@@ -4,6 +4,9 @@ import { getSessionInfo } from "../../../services/totoSessionService"
 import { AiOutlineLoading } from "react-icons/ai";
 
 function Score({sessionId, elementid}) {
+    console.log({
+        sessionId, elementid
+    });
     const [settings] = useContext(SettingsContext);
     const translations = settings.translations[settings.language];
     const [element, setElement] = useState(null);

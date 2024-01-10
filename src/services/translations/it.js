@@ -74,4 +74,16 @@ export default {
     QUEST_LIST_SCREEN_OPTION_ALL: 'Tutto',
     QUEST_LIST_SCREEN_OPTION_UNSOLVED: 'Irrisolto',
     QUEST_LIST_SCREEN_OPTION_SOLVED: 'Risolto',
+
+    // qr code scan
+    QR_CODE_SCAN_PERMISSION_TITLE: "Abilita le autorizzazioni della fotocamera",
+    QR_CODE_SCAN_PERMISSION_DESCRIPTION: "Per utilizzare lo scanner di codice QR in app, è necessario consentire il permesso di utilizzare la fotocamera. Se non vuoi dare l'autorizzazione, puoi anche utilizzare lo scanner di codice QR sul tuo telefono.",
+    QR_CODE_SCAN_ERROR: "Sembra che tu abbia scansionato un codice che non fa parte del gioco.",
+    QR_CODE_SCAN_START_QUEST_BUTTON: "Inizia la ricerca",
+
+    QR_CODE_SCAN_TASK_TITLE: "Tenna attività",
+    QR_CODE_SCAN_TASK_BODY: "Questo codice QR risolve un'attività per una ricerca.",
+    QR_CODE_SCAN_TASK_ERROR: "Hai già scansionato questo codice. O questa parte del gioco non è un getto sbloccato.",
+
+    QR_CODE_SCAN_COIN_ERROR: "La moneta al momento non è valida o è già stata raccolta"
 };
