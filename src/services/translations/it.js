@@ -68,6 +68,7 @@ export default {
     QUEST_SCREEN_TITLE: 'Ricerca',
     QUEST_SCREEN_RESET_BUTTON: 'Ripristina la missione',
     QUEST_SCREEN_CONTINUE_BUTTON: 'Continua alla ricerca',
+    QUEST_SCREEN_SCORE: 'Hai guadagnato punti ":points" con questa missione',
 
     // quest list
     QUEST_LIST_SCREEN_TITLE: 'Missioni',
@@ -86,4 +87,7 @@ export default {
     QR_CODE_SCAN_TASK_ERROR: "Hai già scansionato questo codice. O questa parte del gioco non è un getto sbloccato.",
 
     QR_CODE_SCAN_COIN_ERROR: "La moneta al momento non è valida o è già stata raccolta"
+
+    //next button
+    NEXT_BUTTON: "prossima",
 };

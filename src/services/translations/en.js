@@ -68,6 +68,7 @@ export default {
     QUEST_SCREEN_TITLE: 'QuestScreen',
     QUEST_SCREEN_RESET_BUTTON: 'Reset quest',
     QUEST_SCREEN_CONTINUE_BUTTON: 'Continue quest',
+    QUEST_SCREEN_SCORE: 'You earned ":points" points with this quest',
 
     // quest list
     QUEST_LIST_SCREEN_TITLE: 'Quests',
@@ -86,4 +87,7 @@ export default {
     QR_CODE_SCAN_TASK_ERROR: "You have already scanned this code. Or this part of the game is not an unlocked jet.",
 
     QR_CODE_SCAN_COIN_ERROR: "Coin is curently not valid or is allready collected"
+
+    //next button
+    NEXT_BUTTON: "next",
 };

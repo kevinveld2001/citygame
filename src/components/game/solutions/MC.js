@@ -43,7 +43,7 @@ function MC({element, data, elementId, sessionId, finish }) {
             {success}
         </div>}
         <div className="flex flex-col border rounded-lg mt-3"> 
-            {data.mc.map((title) => <button key={title} className={`p-4 text-left first:rounded-t-lg last:rounded-b-lg [&:not(:first-child)]:border-t ${title === selected ? "bg-blue-100" : ""}`} 
+            {data.mc.map((title) => <button key={title} className={`p-4 text-left first:rounded-t-lg last:rounded-b-lg [&:not(:first-child)]:border-t ${(title === selected  || title === element?.processed?.mc)? "bg-blue-100" : ""}`} 
                 onClick={() => {
                     if (success !== "") return;
                     setSelected(title)
