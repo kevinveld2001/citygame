@@ -53,8 +53,17 @@ function Map() {
         });
 
         map.current.on('style.load', () => { 
-            map.current.addLayer(spawnObject('necklace', './models/necklace_test.glb', [13.6197, 45.9399], 0, [Math.PI / 2, Math.PI / 1.2, 0], 10000));
-            map.current.addLayer(spawnObject('test', './models/test2.glb', [13.6187, 45.9399], 0, [Math.PI / 2, Math.PI / 1.8, 0], 1));
+            // You can add 3d items on the map here:
+            // map.current.addLayer(
+            //    spawnObject(
+            //      'name of object',
+            //      'location of glb file in public folder',
+            //      [x, y],
+            //      modelAltitude,
+            //      [0, 0, 0],
+            //      scale
+            //    )
+            // )
         });
 
         let sessionids = JSON.parse(localStorage.getItem("sessionids") ?? "{}");
