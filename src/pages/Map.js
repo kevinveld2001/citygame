@@ -12,6 +12,12 @@ import { getSessionInfo } from '../services/totoSessionService';
 
 mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_KEY;
 
+// The following is required to stop "npm build" from transpiling mapbox code.
+// notice the exclamation point in the import.
+// @ts-ignore
+// eslint-disable-next-line import/no-webpack-loader-syntax, import/no-unresolved
+mapboxgl.workerClass = require('worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker').default;
+
 function Map() {
     const [settings] = useContext(SettingsContext);
     const [mapActive, setMapActive] = useState(false); 
