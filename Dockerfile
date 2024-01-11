@@ -4,6 +4,7 @@ RUN apt-get install -y nodejs npm
 
 WORKDIR /temp
 COPY ./ /temp
+RUN npm i
 RUN npm run build
 
 WORKDIR /build
