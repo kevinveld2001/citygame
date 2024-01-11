@@ -6,6 +6,7 @@ import remarkGfm from 'remark-gfm'
 import Solutions from './Solutions';
 import GameLink from "./GameLink";
 import ScrMult from '../../pages/games/ScrMult';
+import CustomGamesMap from "./CustomGamesMap";
 
 
 function Game({ elementId, sessionId }) {
@@ -15,6 +16,8 @@ function Game({ elementId, sessionId }) {
     const [element, setElement] = useState(null);
     const [session, setSession] = useState(null);
     const [updateKey, setUpdateKey] = useState(Math.random());
+
+    const [customGame, setCustomGame] = useState(null);
 
     useEffect(() => {
         setError(false);
@@ -32,8 +35,10 @@ function Game({ elementId, sessionId }) {
                         element = acknowledgement.updatedElement;
                     }
                 }
-                setMarkdown(element?.content?.description);
+                const customGameRegex = /{customgame:(.+)}/;
+                setMarkdown(element?.content?.description.replace(customGameRegex, ""));
                 setElement(element);
+                setCustomGame(element?.content?.description.match(customGameRegex));
                 setSession(sessionInfo);
                 setShowSkeletonLoader(false);
             }
@@ -58,8 +63,11 @@ function Game({ elementId, sessionId }) {
                 <ReactMarkdown remarkPlugins={[remarkGfm]} children={markdown}/>
             </div>
 
-            {session.story.content.title === "Memory puzzle with screens" ? /* HARDCODED // RESOLVE MERGE CONFLICTS */
-            <ScrMult /> :
+            {customGame ?
+            <>  
+                {CustomGamesMap.get(customGame[1]) /* [1] contains only the RegEx pattern from above if it was found */}
+            </>
+             :
             <>
                 <Solutions element={element} data={element.solutions} elementId={elementId} sessionId={sessionId} updateLinks={updateLinks} />
                 <GameLink key={updateKey} sessionId={sessionId} elId={elementId}/>

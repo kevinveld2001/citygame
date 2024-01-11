@@ -21,6 +21,9 @@ function ScrMult() {
             }
             else {
                 setDynamicElements(sessionInfo.elements.filter(element => element.t === "Dynamic"));
+                console.log(sessionInfo);
+                console.log(sessionInfo.elements);
+                console.log(sessionInfo.elements.filter(element => element.t === "Dynamic"));
                 setShowSkeletonLoader(false);
             }
         }
