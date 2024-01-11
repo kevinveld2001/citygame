@@ -12,6 +12,12 @@ import { getSessionInfo } from '../services/totoSessionService';
 
 mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_KEY;
 
+// The following is required to stop "npm build" from transpiling mapbox code.
+// notice the exclamation point in the import.
+// @ts-ignore
+// eslint-disable-next-line import/no-webpack-loader-syntax, import/no-unresolved
+mapboxgl.workerClass = require('worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker').default;
+
 function Map() {
     const [settings] = useContext(SettingsContext);
     const [mapActive, setMapActive] = useState(false); 
@@ -53,8 +59,17 @@ function Map() {
         });
 
         map.current.on('style.load', () => { 
-            map.current.addLayer(spawnObject('necklace', './models/necklace_test.glb', [13.6197, 45.9399], 0, [Math.PI / 2, Math.PI / 1.2, 0], 10000));
-            map.current.addLayer(spawnObject('test', './models/test2.glb', [13.6187, 45.9399], 0, [Math.PI / 2, Math.PI / 1.8, 0], 1));
+            // You can add 3d items on the map here:
+            // map.current.addLayer(
+            //    spawnObject(
+            //      'unique name of object',
+            //      'location of glb file in public folder',
+            //      [longitude, latitude], // location 
+            //      modelAltitude,
+            //      [x, y, z], //rotation
+            //      scale
+            //    )
+            // )
         });
 
         let sessionids = JSON.parse(localStorage.getItem("sessionids") ?? "{}");
