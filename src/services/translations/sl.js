@@ -77,6 +77,7 @@ export default {
     QUEST_SCREEN_TITLE: 'Iskanje',
     QUEST_SCREEN_RESET_BUTTON: 'Ponastavitev Quest',
     QUEST_SCREEN_CONTINUE_BUTTON: 'Nadaljujte z iskanjem',
+    QUEST_SCREEN_SCORE: 'S to nalogo ste si prislužili točke ":points".',
 
     // quest list
     QUEST_LIST_SCREEN_TITLE: 'Naloge',
@@ -94,5 +95,8 @@ export default {
     QR_CODE_SCAN_TASK_BODY: "Ta QR-koda rešuje nalogo za iskanje.",
     QR_CODE_SCAN_TASK_ERROR: "To kodo ste že pregledali. Ali pa ta del igre ni odklenjen curek.",
 
-    QR_CODE_SCAN_COIN_ERROR: "Kovanec trenutno ni veljaven ali pa je že zbran"
+    QR_CODE_SCAN_COIN_ERROR: "Kovanec trenutno ni veljaven ali pa je že zbran",
+
+    //next button
+    NEXT_BUTTON: "Naslednji",
 };

@@ -21,9 +21,9 @@ function LanguageGame({element, session, sessionId, elementId, markdown, update}
         {element?.processed && <div className='flex flex-row justify-end'>
             <button className='bg-blue-500 text-white rounded-xl px-4 py-2 mt-3'
             onClick={() => {
-                console.log(unFinishedSessions);
                 if (unFinishedSessions.length == 0) {
                     navigate(`/quest/${session?.session?.id}`);
+                    return;
                 }
                 const element = unFinishedSessions[Math.floor(Math.random() * unFinishedSessions.length)];
                 navigate(`/game/${session?.session?.id}/${element?.id}`);
