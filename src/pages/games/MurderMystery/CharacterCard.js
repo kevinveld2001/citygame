@@ -15,7 +15,7 @@ function CharacterCard({ markdown }) {
     const [error, setError] = useState(false);
 
     useEffect(() => {
-        async function getDynamicElements() {
+        async function initFromSessionInfo() {
             const sessionInfo = await getSessionInfo(sessionId);
             if (sessionInfo === undefined) {
                 setError(true);
@@ -27,7 +27,7 @@ function CharacterCard({ markdown }) {
             }
         }
 
-        getDynamicElements();
+        initFromSessionInfo();
 
     }, []);
 
@@ -44,7 +44,7 @@ function CharacterCard({ markdown }) {
             {createPortal(
                 <div className="fixed w-full h-full z-[-10]">
                     <img className="fixed w-full h-full z-[-10]" src="/MurderMystery/MM_CaseFile_Template_Blank.png" alt="Background, blank template for a Murder Mystery character card"></img>
-                    
+
                     <img className="mx-auto h-1/3" src="/MurderMystery/MM_Image_Isabella_DeLongi.png" alt="Character for a Murder Mystery character card"></img>
                     <ReactMarkdown className="h-2/3 mt-4 px-4" remarkPlugins={[remarkGfm]} children={markdown}/>
                 </div>,
