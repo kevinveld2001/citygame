@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from "react";
+import { CUSTOM_GAME_REGEX } from "../../constants";
 import { Link } from "react-router-dom";
 import { getSessionInfo } from "../../services/totoSessionService";
 import ReactMarkdown from "react-markdown";
@@ -40,7 +41,7 @@ function QuestListItem({sessionId, filter}) {
                 <h1 className="text-xl font-bold text-black">
                     {quest?.story?.content?.title}
                 </h1>
-                <ReactMarkdown className={"text-gray-800"} remarkPlugins={[remarkGfm]} children={quest?.story?.content?.description}/>
+                <ReactMarkdown className={"text-gray-800"} remarkPlugins={[remarkGfm]} children={quest?.story?.content?.description?.replace(CUSTOM_GAME_REGEX, "")}/>
             </div>
         </Link>
     }

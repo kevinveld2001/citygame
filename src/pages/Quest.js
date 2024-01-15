@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
+import { CUSTOM_GAME_REGEX } from "../constants";
 import SettingsContext from "../services/SettingsContext";
 import { useParams, Link } from "react-router-dom";
 import { getSessionInfo, reinit } from "../services/totoSessionService";
@@ -62,7 +63,7 @@ function QuestScreen() {
                     {isLoading ? 
                     <div className="bg-gray-300 h-8 w-full animate-pulse my-2" />
                     :
-                    <ReactMarkdown className={"text-gray-800"} remarkPlugins={[remarkGfm]} children={session?.story?.content?.description}/>
+                    <ReactMarkdown className={"text-gray-800"} remarkPlugins={[remarkGfm]} children={session?.story?.content?.description?.replace(CUSTOM_GAME_REGEX, "")}/>
                     }
                 </div>
             </div>
