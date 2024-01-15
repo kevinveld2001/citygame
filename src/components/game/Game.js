@@ -1,23 +1,20 @@
 import React, { useEffect, useState } from 'react'
+import { CUSTOM_GAME_REGEX } from '../../constants';
 import SkeletonLoader from "./SkeletonLoader";
-import ReactMarkdown from "react-markdown";
 import { acknowledge, getSessionInfo } from "../../services/totoSessionService";
-import remarkGfm from 'remark-gfm'
-import Solutions from './Solutions';
-import GameLink from "./GameLink";
-import ScrMult from '../../pages/games/ScrMult';
 import CustomGamesMap from "./CustomGamesMap";
 
 
 function Game({ elementId, sessionId }) {
     const [showSkeletonLoader, setShowSkeletonLoader] = useState(true);
+    const [updateKey, setUpdateKey] = useState(Math.random());
     const [error, setError] = useState(false);
     const [markdown, setMarkdown] = useState("");
     const [element, setElement] = useState(null);
     const [session, setSession] = useState(null);
-    const [updateKey, setUpdateKey] = useState(Math.random());
 
-    const [customGame, setCustomGame] = useState(null);
+    const [customGame, setCustomGame] = useState("default");
+    const CustomGame = CustomGamesMap.get(customGame);
 
     useEffect(() => {
         setError(false);
@@ -35,19 +32,30 @@ function Game({ elementId, sessionId }) {
                         element = acknowledgement.updatedElement;
                     }
                 }
-                const customGameRegex = /{customgame:(.+)}/;
-                setMarkdown(element?.content?.description.replace(customGameRegex, ""));
+
+                const elementCustomGame = element?.content?.description?.match(CUSTOM_GAME_REGEX);
+                if (elementCustomGame && CustomGamesMap.has(elementCustomGame[1])) {
+                    setCustomGame(elementCustomGame[1]);
+                }
+                const storyCustomGame = sessionInfo?.story?.content?.description?.match(CUSTOM_GAME_REGEX);
+                if (storyCustomGame && CustomGamesMap.has(storyCustomGame[1])) {
+                    setCustomGame(storyCustomGame[1]);
+                }
+
+
+                setMarkdown(element?.content?.description.replace(CUSTOM_GAME_REGEX, ""));
                 setElement(element);
-                setCustomGame(element?.content?.description.match(customGameRegex));
                 setSession(sessionInfo);
                 setShowSkeletonLoader(false);
             }
         };
 
         getMarkdown();
-    }, [elementId, sessionId]);
+    }, [elementId, sessionId, updateKey]);
 
-    function updateLinks() {
+
+
+    function update() {
         setUpdateKey(Math.random());
     }
 
@@ -59,19 +67,7 @@ function Game({ elementId, sessionId }) {
         </div>}
 
         {!showSkeletonLoader && !error && <div className="flex flex-col justify-between p-10 h-full">
-            <div className="prose lg:prose-xl mb-5">
-                <ReactMarkdown remarkPlugins={[remarkGfm]} children={markdown}/>
-            </div>
-
-            {customGame ?
-            <>  
-                {CustomGamesMap.get(customGame[1]) /* [1] contains only the RegEx pattern from above if it was found */}
-            </>
-             :
-            <>
-                <Solutions element={element} data={element.solutions} elementId={elementId} sessionId={sessionId} updateLinks={updateLinks} />
-                <GameLink key={updateKey} sessionId={sessionId} elId={elementId}/>
-            </>}
+            <CustomGame element={element} session={session} sessionId={sessionId} elementId={elementId} markdown={markdown} update={update}/>
         </div>}
     </div>)
 }

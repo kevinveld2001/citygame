@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import { getSessionInfo, processManualTrigger } from "../../services/totoSessionService";
+import { getSessionInfo, processManualTrigger } from "../../../services/totoSessionService";
 import { useParams } from "react-router-dom";
 
-import SkeletonLoader from "../../components/game/SkeletonLoader";
+import SkeletonLoader from "../SkeletonLoader";
 
 function ScrMult() {
     const { sessionId } = useParams();
