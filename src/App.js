@@ -70,7 +70,7 @@ function App() {
     <div className='h-[100%] w-screen flex flex-col overflow-hidden'>
       <SettingsContext.Provider value={[settings, setSettings]}>
         <InstallBar />
-        <div className='flex-1 flex overflow-auto'>
+        <div id='main-container' className='flex-1 flex overflow-auto'>
           {settings.auth === null && !location.pathname.includes("/auth") ? (<Navigate to="/auth" />) : <></>}
           <Routes>
             <Route path='/' element={<HomeScreen />} />
