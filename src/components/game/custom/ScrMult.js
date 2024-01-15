@@ -2,34 +2,15 @@ import { useEffect, useState } from "react";
 import { getSessionInfo, processManualTrigger } from "../../../services/totoSessionService";
 import { useParams } from "react-router-dom";
 
-import SkeletonLoader from "../SkeletonLoader";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from 'remark-gfm'
 
-function ScrMult() {
-    const { sessionId } = useParams();
-
-    const [showSkeletonLoader, setShowSkeletonLoader] = useState(true);
-    const [error, setError] = useState(false);
-
+function ScrMult( {element, session, sessionId, elementId, markdown, update} ) {
+    
     const [dynamicElements, setDynamicElements] = useState([]);
 
     useEffect(() => {
-        async function getDynamicElements() {
-            const sessionInfo = await getSessionInfo(sessionId);
-            if (sessionInfo === undefined) {
-                setError(true);
-                setShowSkeletonLoader(false);
-            }
-            else {
-                setDynamicElements(sessionInfo.elements.filter(element => element.t === "Dynamic"));
-                console.log(sessionInfo);
-                console.log(sessionInfo.elements);
-                console.log(sessionInfo.elements.filter(element => element.t === "Dynamic"));
-                setShowSkeletonLoader(false);
-            }
-        }
-
-        getDynamicElements();
-
+        setDynamicElements(session.elements.filter(element => element.t === "Dynamic"));
     }, []);
 
     function processScreenButton(sessionId, elementUuid) {
@@ -37,22 +18,19 @@ function ScrMult() {
     }
 
     return (<div>
-        {showSkeletonLoader && <SkeletonLoader />}
+        <div className="prose lg:prose-xl mb-5">
+            <ReactMarkdown remarkPlugins={[remarkGfm]} children={markdown}/>
+        </div>
 
-        {error && <div className="m-5 h-full bg-red-400 border border-red-700 rounded-xl">
-            <span>The game was not able to load.</span>
-        </div>}
-
-        {!showSkeletonLoader && !error &&
-            <div className="flex flex-col justify-between p-10 h-full">
-                {dynamicElements.map( (element) =>
-                    <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-xl mt-3 flex items-center justify-center"
-                            key={element.id}
-                            onClick={ () => { processScreenButton(sessionId, element.id); } } >
-                                Screen {element.elementId}
-                    </button>)
-                }
-        </div>}
+        <div className="flex flex-col justify-between p-10 h-full">
+            {dynamicElements.map( (element) =>
+                <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-xl mt-3 flex items-center justify-center"
+                        key={element.id}
+                        onClick={ () => { processScreenButton(sessionId, element.id); } } >
+                            Screen {element.elementId}
+                </button>)
+            }
+        </div>
 
         
     </div>);
