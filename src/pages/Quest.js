@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
+import { CUSTOM_GAME_REGEX } from "../constants";
 import SettingsContext from "../services/SettingsContext";
 import { useParams, Link } from "react-router-dom";
 import { getSessionInfo, reinit } from "../services/totoSessionService";
@@ -16,7 +17,7 @@ function QuestScreen() {
     const { id } = useParams();
     const [session, setSession] = useState(null);
     const elements = session?.elements?.filter(element => element?.t !== "Coin");
-    const unFinishedSessions = session?.elements.filter(element => !element.processed)
+    const unFinishedSessions = session?.elements.filter(element => !element.processed && (element.t !== "Dynamic" && element.content?.showOnList) );
     const [isLoading, setIsLoading] = useState(true);
     const navigate = useNavigate();
 
@@ -62,7 +63,7 @@ function QuestScreen() {
                     {isLoading ? 
                     <div className="bg-gray-300 h-8 w-full animate-pulse my-2" />
                     :
-                    <ReactMarkdown className={"text-gray-800"} remarkPlugins={[remarkGfm]} children={session?.story?.content?.description}/>
+                    <ReactMarkdown className={"text-gray-800"} remarkPlugins={[remarkGfm]} children={session?.story?.content?.description?.replace(CUSTOM_GAME_REGEX, "")}/>
                     }
                 </div>
             </div>
@@ -70,7 +71,7 @@ function QuestScreen() {
             {unFinishedSessions?.length > 0 &&
                 <button className="bg-blue-500 py-3 mb-3 text-white"
                     onClick={() => {
-                        const element = unFinishedSessions[0];
+                        const element = unFinishedSessions[Math.floor(Math.random() * unFinishedSessions.length)];
                         navigate(`/game/${id}/${element?.id}`);
                     }}
                 >
@@ -78,7 +79,8 @@ function QuestScreen() {
                 </button>
             }
 
-            {session && !isLoading && elements.map((element, index) => 
+            {session && !isLoading 
+                && session?.elements?.filter(element => element?.content?.showOnList)?.map((element, index) => 
             <Link key={element?.id} to={`/game/${id}/${element?.id}`} className='text-blue-500 my-2 flex flex-row items-center gap-4'>
                 <div className="w-10 h-10 bg-slate-200"> 
                     {element?.processed && <div className="w-full h-full bg-blue-500 flex justify-center items-center">
@@ -98,6 +100,20 @@ function QuestScreen() {
                     )}
                 </div>
             }
+            {!isLoading && <div className="relative border rounded-lg p-4 pt-11 mt-11 flex flex-col">
+                <div className="absolute rounded-full border h-16 w-16 flex justify-center items-center top-[-2rem] bg-white self-center">
+                    <span className="font-bold text-2xl">{session?.session?.score ?? 0}</span>
+                </div>
+
+                <div className="flex flex-col">
+                    <span>
+                        {
+                        translations.QUEST_SCREEN_SCORE
+                            .replace(':points', session?.session?.score ?? 0)
+                        }
+                    </span>
+                </div>
+            </div>}
 
             <button className="border-2 border-red-500 rounded p-2 self-center mt-6 text-red-500"
                 onClick={async () => {

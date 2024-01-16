@@ -5,7 +5,7 @@ import Geofence from "./solutions/Geofence";
 
 import ScanButton from "./solutions/Scan";
 
-function Solutions({element, data, elementId, sessionId, updateLinks }) {
+function Solutions({element, data, elementId, sessionId, update }) {
     let defaultFinished = "";
     if (element?.processed?.mc) defaultFinished = "MC";
     if (element?.processed?.text) defaultFinished = "TEXT";
@@ -14,7 +14,7 @@ function Solutions({element, data, elementId, sessionId, updateLinks }) {
     const [finished, setFinished] = useState(defaultFinished);
     function finish(type) {
         setFinished(type);
-        updateLinks();
+        update();
     }
 
     return <>
