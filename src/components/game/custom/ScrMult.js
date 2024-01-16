@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
-import { getSessionInfo, processManualTrigger } from "../../../services/totoSessionService";
-import { useParams } from "react-router-dom";
+import { processManualTrigger, getSessionInfo } from "../../../services/totoSessionService";
 
 import ReactMarkdown from "react-markdown";
 import remarkGfm from 'remark-gfm'
@@ -9,9 +8,22 @@ function ScrMult( {element, session, sessionId, elementId, markdown, update} ) {
     
     const [dynamicElements, setDynamicElements] = useState([]);
 
+    // first, the info element has to be acknowledged and release the dynamic elements
     useEffect(() => {
-        setDynamicElements(session.elements.filter(element => element.t === "Dynamic"));
-    }, []);
+        async function setDynamicAfterInfoAcknowledge() {
+            const sessionAnew = await getSessionInfo(sessionId);
+
+            if (element.t === "Info" && element.processed) {
+                setDynamicElements(sessionAnew.elements.filter(element => element.t === "Dynamic"));
+            }
+            else {
+                throw new Error("Dynamic elements are not set correctly - the info element was not yet acknowledged and the session did not yet have information about the dynamic elements at this point in the code!");
+            }
+        }
+
+        setDynamicAfterInfoAcknowledge();
+        
+    }, [element]);
 
     function processScreenButton(sessionId, elementUuid) {
         processManualTrigger(sessionId, elementUuid);
