@@ -17,7 +17,7 @@ function QuestScreen() {
     const { id } = useParams();
     const [session, setSession] = useState(null);
     const elements = session?.elements?.filter(element => element?.t !== "Coin");
-    const unFinishedSessions = session?.elements.filter(element => !element.processed)
+    const unFinishedSessions = session?.elements.filter(element => !element.processed && (element.t !== "Dynamic" && element.content?.showOnList) );
     const [isLoading, setIsLoading] = useState(true);
     const navigate = useNavigate();
 
