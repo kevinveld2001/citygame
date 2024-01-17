@@ -21,12 +21,19 @@ function HomeScreen() {
         }) ();
     }, []);
 
-    return <div className='w-full h-full flex flex-col items-stretch pt-10 relative' id="homeScreen">
-        <div className='flex flex-col items-center'>
+    return <div className='w-full h-full flex flex-col items-stretch pt-5 relative' id="homeScreen">
+        <div className='flex justify-end'>
+            <Link to="/settings">
+                <img src='/ui_assets/settings_icon.png' alt="settings icon" className='w-10 h-10 mr-10' />
+            </Link>
+        </div>
+        <div className='flex flex-row justify-center gap-5 items-end'>
             <ProfileImage user={user} size="h-36 w-36"/>
-            <span className='text-2xl font-bold mt-4'>
-                {user?.screenName ?? user?.email ?? (user === null ? "..." : 'Anonymous')}
-            </span>
+            <div className='flex flex-col'>
+                <span className='text-2xl font-bold mt-4'>
+                    {user?.screenName ?? user?.email ?? (user === null ? "..." : 'Anonymous')}
+                </span>
+            </div>
         </div>
         <div className='flex-1 flex flex-col m-10 gap-3 overflow-y-scroll overflow-x-hidden'> 
             {Object.values(sessionIds).map((sessionId) => (

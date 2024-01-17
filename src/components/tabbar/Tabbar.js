@@ -1,7 +1,6 @@
 import React, {useContext} from "react";
 import SettingsContext from "../../services/SettingsContext";
 import TabItem from "./TabItem";
-import {FaSlidersH } from "react-icons/fa";
 import { useLocation } from "react-router-dom";
 
 function Tabbar() {
