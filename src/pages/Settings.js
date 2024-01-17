@@ -77,7 +77,7 @@ function Settings() {
                 <span className="font-semibold text-lg text-green-600">{translations.SETTINGS_ACOUNTSETTING_UPLOADED}</span>
               </>}
 
-              <input type="file" id="dropzone" className="hidden" accept=".png, .gif, .jpeg"
+              <input type="file" id="dropzone" className="hidden" accept=".png, .gif, .jpg, .jpeg"
                 onChange={(event) => {
                   const files = event.target.files;
                   if (files.length > 0) {
