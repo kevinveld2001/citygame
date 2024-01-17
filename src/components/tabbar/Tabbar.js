@@ -30,12 +30,12 @@ function Tabbar() {
             activeIcon={{src: "/ui_assets/quest_active.png", alt: "Quest icon active"}} 
             icon={{src: "/ui_assets/quest_button.png", alt: "Quest icon"}} 
             text={translations.TAB_QUEST}  />
-        {/* <TabItem 
+        <TabItem 
             active={location.pathname.includes("/inventory")}
             toLink="/inventory" 
             activeIcon={{src: "/ui_assets/inventory_active.png", alt: "inventory icon active"}} 
             icon={{src: "/ui_assets/inventory_button.png", alt: "inventory icon"}} 
-            text={"Inventory"} /> */}
+            text={"Inventory"} />
     </div>
     );
 }
