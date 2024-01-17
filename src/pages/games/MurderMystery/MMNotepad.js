@@ -4,6 +4,8 @@ import { useParams, Link } from "react-router-dom";
 import { MdArrowBackIos } from "react-icons/md";
 import { FaSave } from "react-icons/fa";
 
+import { MAX_NOTEPAD_CHARS } from "constants";
+
 function MMNotepad({ markdown }) {
     const { elementId, sessionId } = useParams();
 
@@ -34,7 +36,11 @@ function MMNotepad({ markdown }) {
                         <div className="relative top-[25%] h-[50%]">
                             <label htmlFor="freenotes">Type your notes here:</label>
                             <br />
-                            <textarea id="freenotes" className="resize-none w-full h-full" style={{backgroundColor:"rgba(235,160,160,0.33)"}}></textarea>
+                            {/* !! maxLength not displayed to the users !! */}
+                            <textarea id="freenotes"
+                                        className="resize-none w-full h-full"
+                                        style={{backgroundColor:"rgba(235,160,160,0.33)"}}
+                                        maxLength={MAX_NOTEPAD_CHARS}></textarea>
                         </div>
                     </div>
                 </div>
