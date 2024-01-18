@@ -26,7 +26,7 @@ scheduleNotificationFromStoreage();
 
 function App() {
   const location = useLocation(); 
-  const pathsWithTabbar = ['/quest', '/settings', '/map'	];
+  const pathsWithTabbar = ['/quest', '/settings', '/map', '/inventory'	];
   const [settings, setSettings] = useState(rawSettings);
 
   useEffect(() => {
@@ -74,7 +74,8 @@ function App() {
             <Route path='/map' element={<Map />} />
             <Route path='/quest/list' element={<QuestList />} />
             <Route path='/quest/:id' element={<QuestScreen />} />
-            <Route path='/inventory' element={<Inventory />} />
+            <Route path='/inventory' element={<Navigate to="/inventory/achievements" />} />
+            <Route path='/inventory/:id' element={<Inventory />} />
             <Route path='/settings' element={<Settings />} />
             <Route path='/game/:sessionId/:elementId' element={<GameScreen />} />
             {process.env.REACT_APP_EXPERIMENTAL_FEATURES === 'true' && <>
