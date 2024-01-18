@@ -21,7 +21,7 @@ function MMNotepad({ markdown }) {
     return (
         <>
             {/* if someone can make this positioning CSS less hardcoded (and awful), please do it */}
-                <div className="absolute inset-0 w-full h-full" style={{backgroundImage:"url(/MurderMystery/MM_CaseFile_Isabella.png)"}}>
+                <div className="absolute inset-0 w-full h-full" style={{backgroundImage:"url(/MurderMystery/MM_CaseFile_Amelie.png)"}}>
                     {/* Link drilled in the component (it should be identical to the global back button for every game - the real one is buried below the div and image here) */}
                     <Link to={`/quest/${sessionId}`} className={`absolute flex flex-row items-center m-5 mb-0 pr-10 self-start`} >
                         <MdArrowBackIos />
