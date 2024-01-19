@@ -93,7 +93,8 @@ function Settings() {
             if (loading === true) return;
             setLoading(true);
             await logout();
-            localStorage.clear();
+            localStorage.removeItem("sessionids");
+            localStorage.removeItem("auth");
             setSettings({...settings, auth: null});
           }}>
           <div className="border my-4 rounded-lg flex flex-col p-3">
