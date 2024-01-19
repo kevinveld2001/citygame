@@ -1,22 +1,55 @@
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 
-import { MdArrowBackIos } from "react-icons/md";
+import { MdArrowBackIos, MdArrowForwardIos } from "react-icons/md";
 import { FaSave } from "react-icons/fa";
 
-import { MAX_NOTEPAD_CHARS } from "constants";
+import { MAX_NOTEPAD_CHARS, TOTO_VAR_MMYSTERY_IDS } from "constants";
+import { getSessionInfo } from "services/totoSessionService";
 
 function MMNotepad({ markdown }) {
+    const [predefinedNotes, setPredefinedNotes] = useState([]);
+    const [predefinedNoteIndex, setPredefinedNoteIndex] = useState(0);
+
     const { elementId, sessionId } = useParams();
+
+    function savePredefinedNotes() {
+        // better?: store in Toto variable instead (we do not have the permissions to do that)
+        window.localStorage.setItem("mm_notes_predefined", predefinedNotes);
+    }
 
     function saveUserNotes() {
         // seems to be sanitized automatically by React
-        window.localStorage.setItem("mm_notes", document.getElementById("freenotes").value);
+        window.localStorage.setItem("mm_notes_user", document.getElementById("freenotes").value);
+    }
+
+    async function setPredefinedNotesFromIds() {
+        const sessionInfo = await getSessionInfo(sessionId);
+        // the variable name is hardcoded here because there exists no more reasonable way to locate the info storage for this code
+        const notesIds = sessionInfo.variables.find(variable => variable.name === TOTO_VAR_MMYSTERY_IDS);
+        if (!notesIds) return;  // silent return - bad for error handling, but necessary to handle not having any notes yet
+        const notesIdsArray = notesIds.value.split(",");
+
+        const updatedNotes = new Array();
+        // -1 because if every trigger in Toto follows the same generic pattern of 'var = var + "id,"', there will be an excess element caused by the last comma.
+        // as an alternative to this, check for each element if it is an empty string instead.
+        for (let i = 0; i < notesIdsArray.length - 1; i++) {
+            const noteText = sessionInfo.elements.find(element => element.elementId === notesIdsArray[i]).processed.postDescription;
+            console.log(updatedNotes);
+            updatedNotes.push(noteText);
+        }
+        setPredefinedNotes(updatedNotes);
     }
 
     useEffect(() => {
-        document.getElementById("freenotes").value = window.localStorage.getItem("mm_notes");
+        setPredefinedNotesFromIds();
+
+        document.getElementById("freenotes").value = window.localStorage.getItem("mm_notes_user");
     }, []);
+
+    useEffect(() => {
+        savePredefinedNotes();
+    }, [predefinedNotes]);
 
     return (
         <>
@@ -29,16 +62,33 @@ function MMNotepad({ markdown }) {
                     </Link>
                         
                     <div className="fixed top-[40%] h-[60%] mt-8 inset-x-4">
-                        {/* HARDCODED CLUES HERE */}
-                        <p>More notes (not)</p>
-                        <br />
+                        <div className="relative h-[40%]">
+                            <p>Found notes:</p>
+                            <br />
+                            <div className="flex">
+                                {predefinedNotes && predefinedNotes.length > 0 ? <>
+                                    <button className="" onClick={ () =>
+                                        setPredefinedNoteIndex(predefinedNoteIndex === 0 ? predefinedNotes.length - 1 : predefinedNoteIndex - 1) }>
+                                        <MdArrowBackIos className="w-8 h-8" />
+                                    </button>
+                                    <p id="foundnotes" className="basis-[80%]">{predefinedNotes.length > 0 ? predefinedNotes[predefinedNoteIndex] : ""}</p>
+                                    <button className="" onClick={ () =>
+                                        setPredefinedNoteIndex(predefinedNoteIndex === predefinedNotes.length - 1 ? 0 : predefinedNoteIndex + 1) }>
+                                        <MdArrowForwardIos className="w-8 h-8" />
+                                    </button>
+                                </>
+                                :
+                                <p className="justify-center self-center">No notes</p>
+                                }
+                            </div>
+                        </div>
 
-                        <div className="relative top-[25%] h-[50%]">
+                        <div className="relative h-[50%]">
                             <label htmlFor="freenotes">Type your notes here:</label>
                             <br />
                             {/* !! maxLength not displayed to the users !! */}
                             <textarea id="freenotes"
-                                        className="resize-none w-full h-full"
+                                        className="resize-none w-full h-[80%]"
                                         style={{backgroundColor:"rgba(235,160,160,0.33)"}}
                                         maxLength={MAX_NOTEPAD_CHARS}></textarea>
                         </div>
