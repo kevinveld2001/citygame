@@ -22,7 +22,8 @@ function CharacterCard({ markdown }) {
     return (<>
         {!showNotepad && <>
                 {/* TODO: Randomize/appropriate backgroundImage per character */}
-                <div className="absolute inset-0 w-full h-full" style={{backgroundImage:"url(/MurderMystery/MM_CaseFile_Amelie.png)", backgroundSize:"cover", backgroundPosition:"top"}}>
+                <div className="absolute inset-0 w-full h-full" >
+                    <img className="absolute top-0 left-0 w-full h-full" src="/MurderMystery/MM_CaseFile_Amelie.png" alt="Case file background with character" />
                     {/* Link drilled in the component (it should be identical to the global back button for every game - the real one is buried below the div and image here) */}
                     <Link to={`/quest/${sessionId}`} className={`absolute flex flex-row items-center m-5 mb-0 pr-10 self-start`} >
                         <MdArrowBackIos />
