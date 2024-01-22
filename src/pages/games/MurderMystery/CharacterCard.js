@@ -25,7 +25,7 @@ function CharacterCard({ markdown }) {
                         <span>back</span>
                     </Link>
                         
-                    <ReactMarkdown className="relative top-[40%] h-2/3 mt-6 px-4" remarkPlugins={[remarkGfm]} children={markdown}/>
+                    <ReactMarkdown className="relative top-[40%] h-[50%] mt-6 px-4" remarkPlugins={[remarkGfm]} children={markdown}/>
 
                     <button className="absolute top-4 right-4" onClick={() => { setShowNotepad(true) } }>
                         <PiNotepadFill className="w-8 h-8" />
