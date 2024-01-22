@@ -1,19 +1,34 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
 import InventoryList from "./InventoryList";
+import { AiOutlineLoading } from "react-icons/ai";
+import { getSessionInfo } from "../../services/totoSessionService";
 
 function StoriesTab() {
-    const listData = [
-        {picture: "/totoapi/v2/pub/file/6c210b5d-cdcd-4efa-8898-0fa498348c92?v=xl", collected: true, link: "/game/b42c6e56-535e-415b-89c7-75d9fce01c6a/917a02ff-e9b5-423f-9243-20ec5b1916c6"},
-        {picture: "/totoapi/v2/pub/file/6c210b5d-cdcd-4efa-8898-0fa498348c92?v=xl", collected: false, link: "/game/b42c6e56-535e-415b-89c7-75d9fce01c6a/917a02ff-e9b5-423f-9243-20ec5b1916c6"},
-        {picture: "", collected: false, link: ""},
-        {picture: "", collected: false, link: ""},
-        {picture: "", collected: false, link: ""},
-        {picture: "", collected: true, link: ""},
-        {picture: "", collected: false, link: ""},
-    ]
+    const [isLoading, setIsLoading] = useState(true);
+    const [listData, setListData] = useState([]);
 
-    return <div className="w-full h-full">
-        <InventoryList listData={listData} />
+    useEffect(() => {
+        (async () => {
+            const sessionIds = JSON.parse(localStorage.getItem("sessionids") ?? "{}");
+            const list = await Promise.all(Object.values(sessionIds).map(async (id) => await getSessionInfo(id)))
+            const formatedList = list.map((totoSession) => {
+                let picture = "";
+                if (totoSession?.story?.content?.logo) {
+                    picture = `/totoapi/v2/pub/file/${totoSession?.story?.content?.logo}?v=xl`
+                }
+                return {picture, collected: !!totoSession?.session?.session?.finishedAt, link: "", key: totoSession?.story?.id}
+            }) 
+            setListData(formatedList);
+            setIsLoading(false);
+        }) ()
+    }, [])
+
+    console.log(listData);
+    return <div className={`w-full h-full ${isLoading? "flex justify-center items-center" : ""}`}>
+        { isLoading ? 
+            <AiOutlineLoading className="animate-spin w-6 h-6" /> : 
+            <InventoryList listData={listData} />
+        }
     </div>
 }
 
