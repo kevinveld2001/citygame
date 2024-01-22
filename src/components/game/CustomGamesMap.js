@@ -2,7 +2,7 @@ import ScrMult from "./custom/ScrMult";
 import LanguageGame from "./custom/LanguageGame";
 import DefaultGame from "./custom/Default";
 
-import CharacterCard from "pages/games/MurderMystery/CharacterCard";
+import CharacterCard from "./custom/MurderMystery/CharacterCard";
 
 const map = new Map();
 

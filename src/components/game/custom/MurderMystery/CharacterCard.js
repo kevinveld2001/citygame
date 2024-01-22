@@ -9,7 +9,7 @@ import { MdArrowBackIos } from "react-icons/md";
 import { FaWindowClose } from "react-icons/fa";
 import SettingsContext from "services/SettingsContext";
 
-import MMNotepad from "pages/games/MurderMystery/MMNotepad";
+import MMNotepad from "components/game/custom/MurderMystery/MMNotepad";
 
 function CharacterCard({ markdown }) {
     const [settings] = useContext(SettingsContext);
