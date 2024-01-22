@@ -99,4 +99,13 @@ export default {
 
     //next button
     NEXT_BUTTON: "prossima",
+    BACK_BUTTON: "indietro",
+
+    // murder mystery notepad
+    MM_FOUND_NOTES_LABEL: "Note trovate:",
+    MM_FOUND_NOTES_NONE: "Nessuna nota",
+    MM_USER_NOTES_LABEL: "Scrivi qui i tuoi appunti:",
+    
+    // game load error
+    GAME_LOAD_ERROR_GENERIC: "Impossibile caricare il gioco.",
 };

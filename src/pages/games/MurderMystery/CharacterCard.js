@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { createPortal } from "react-dom";
 import { useParams, Link } from "react-router-dom";
 
@@ -7,10 +7,14 @@ import remarkGfm from 'remark-gfm'
 import { PiNotepadFill } from "react-icons/pi";
 import { MdArrowBackIos } from "react-icons/md";
 import { FaWindowClose } from "react-icons/fa";
+import SettingsContext from "services/SettingsContext";
 
 import MMNotepad from "pages/games/MurderMystery/MMNotepad";
 
 function CharacterCard({ markdown }) {
+    const [settings] = useContext(SettingsContext);
+    const translations = settings.translations[settings.language];
+
     const { elementId, sessionId } = useParams();
 
     const [showNotepad, setShowNotepad] = useState(false);
@@ -22,7 +26,7 @@ function CharacterCard({ markdown }) {
                     {/* Link drilled in the component (it should be identical to the global back button for every game - the real one is buried below the div and image here) */}
                     <Link to={`/quest/${sessionId}`} className={`absolute flex flex-row items-center m-5 mb-0 pr-10 self-start`} >
                         <MdArrowBackIos />
-                        <span>back</span>
+                        <span>{translations.BACK_BUTTON}</span>
                     </Link>
                         
                     <ReactMarkdown className="relative top-[40%] h-[50%] mt-6 px-4" remarkPlugins={[remarkGfm]} children={markdown}/>

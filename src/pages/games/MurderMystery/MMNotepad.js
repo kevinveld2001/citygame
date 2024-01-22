@@ -1,13 +1,17 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { useParams, Link } from "react-router-dom";
 
 import { MdArrowBackIos, MdArrowForwardIos } from "react-icons/md";
 import { FaSave } from "react-icons/fa";
+import SettingsContext from "services/SettingsContext";
 
 import { MAX_NOTEPAD_CHARS, TOTO_VAR_MMYSTERY_IDS } from "constants";
 import { getSessionInfo } from "services/totoSessionService";
 
 function MMNotepad({ markdown }) {
+    const [settings] = useContext(SettingsContext);
+    const translations = settings.translations[settings.language];
+    
     const [predefinedNotes, setPredefinedNotes] = useState([]);
     const [predefinedNoteIndex, setPredefinedNoteIndex] = useState(0);
 
@@ -58,12 +62,12 @@ function MMNotepad({ markdown }) {
                     {/* Link drilled in the component (it should be identical to the global back button for every game - the real one is buried below the div and image here) */}
                     <Link to={`/quest/${sessionId}`} className={`absolute flex flex-row items-center m-5 mb-0 pr-10 self-start`} >
                         <MdArrowBackIos />
-                        <span>back</span>
+                        <span>{translations.BACK_BUTTON}</span>
                     </Link>
                         
                     <div className="fixed top-[40%] h-[60%] mt-8 inset-x-4">
                         <div className="relative h-[40%]">
-                            <p>Found notes:</p>
+                            <p>{translations.MM_FOUND_NOTES_LABEL}</p>
                             <br />
                             <div className="flex">
                                 {predefinedNotes && predefinedNotes.length > 0 ? <>
@@ -78,13 +82,13 @@ function MMNotepad({ markdown }) {
                                     </button>
                                 </>
                                 :
-                                <p className="justify-center self-center">No notes</p>
+                                <p className="justify-center self-center">{translations.MM_FOUND_NOTES_NONE}</p>
                                 }
                             </div>
                         </div>
 
                         <div className="relative h-[50%]">
-                            <label htmlFor="freenotes">Type your notes here:</label>
+                            <label htmlFor="freenotes">{translations.MM_USER_NOTES_LABEL}</label>
                             <br />
                             {/* !! maxLength not displayed to the users !! */}
                             <textarea id="freenotes"

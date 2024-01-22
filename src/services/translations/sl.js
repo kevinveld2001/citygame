@@ -99,4 +99,13 @@ export default {
 
     //next button
     NEXT_BUTTON: "Naslednji",
+    BACK_BUTTON: "nazaj",
+    
+    // murder mystery notepad
+    MM_FOUND_NOTES_LABEL: "Najdeni zapiski:",
+    MM_FOUND_NOTES_NONE: "Brez opomb",
+    MM_USER_NOTES_LABEL: "Tukaj vnesite svoje opombe:",
+    
+    // game load error
+    GAME_LOAD_ERROR_GENERIC: "Igre ni bilo mogoče naložiti.",
 };
