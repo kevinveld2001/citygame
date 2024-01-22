@@ -20,6 +20,7 @@ export default {
     SETTINGS_ACOUNTSETTING_UPLOAD_FILE: 'Caricare un file',
     SETTINGS_ACOUNTSETTING_UPLOAD_FAILED: 'Impossibile caricare il file',
     SETTINGS_ACOUNTSETTING_UPLOADED: 'File caricato',
+    SETTINGS_ACOUNTSETTING_UPGRADE_ACCOUNT: 'Account di aggiornamento',
 
     // Instalation banner
     INSTALL_BANNER_TITLE: 'Installa l\'app di gioco della città',

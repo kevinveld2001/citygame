@@ -20,6 +20,7 @@ export default {
     SETTINGS_ACOUNTSETTING_UPLOAD_FILE: 'Naloži datoteko',
     SETTINGS_ACOUNTSETTING_UPLOAD_FAILED: 'Datoteke ni bilo mogoče naložiti',
     SETTINGS_ACOUNTSETTING_UPLOADED: 'Datoteka naložena',
+    SETTINGS_ACOUNTSETTING_UPGRADE_ACCOUNT: 'Nadgradnja računa',
 
     // Instalation banner
     INSTALL_BANNER_TITLE: 'Namestite aplikacijo City Game',

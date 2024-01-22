@@ -104,7 +104,7 @@ function Settings() {
 
         { settings?.auth?.role === "Anonymised" && 
         <Link to="/settings/upgrade" className="underline cursor-pointer border my-4 rounded-lg flex flex-col p-3">
-               Upgrade account
+               {translations.SETTINGS_ACOUNTSETTING_UPGRADE_ACCOUNT}
         </Link>
         }
         

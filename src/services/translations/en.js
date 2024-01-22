@@ -20,6 +20,7 @@ export default {
     SETTINGS_ACOUNTSETTING_UPLOAD_FILE: 'Upload file',
     SETTINGS_ACOUNTSETTING_UPLOAD_FAILED: 'Failed to upload file',
     SETTINGS_ACOUNTSETTING_UPLOADED: 'File uploaded',
+    SETTINGS_ACOUNTSETTING_UPGRADE_ACCOUNT: 'Upgrade account',
 
     // Instalation banner
     INSTALL_BANNER_TITLE: 'Install city game app',
