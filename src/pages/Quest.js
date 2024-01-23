@@ -17,7 +17,8 @@ function QuestScreen() {
     const { id } = useParams();
     const [session, setSession] = useState(null);
     const elements = session?.elements?.filter(element => element?.t !== "Coin");
-    const unFinishedSessions = session?.elements.filter(element => !element.processed && (element.t !== "Dynamic" && element.content?.showOnList) );
+    const [isLanguageGame, setIsLanguageGame] = useState(false);
+    const unFinishedSessions = session?.elements.filter(element => !element.processed && (element.t !== "Dynamic" && element.content?.showOnList) || isLanguageGame);
     const [isLoading, setIsLoading] = useState(true);
     const navigate = useNavigate();
 
@@ -25,6 +26,8 @@ function QuestScreen() {
         const session = await getSessionInfo(id);
         setSession(session);
         setIsLoading(false);
+        const regexOutput = session?.story?.content?.description?.match(CUSTOM_GAME_REGEX)
+        setIsLanguageGame(regexOutput && regexOutput[1] === "language");
     }
 
     useEffect(() => {
