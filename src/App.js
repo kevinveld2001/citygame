@@ -60,7 +60,8 @@ function App() {
       if (!user?.lang) return;
       setSettings({
         ...settings,
-        language: languageMap.find(map => map.toto === user?.lang)?.local
+        language: languageMap.find(map => map.toto === user?.lang)?.local,
+        auth: user
       });
     }) ();
   }, [])
