@@ -20,6 +20,7 @@ export default {
     SETTINGS_ACOUNTSETTING_UPLOAD_FILE: 'Naloži datoteko',
     SETTINGS_ACOUNTSETTING_UPLOAD_FAILED: 'Datoteke ni bilo mogoče naložiti',
     SETTINGS_ACOUNTSETTING_UPLOADED: 'Datoteka naložena',
+    SETTINGS_ACOUNTSETTING_UPGRADE_ACCOUNT: 'Nadgradnja računa',
 
     // Instalation banner
     INSTALL_BANNER_TITLE: 'Namestite aplikacijo City Game',
@@ -99,4 +100,13 @@ export default {
 
     //next button
     NEXT_BUTTON: "Naslednji",
+    BACK_BUTTON: "nazaj",
+    
+    // murder mystery notepad
+    MM_FOUND_NOTES_LABEL: "Najdeni zapiski:",
+    MM_FOUND_NOTES_NONE: "Brez opomb",
+    MM_USER_NOTES_LABEL: "Tukaj vnesite svoje opombe:",
+    
+    // game load error
+    GAME_LOAD_ERROR_GENERIC: "Igre ni bilo mogoče naložiti.",
 };

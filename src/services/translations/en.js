@@ -20,6 +20,7 @@ export default {
     SETTINGS_ACOUNTSETTING_UPLOAD_FILE: 'Upload file',
     SETTINGS_ACOUNTSETTING_UPLOAD_FAILED: 'Failed to upload file',
     SETTINGS_ACOUNTSETTING_UPLOADED: 'File uploaded',
+    SETTINGS_ACOUNTSETTING_UPGRADE_ACCOUNT: 'Upgrade account',
 
     // Instalation banner
     INSTALL_BANNER_TITLE: 'Install city game app',
@@ -99,4 +100,13 @@ export default {
     
     //next button
     NEXT_BUTTON: "next",
+    BACK_BUTTON: "back",
+
+    // murder mystery notepad
+    MM_FOUND_NOTES_LABEL: "Found notes:",
+    MM_FOUND_NOTES_NONE: "No notes",
+    MM_USER_NOTES_LABEL: "Type your notes here:",
+
+    // game load error
+    GAME_LOAD_ERROR_GENERIC: "The game was not able to load.",
 };

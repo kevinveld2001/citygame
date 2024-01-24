@@ -1,11 +1,16 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import { CUSTOM_GAME_REGEX } from '../../constants';
 import SkeletonLoader from "./SkeletonLoader";
 import { acknowledge, getSessionInfo } from "../../services/totoSessionService";
 import CustomGamesMap from "./CustomGamesMap";
 
+import SettingsContext from "services/SettingsContext";
+
 
 function Game({ elementId, sessionId }) {
+    const [settings] = useContext(SettingsContext);
+    const translations = settings.translations[settings.language];
+
     const [showSkeletonLoader, setShowSkeletonLoader] = useState(true);
     const [updateKey, setUpdateKey] = useState(Math.random());
     const [error, setError] = useState(false);
@@ -63,7 +68,7 @@ function Game({ elementId, sessionId }) {
         {showSkeletonLoader && <SkeletonLoader />}
 
         {error && <div className="m-5 h-full bg-red-400 border border-red-700 rounded-xl">
-            <span>The game was not able to load.</span>
+            <span>{translations.GAME_LOAD_ERROR_GENERIC}</span>
         </div>}
 
         {!showSkeletonLoader && !error && <div className="flex flex-col justify-between p-10 h-full">

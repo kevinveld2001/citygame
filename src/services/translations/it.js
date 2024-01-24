@@ -20,6 +20,7 @@ export default {
     SETTINGS_ACOUNTSETTING_UPLOAD_FILE: 'Caricare un file',
     SETTINGS_ACOUNTSETTING_UPLOAD_FAILED: 'Impossibile caricare il file',
     SETTINGS_ACOUNTSETTING_UPLOADED: 'File caricato',
+    SETTINGS_ACOUNTSETTING_UPGRADE_ACCOUNT: 'Account di aggiornamento',
 
     // Instalation banner
     INSTALL_BANNER_TITLE: 'Installa l\'app di gioco della città',
@@ -99,4 +100,13 @@ export default {
 
     //next button
     NEXT_BUTTON: "prossima",
+    BACK_BUTTON: "indietro",
+
+    // murder mystery notepad
+    MM_FOUND_NOTES_LABEL: "Note trovate:",
+    MM_FOUND_NOTES_NONE: "Nessuna nota",
+    MM_USER_NOTES_LABEL: "Scrivi qui i tuoi appunti:",
+    
+    // game load error
+    GAME_LOAD_ERROR_GENERIC: "Impossibile caricare il gioco.",
 };
